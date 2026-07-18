@@ -4,94 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The International 2026 — Phân tích chỉ số các đội</title>
-<meta name="description" content="Trang phân tích chỉ số 16 đội tham dự The International 2026, dữ liệu 3 tháng gần nhất, cập nhật tự động.">
-<link rel="stylesheet" href="assets/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root{--pg:#f4f4f1;--cd:#fff;--tx:#0b0b0b;--t2:#52514e;--mu:#898781;--gr:#e1e0d9;--bd:rgba(11,11,11,.1);--bl:#2a78d6;--aq:#1baf7a;--rd:#e34948;--lo:#eef4fb;--hi:#2a78d6}
+[data-t=dark]{--pg:#0d0d0d;--cd:#1f1f1e;--tx:#fff;--t2:#c3c2b7;--mu:#898781;--gr:#2c2c2a;--bd:rgba(255,255,255,.1);--bl:#3987e5;--aq:#199e70;--rd:#e66767;--lo:#14233a;--hi:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--pg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+.w{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+h1{font-size:24px;margin:0 0 3px;letter-spacing:-.02em}.sub{color:var(--t2);font-size:14px;margin:0}.snap{color:var(--mu);font-size:12px;margin-top:4px}.snap b{color:var(--tx)}.lv{color:var(--aq)}
+.tb{background:var(--cd);color:var(--t2);border:1px solid var(--bd);border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+nav{display:flex;gap:6px;margin:18px 0 8px;border-bottom:1px solid var(--gr);flex-wrap:wrap}
+nav button{background:none;border:none;border-bottom:2px solid transparent;color:var(--t2);font-size:14px;font-family:inherit;padding:9px 14px;cursor:pointer;margin-bottom:-1px}
+nav button.on{color:var(--tx);border-bottom-color:var(--bl);font-weight:600}
+.v{display:none}.v.on{display:block}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:20px 0}
+.tile{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:16px 18px}
+.tile .l{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}.tile .n{font-size:28px;font-weight:700;margin:6px 0 2px;letter-spacing:-.02em}.tile .h{font-size:13px;color:var(--t2)}.tile .h b{color:var(--tx)}
+.p{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;margin-bottom:16px}.p h2{font-size:15px;margin:0 0 2px}.p .d{font-size:12.5px;color:var(--t2);margin:0 0 12px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 8px;text-align:center;border-bottom:1px solid var(--gr);white-space:nowrap}
+th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{color:var(--tx)}td.tm{text-align:left;font-weight:600}.tw{overflow-x:auto}
+.bg{display:inline-block;min-width:20px;height:20px;line-height:20px;border-radius:6px;color:#fff;font-size:11px;padding:0 5px}.S{background:var(--bl)}.A{background:var(--aq)}.B{background:var(--mu)}
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:16px 18px}.c .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.c .nm{font-size:16px;font-weight:700}.c .rg{font-size:11.5px;color:var(--mu)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.t{font-size:11px;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--bl) 12%,transparent);color:var(--bl);border:1px solid color-mix(in srgb,var(--bl) 28%,transparent)}.t.wn{background:color-mix(in srgb,var(--rd) 12%,transparent);color:var(--rd);border-color:color-mix(in srgb,var(--rd) 28%,transparent)}
+.ms{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 10px;margin-top:10px}.m .ml{color:var(--mu);font-size:10.5px;text-transform:uppercase}.m .mv{font-weight:700;font-size:15px}
+.in{font-size:12.5px;color:var(--t2);margin-top:10px;padding-top:10px;border-top:1px solid var(--gr)}
+.nd{border:1px dashed var(--mu);border-radius:12px;padding:16px 18px;color:var(--mu);font-size:13px}
+.ft{color:var(--mu);font-size:11.5px;margin-top:14px}.ft a{color:var(--bl)}
+</style>
 </head>
-<body data-theme="light">
-<div class="wrap">
-  <header class="top">
+<body data-t="light">
+<div class="w">
+  <div class="top">
     <div>
       <h1>The International 2026 · Phân tích chỉ số các đội</h1>
       <p class="sub">16 đội tham dự — chỉ số thi đấu 3 tháng gần nhất</p>
       <p class="snap" id="snap">Đang tải dữ liệu…</p>
     </div>
-    <button class="theme-btn" id="themeBtn">🌙 Chế độ tối</button>
-  </header>
-
-  <nav class="tabs" id="tabs">
-    <button data-view="overview" class="active">Tổng quan</button>
-    <button data-view="ranking">Bảng xếp hạng</button>
-    <button data-view="reports">Chi tiết đội</button>
-    <button data-view="about">Về trang này</button>
+    <button class="tb" id="tbtn">🌙 Chế độ tối</button>
+  </div>
+  <nav id="nav">
+    <button data-v="rank" class="on">Bảng xếp hạng</button>
+    <button data-v="rep">Chi tiết đội</button>
+    <button data-v="abt">Về trang này</button>
   </nav>
-
   <div id="err"></div>
-
-  <!-- OVERVIEW -->
-  <section class="view active" id="view-overview">
+  <section class="v on" id="v-rank">
     <div class="tiles" id="tiles"></div>
-    <div class="panel">
-      <h2>Radar — Top 5 đội theo phong độ</h2>
-      <p class="desc">6 chỉ số chuẩn hoá 0–100 (so tương đối trong các đội đã có dữ liệu). Bấm tên đội ở chú giải để bật/tắt.</p>
-      <div class="chart-box tall"><canvas id="radar"></canvas></div>
-    </div>
-    <div class="grid2">
-      <div class="panel"><h2>Xếp hạng tỉ lệ thắng</h2><p class="desc">Winrate 3 tháng gần nhất (%).</p><div class="chart-box tall"><canvas id="wr"></canvas></div></div>
-      <div class="panel"><h2>Chênh lệch Kills – Deaths mỗi trận</h2><p class="desc">Dương = áp đảo giao tranh; âm = bị áp đảo.</p><div class="chart-box tall"><canvas id="kd"></canvas></div></div>
-    </div>
-    <div class="grid2">
-      <div class="panel">
-        <h2>Bản đồ phong cách: Kills vs Deaths</h2>
-        <p class="desc">Trên đường chéo = chết nhiều hơn giết. Xa gốc = trận nhiều máu.</p>
-        <div class="legendrow"><span><span class="dot" style="background:var(--blue)"></span>Tier S</span><span><span class="dot" style="background:var(--aqua)"></span>Tier A</span><span><span class="dot" style="background:var(--muted)"></span>Tier B</span></div>
-        <div class="chart-box"><canvas id="scatterKD"></canvas></div>
-      </div>
-      <div class="panel">
-        <h2>Sớm vs Chuyển hoá: F10 vs Thắng khi có F10</h2>
-        <p class="desc">Trục X = tần suất giành 10 kill đầu. Trục Y = tỉ lệ thắng khi đã giành.</p>
-        <div class="legendrow"><span><span class="dot" style="background:var(--blue)"></span>Tier S</span><span><span class="dot" style="background:var(--aqua)"></span>Tier A</span><span><span class="dot" style="background:var(--muted)"></span>Tier B</span></div>
-        <div class="chart-box"><canvas id="scatterF10"></canvas></div>
-      </div>
-    </div>
+    <div class="p"><h2>Bảng dữ liệu đầy đủ</h2><p class="d">Bấm tiêu đề cột để sắp xếp. Ô tô đậm theo giá trị.</p><div class="tw"><table id="tbl"></table></div>
+    <p class="ft"><b>Chênh K–D</b>=Kills−Deaths · <b>F10</b>=xác suất giành 10 kill đầu · <b>Thắng|F10</b>=tỉ lệ thắng khi giành F10 · <b>Dur</b>=phút. Tier theo winrate (S≥60, A≥50, B còn lại). Nguồn: DLTV.org.</p></div>
   </section>
-
-  <!-- RANKING -->
-  <section class="view" id="view-ranking">
-    <div class="panel">
-      <h2>Bảng dữ liệu đầy đủ</h2>
-      <p class="desc">Bấm tiêu đề cột để sắp xếp. Ô tô đậm theo giá trị (xanh đậm = cao).</p>
-      <div class="tablewrap"><table id="tbl"></table></div>
-      <p class="foot">
-        <b>Chênh K–D</b> = Kills − Deaths · <b>Tổng kills</b> = Kills + Deaths · <b>F10</b> = xác suất giành 10 kill đầu ·
-        <b>Thắng|FB / Thắng|F10</b> = tỉ lệ thắng khi có First Blood / khi giành 10 kill đầu · <b>Dur</b> = thời lượng TB (phút).
-        Tier suy ra từ winrate (S ≥ 60%, A ≥ 50%, còn lại B). Nguồn: DLTV.org.
-      </p>
-    </div>
-  </section>
-
-  <!-- REPORTS -->
-  <section class="view" id="view-reports">
-    <p class="desc" style="margin:6px 0 14px">Báo cáo tự sinh cho từng đội: nhãn phong cách, chỉ số chính và nhận định ngắn dựa trên dữ liệu.</p>
-    <div class="teamgrid" id="reports"></div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="view" id="view-about">
-    <div class="panel">
-      <h2>Về trang này</h2>
-      <div class="desc" style="font-size:13.5px;line-height:1.7">
-        <p>Trang phân tích 16 đội tham dự <b>The International 2026</b>, dùng chỉ số thi đấu <b>3 tháng gần nhất</b> lấy từ DLTV.org.</p>
-        <p><b>Cập nhật tự động:</b> một GitHub Actions workflow chạy mỗi ngày, cào lại dữ liệu và commit vào repo; GitHub Pages tự phục vụ bản mới. Bạn cũng có thể chạy <code>node scraper/scrape.mjs</code> để cập nhật thủ công.</p>
-        <p><b>Các chỉ số:</b> Winrate, Kills/Deaths/Assists trung bình mỗi trận, chênh lệch K–D, First Blood %, F10 (giành 10 kill đầu), tỉ lệ thắng khi có First Blood / F10, và thời lượng trận trung bình.</p>
-        <p><b>Ghi chú:</b> một số đội có thể chưa hiện dữ liệu nếu slug DLTV chưa được xác minh — xem README để chỉnh <code>scraper/teams.config.json</code>.</p>
-      </div>
-    </div>
-  </section>
-
-  <p class="foot">Dữ liệu: <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a> · Trang tĩnh, mã nguồn mở · Cập nhật lần cuối: <span id="footUpdated">—</span></p>
+  <section class="v" id="v-rep"><p class="d" style="margin:6px 0 14px">Báo cáo tự sinh: nhãn phong cách, chỉ số chính và nhận định ngắn dựa trên dữ liệu.</p><div class="tg" id="rep"></div></section>
+  <section class="v" id="v-abt"><div class="p"><h2>Về trang này</h2><div class="d" style="font-size:13.5px;line-height:1.7">
+    <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>3 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code>; một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
+    <p><b>Bản đầy đủ</b> (kèm biểu đồ radar/scatter, scraper, workflow) có trong gói mã nguồn. Trang này là bản gọn tự chứa để demo.</p>
+  </div></div></section>
+  <p class="ft">Dữ liệu: <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a> · Cập nhật lần cuối: <span id="fu">—</span></p>
 </div>
-<script src="assets/app.js"></script>
+<script>
+const $=s=>document.querySelector(s),tier=w=>w>=60?"S":w>=50?"A":"B";
+let T=[];
+fetch("data/teams.json").then(r=>r.json()).then(d=>{
+  T=d.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));
+  return fetch("data/meta.json").then(r=>r.json()).catch(()=>({}));
+}).then(m=>{
+  const wd=T.filter(t=>t.stats).length,dt=m.updatedAt?new Date(m.updatedAt).toLocaleString("vi-VN",{dateStyle:"medium",timeStyle:"short"}):"—";
+  $("#snap").innerHTML='<span class="lv">●</span> Cập nhật: <b>'+dt+'</b> · '+wd+'/'+T.length+' đội có dữ liệu'+(m.seed?' · (seed)':'');
+  $("#fu").textContent=dt;render();
+}).catch(e=>{$("#err").innerHTML='<p style="color:var(--rd)">Không tải được data/teams.json — hãy mở qua GitHub Pages/web server.</p>';});
+const wd=()=>T.filter(t=>t.stats),S=t=>t.stats;
+function tiles(){const d=wd();if(!d.length)return;const by=f=>[...d].sort(f)[0];
+  const a=[["Winrate cao nhất",x=>S(x).winrate+"%",(x)=>x.name+" · "+S(x).maps+" ván",(p,q)=>S(q).winrate-S(p).winrate],
+  ["Chênh K–D tốt nhất",x=>(S(x).killDiff>0?"+":"")+S(x).killDiff,x=>x.name,(p,q)=>S(q).killDiff-S(p).killDiff],
+  ["Đóng trận chắc nhất",x=>S(x).winWhenF10+"%",x=>x.name+" · thắng khi có F10",(p,q)=>S(q).winWhenF10-S(p).winWhenF10],
+  ["Kết trận nhanh nhất",x=>S(x).duration+"′",x=>x.name,(p,q)=>S(p).duration-S(q).duration],
+  ["Trận nhiều máu nhất",x=>S(x).totalKills.toFixed(1),x=>x.name+" · tổng kills/trận",(p,q)=>S(q).totalKills-S(p).totalKills]];
+  $("#tiles").innerHTML=a.map(([l,v,h,s])=>{const x=by(s);return '<div class="tile"><div class="l">'+l+'</div><div class="n">'+v(x)+'</div><div class="h"><b>'+h(x).split(" · ")[0]+'</b>'+(h(x).includes("·")?" · "+h(x).split(" · ").slice(1).join(" · "):"")+'</div></div>';}).join("");}
+const C=[["name","Đội","tm",v=>v],["tier","Tier","",v=>v?'<span class="bg '+v+'">'+v+'</span>':"—"],["maps","Ván","",v=>v],["winrate","WR%","",v=>v+"%"],["kills","Kills","",v=>v.toFixed(2)],["deaths","Deaths","",v=>v.toFixed(2),1],["killDiff","Chênh K–D","",v=>(v>0?"+":"")+v.toFixed(2)],["totalKills","Tổng kills","",v=>v.toFixed(1)],["assists","Assists","",v=>v.toFixed(1)],["firstBlood","FB%","",v=>v+"%"],["f10","F10%","",v=>v+"%"],["winWhenFb","Thắng|FB","",v=>v+"%"],["winWhenF10","Thắng|F10","",v=>v+"%"],["duration","Dur′","",v=>v]];
+let sk="winrate",sa=0;
+const gv=(t,k)=>k==="name"?t.name:k==="tier"?t.tier:t.stats?t.stats[k]:null;
+function mix(a,b,f){const p=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),[r,g,c]=p(a),[R,G,B]=p(b);return`rgb(${Math.round(r+(R-r)*f)},${Math.round(g+(G-g)*f)},${Math.round(c+(B-c)*f)})`;}
+function heat(k,v,inv){if(k==="name"||k==="tier"||v==null)return"";const vs=wd().map(t=>t.stats[k]),mn=Math.min(...vs),mx=Math.max(...vs);let f=(v-mn)/(mx-mn||1);if(inv)f=1-f;const cs=getComputedStyle(document.body);return"background:"+mix(cs.getPropertyValue("--lo").trim(),cs.getPropertyValue("--hi").trim(),f*.85)+";color:#0b0b0b";}
+function tbl(){const rows=[...T].sort((a,b)=>{let x=gv(a,sk),y=gv(b,sk);if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return-1;return typeof x=="string"?(sa?x.localeCompare(y):y.localeCompare(x)):(sa?x-y:y-x);});
+  let h="<thead><tr>"+C.map(c=>'<th data-k="'+c[0]+'">'+c[1]+(c[0]===sk?(sa?" ▲":" ▼"):"")+'</th>').join("")+"</tr></thead><tbody>";
+  h+=rows.map(t=>"<tr>"+C.map(c=>{const v=gv(t,c[0]);if(v==null&&c[0]!=="name"&&c[0]!=="tier")return'<td style="color:var(--mu)">—</td>';return'<td class="'+c[2]+'" style="'+heat(c[0],v,c[5])+'">'+c[3](v)+"</td>";}).join("")+"</tr>").join("")+"</tbody>";
+  const T2=$("#tbl");T2.innerHTML=h;T2.querySelectorAll("th").forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k===sk)sa=!sa;else{sk=k;sa=0;}tbl();});}
+function tags(s){const r=[];if(s.winrate>=65)r.push(["Phong độ đỉnh cao",0]);if(s.killDiff>=5)r.push(["Áp đảo giao tranh",0]);if(s.firstBlood>=55||s.f10>=62)r.push(["Áp nhịp sớm",0]);if(s.assists>=64)r.push(["Teamfight gắn kết",0]);if(s.winWhenF10>=85)r.push(["Đóng trận kỷ luật",0]);if(s.duration>=45)r.push(["Vận hành muộn",0]);if(s.duration<=41)r.push(["Kết trận nhanh",0]);if(s.killDiff<=-3)r.push(["Bị áp đảo",1]);if(s.winWhenFb<=45)r.push(["Chuyển hoá kém",1]);if(s.winrate<45)r.push(["Đang sa sút",1]);return r.slice(0,5);}
+function ins(t){const s=t.stats;return t.name+" đạt winrate <b>"+s.winrate+"%</b> qua "+s.maps+" ván, "+(s.killDiff>=3?"áp đảo giao tranh (chênh K–D <b>+"+s.killDiff+"</b>)":s.killDiff<=-3?"bị lép vế giao tranh (chênh K–D <b>"+s.killDiff+"</b>)":"giao tranh cân bằng")+", "+(s.f10>=60?"thường thắng nhịp đầu (F10 <b>"+s.f10+"%</b>)":s.f10<=48?"ít thắng nhịp đầu (F10 "+s.f10+"%)":"nhịp đầu trung bình")+(s.winWhenF10>=85?", và đóng trận rất chắc (thắng khi có F10 <b>"+s.winWhenF10+"%</b>)":s.winWhenFb<=45?", nhưng chuyển hoá lợi thế yếu (thắng|FB "+s.winWhenFb+"%)":", thời lượng TB "+s.duration+" phút")+".";}
+function rep(){const so=[...T].sort((a,b)=>a.stats&&b.stats?b.stats.winrate-a.stats.winrate:a.stats?-1:b.stats?1:0);
+  $("#rep").innerHTML=so.map(t=>{if(!t.stats)return'<div class="nd"><div class="hd"><span class="nm" style="font-size:15px">'+t.name+'</span></div><div style="margin-top:8px">'+t.region+' · Chưa có dữ liệu.</div></div>';
+    const s=t.stats,tg=tags(s).map(([x,w])=>'<span class="t'+(w?" wn":"")+'">'+x+"</span>").join(""),M=(l,v)=>'<div class="m"><div class="ml">'+l+'</div><div class="mv">'+v+"</div></div>";
+    return'<div class="c"><div class="hd"><span class="nm">'+t.name+' <span class="bg '+t.tier+'">'+t.tier+'</span></span><span class="rg">'+t.region+" · "+t.qualification+'</span></div><div class="tags">'+(tg||'<span class="t">Cân bằng</span>')+'</div><div class="ms">'+M("Winrate",s.winrate+"%")+M("Chênh K–D",(s.killDiff>0?"+":"")+s.killDiff)+M("Tổng kills",s.totalKills.toFixed(1))+M("F10",s.f10+"%")+M("Thắng|F10",s.winWhenF10+"%")+M("Thời lượng",s.duration+"′")+'</div><div class="in">'+ins(t)+"</div></div>";}).join("");}
+function render(){tiles();tbl();rep();}
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".v").forEach(v=>v.classList.remove("on"));$("#v-"+b.dataset.v).classList.add("on");};
+$("#tbtn").onclick=function(){const d=document.body.getAttribute("data-t")==="dark";document.body.setAttribute("data-t",d?"light":"dark");this.textContent=d?"🌙 Chế độ tối":"☀️ Chế độ sáng";render();};
+if(matchMedia("(prefers-color-scheme: dark)").matches){document.body.setAttribute("data-t","dark");$("#tbtn").textContent="☀️ Chế độ sáng";}
+</script>
 </body>
 </html>
