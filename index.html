@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The International 2026 — Phân tích chỉ số các đội</title>
+<meta name="description" content="Trang phân tích chỉ số 16 đội tham dự The International 2026, dữ liệu 3 tháng gần nhất, cập nhật tự động.">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+</head>
+<body data-theme="light">
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>The International 2026 · Phân tích chỉ số các đội</h1>
+      <p class="sub">16 đội tham dự — chỉ số thi đấu 3 tháng gần nhất</p>
+      <p class="snap" id="snap">Đang tải dữ liệu…</p>
+    </div>
+    <button class="theme-btn" id="themeBtn">🌙 Chế độ tối</button>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-view="overview" class="active">Tổng quan</button>
+    <button data-view="ranking">Bảng xếp hạng</button>
+    <button data-view="reports">Chi tiết đội</button>
+    <button data-view="about">Về trang này</button>
+  </nav>
+
+  <div id="err"></div>
+
+  <!-- OVERVIEW -->
+  <section class="view active" id="view-overview">
+    <div class="tiles" id="tiles"></div>
+    <div class="panel">
+      <h2>Radar — Top 5 đội theo phong độ</h2>
+      <p class="desc">6 chỉ số chuẩn hoá 0–100 (so tương đối trong các đội đã có dữ liệu). Bấm tên đội ở chú giải để bật/tắt.</p>
+      <div class="chart-box tall"><canvas id="radar"></canvas></div>
+    </div>
+    <div class="grid2">
+      <div class="panel"><h2>Xếp hạng tỉ lệ thắng</h2><p class="desc">Winrate 3 tháng gần nhất (%).</p><div class="chart-box tall"><canvas id="wr"></canvas></div></div>
+      <div class="panel"><h2>Chênh lệch Kills – Deaths mỗi trận</h2><p class="desc">Dương = áp đảo giao tranh; âm = bị áp đảo.</p><div class="chart-box tall"><canvas id="kd"></canvas></div></div>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h2>Bản đồ phong cách: Kills vs Deaths</h2>
+        <p class="desc">Trên đường chéo = chết nhiều hơn giết. Xa gốc = trận nhiều máu.</p>
+        <div class="legendrow"><span><span class="dot" style="background:var(--blue)"></span>Tier S</span><span><span class="dot" style="background:var(--aqua)"></span>Tier A</span><span><span class="dot" style="background:var(--muted)"></span>Tier B</span></div>
+        <div class="chart-box"><canvas id="scatterKD"></canvas></div>
+      </div>
+      <div class="panel">
+        <h2>Sớm vs Chuyển hoá: F10 vs Thắng khi có F10</h2>
+        <p class="desc">Trục X = tần suất giành 10 kill đầu. Trục Y = tỉ lệ thắng khi đã giành.</p>
+        <div class="legendrow"><span><span class="dot" style="background:var(--blue)"></span>Tier S</span><span><span class="dot" style="background:var(--aqua)"></span>Tier A</span><span><span class="dot" style="background:var(--muted)"></span>Tier B</span></div>
+        <div class="chart-box"><canvas id="scatterF10"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING -->
+  <section class="view" id="view-ranking">
+    <div class="panel">
+      <h2>Bảng dữ liệu đầy đủ</h2>
+      <p class="desc">Bấm tiêu đề cột để sắp xếp. Ô tô đậm theo giá trị (xanh đậm = cao).</p>
+      <div class="tablewrap"><table id="tbl"></table></div>
+      <p class="foot">
+        <b>Chênh K–D</b> = Kills − Deaths · <b>Tổng kills</b> = Kills + Deaths · <b>F10</b> = xác suất giành 10 kill đầu ·
+        <b>Thắng|FB / Thắng|F10</b> = tỉ lệ thắng khi có First Blood / khi giành 10 kill đầu · <b>Dur</b> = thời lượng TB (phút).
+        Tier suy ra từ winrate (S ≥ 60%, A ≥ 50%, còn lại B). Nguồn: DLTV.org.
+      </p>
+    </div>
+  </section>
+
+  <!-- REPORTS -->
+  <section class="view" id="view-reports">
+    <p class="desc" style="margin:6px 0 14px">Báo cáo tự sinh cho từng đội: nhãn phong cách, chỉ số chính và nhận định ngắn dựa trên dữ liệu.</p>
+    <div class="teamgrid" id="reports"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="view-about">
+    <div class="panel">
+      <h2>Về trang này</h2>
+      <div class="desc" style="font-size:13.5px;line-height:1.7">
+        <p>Trang phân tích 16 đội tham dự <b>The International 2026</b>, dùng chỉ số thi đấu <b>3 tháng gần nhất</b> lấy từ DLTV.org.</p>
+        <p><b>Cập nhật tự động:</b> một GitHub Actions workflow chạy mỗi ngày, cào lại dữ liệu và commit vào repo; GitHub Pages tự phục vụ bản mới. Bạn cũng có thể chạy <code>node scraper/scrape.mjs</code> để cập nhật thủ công.</p>
+        <p><b>Các chỉ số:</b> Winrate, Kills/Deaths/Assists trung bình mỗi trận, chênh lệch K–D, First Blood %, F10 (giành 10 kill đầu), tỉ lệ thắng khi có First Blood / F10, và thời lượng trận trung bình.</p>
+        <p><b>Ghi chú:</b> một số đội có thể chưa hiện dữ liệu nếu slug DLTV chưa được xác minh — xem README để chỉnh <code>scraper/teams.config.json</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">Dữ liệu: <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a> · Trang tĩnh, mã nguồn mở · Cập nhật lần cuối: <span id="footUpdated">—</span></p>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
