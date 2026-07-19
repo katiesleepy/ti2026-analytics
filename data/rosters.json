@@ -1,0 +1,135 @@
+{
+  "updatedAt": "2026-07-20T00:00:00.000Z",
+  "source": "https://dltv.org",
+  "note": "Đội hình thi đấu (ACTIVE SQUAD) + HLV, ảnh & tên lấy từ DLTV.org. Vai trò: CORE=đi rừng/carry (pos 1), MID=đường giữa (pos 2), OFFLANE=đường trên (pos 3), SUPPORT=hỗ trợ (pos 4), FULL SUPPORT=hỗ trợ chính (pos 5).",
+  "rosters": {
+    "team-falcons": [
+      {"nick": "AUI_2000", "real": "Kurtis Daniel", "role": "COACH", "photo": "https://dltv.org/uploads/players/ecepcFLT1KEFDQKPQNyGdqgF67sh3kPM.png.webp"},
+      {"nick": "SKITER", "real": "Oliver Lepko", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/OEjLKfPVoMaHGiM7uJzGney76BfxQg51.png"},
+      {"nick": "MALR1NE", "real": "Stanislav Potorak", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/CJ6Qb0BViIFmWVEfLYcwhGBCi2d8O52S.png"},
+      {"nick": "ATF", "real": "Ammar Assaf", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/JWIMNXCtHskayfIeTUxawrXd4lO8H89L.png"},
+      {"nick": "CR1T-", "real": "Andreas Franck", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/IM1GZq8cxGT6e4hEFs4OayiPRdSCuWsv.png"},
+      {"nick": "SNEYKING", "real": "Wu Jingjun", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/3InYCTJr6XspF1vp1v2nlGofeV30ltMW.png"}
+    ],
+    "team-liquid": [
+      {"nick": "BLITZ", "real": "William Lee", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/RWZ3utdIgDvoO9BTOK2N5krMDQXqEN6p.png"},
+      {"nick": "MICKE", "real": "Michael Vu", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/L1jBlChBoQDwAzwA5SSi2l6Pl1qEIxq4.png"},
+      {"nick": "NISHA", "real": "Michal Jankowski", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/pKxMniT4sfLBEsVbcUZmh00g04BGclMk.png"},
+      {"nick": "ACE", "real": "Marcus Folke Hoelgaard Christensen", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/2PnegwDyLCxoaxzYmGTUZEQ7EjjUMxxx.png"},
+      {"nick": "BOXI", "real": "Samuel Svahn", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/hjbuuXIs5cC0TTcUpMv3Nl9Cet7WBZFq.png"},
+      {"nick": "TOFU", "real": "Eric Engel", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/MfLBzSgRbQbpxJ9MP47cdbf0RW106K1M.png"}
+    ],
+    "xtreme-gaming": [
+      {"nick": "XIAO8", "real": "Zhang Ning", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/6LzzTxFWK2pCzEjUExlzVoodw5mVpoJR.png"},
+      {"nick": "AME", "real": "Wang Chunyu", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/Lp2N9OlUKwRbYdGbkFsEfuYbejX5KD9Y.png"},
+      {"nick": "NOTHINGTOSAY", "real": "Cheng Jin Xiang", "role": "MID", "photo": "https://dltv.org/uploads/players/9Lbl0rAASPmFvQSY9oASjNr8K5Q80KuV.png.webp"},
+      {"nick": "XXS", "real": "Lin Jing", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/Nh2lo39PUvnrVFlxiN3zPp2GfGZN2wEw.png"},
+      {"nick": "FY", "real": "Xu Linsen", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/0zeDUhhzQ0yQzOBQ8tuBh2oHRwfdGCO5.png.webp"},
+      {"nick": "XNOVA", "real": "Yap Jian Wei", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/AtsZHT080XKHhnK1RIfhdjB0Vp7rZUBM.png.webp"}
+    ],
+    "aurora": [
+      {"nick": "KPII", "real": "Damien Sau-jing", "role": "COACH", "photo": "https://dltv.org/uploads/players/TI1TssCn2O3gpn9ddm7ozRsDjGhsHL7D.png.webp"},
+      {"nick": "NIGHTFALL", "real": "Egor Grigorenko", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/0Ni03a4S8kujdgEN6QMdlH61USjUqMjB.png"},
+      {"nick": "MIKOTO", "real": "Rafli Fathur Rahman", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/lctfFUiRzWPwGuu6aaaAPEqe3fPU81qu.png"},
+      {"nick": "WS", "real": "Chung Wei Shen", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/xoEysG3QRRdrTXbrq8hyHivVBc4xSt6s.png"},
+      {"nick": "MIRA", "real": "Myroslav Kolpakov", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/39YbFQ42rEuvTJBjqBnmIJjkCXOtUtDl.png"},
+      {"nick": "KAORI", "real": "Oleg Medvedok", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/3oHVSlJfmvV0lG9rwXRFXR4aOG3u4WyV.png"}
+    ],
+    "betboom-team": [
+      {"nick": "BOOLK", "real": "Anatoly Ivanov", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/2MIqNACEdm4x63jechIhL0kTzGbkfXiP.png"},
+      {"nick": "KIRITYCH", "real": "Ilya Ulyanov", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/12uYGfynaruOu2gys0CCH7CVnfgObntS.png"},
+      {"nick": "GPK~", "real": "Danil Skutin", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/cO4LtZdB3rYQn1WM2O7YQ4njMJoTXC9b.png"},
+      {"nick": "MIERO`", "real": "Matvey Vasyunin", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/Qps8F68s6HTahwNkif4hEtlNGNqwL7vI.png"},
+      {"nick": "SAVE-", "real": "Vitalie Melnic", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/cT1rMLzwP7Vzat47PEoQlFllarBdRUpn.png"},
+      {"nick": "KATAOMI`", "real": "Vladislav Semenov", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/1ugCV9woF7fbevQtpllj1ziiO5jPhaIx.png"}
+    ],
+    "team-yandex": [
+      {"nick": "ACCELL", "real": "Alexander Litvinenko", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/7PJQi1w91AvrbXzo0vzoWqiPHP096Wyb.png"},
+      {"nick": "WATSON", "real": "Alijan Islambekov", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/zTEhhsVQGmM5ikK6FLJAzaY7ByNUXuT7.png"},
+      {"nick": "CHIRA_JUNIOR", "real": "Ilya Chirtsov", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/WgOgZS3Y6dClfBJkHhsHMI4WcV2BUeDO.png"},
+      {"nick": "DM", "real": "Dmitry Dorokhin", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/8JYR84vmUPkdvhKMhsZRhZoYY50oP3gj.png"},
+      {"nick": "SAKSA", "real": "Martin Sazdov", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/RpbyWEKH2tSZHT2BJLLSyF4NG59XioTm.png"},
+      {"nick": "MALADY", "real": "Arman Orazbaev", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/sn4D73yFjNlBUhRLZ6Jo85BNgHNXatGn.png"}
+    ],
+    "1win-team": [
+      {"nick": "MOONMEANDER", "real": "David Tan", "role": "COACH", "photo": "https://dltv.org/uploads/players/LTlF3KEykiu4XtIN5NjHiHoD9S9ToG2C.png.webp"},
+      {"nick": "PURE", "real": "Ivan Moskalenko", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/b36yy8wmDpvZmk7u80ivPYz86ZiOWLTJ.png"},
+      {"nick": "BZM", "real": "Bozhidar Bogdanov", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/WJvCtyVt6AKOXcRzN93Dc42MERPABmw3.png"},
+      {"nick": "33", "real": "Neta Shapira", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/VVOerlJXKTnHBQFRH0q9u23wIS2v7BzW.png"},
+      {"nick": "ARI", "real": "Matthew Walker", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/MxSR7bSfRvVaJXWBgtKk2j7a7ejTtL3I.png"},
+      {"nick": "WHITEMON", "real": "Matthew Filemon", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/dsBLllDYzIE6wgezhdfjBBgjbxUD9bkl.png"}
+    ],
+    "team-spirit": [
+      {"nick": "MILAN", "real": "Milan Kozomara", "role": "COACH", "photo": "https://dltv.org/uploads/players/LnS6oT04Oo5zY2ogqZ4oQV58xkl1pUr5.png.webp"},
+      {"nick": "YATORO", "real": "Ilya Muliarchuk", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/zKD0RaFQitXd7AhAWJgOyEeiEbb1B15H.png"},
+      {"nick": "LARL", "real": "Denis Sigitov", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/JwjUCfZvisJRdp4BKirTZrbjhCTnJ6NX.png"},
+      {"nick": "COLLAPSE", "real": "Magomed Khalilov", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/27y3VuYw1dAMoRZHGisRyMB3JAzFGMHp.png"},
+      {"nick": "NOT ME", "real": "Alexey Kosmynin", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/ZTZoS2k5Qwm9Qq3f4psxTUqbhKonq1Tb.png.webp"},
+      {"nick": "RUE", "real": "Aleksandr Filin", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/68zrpWVk0Yr3qC2nEjoraby7Lm93WBJg.png"}
+    ],
+    "parivision": [
+      {"nick": "PUPPEY", "real": "Clement Ivanov", "role": "COACH", "photo": "https://dltv.org/uploads/players/fH1DhRzxclcXnLTMp9Zz9BMB0TrZ2yhA.webp"},
+      {"nick": "SATANIC", "real": "Alan Gallyamov", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/SHyeH1nt71W92plyjuHgXxk5IDwfm741.png"},
+      {"nick": "NO[O]NE-", "real": "Vladimir Minenko", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/kqfo2jXd4KpGaQHBMzOIiMxCxes3mRKq.png"},
+      {"nick": "NOTICED", "real": "Evgeniy Ignatenko", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/EF2eeOYAyeTGfRCu9t79XED72DEK2v9o.png"},
+      {"nick": "9CLASS", "real": "Edgar Naltakyan", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/63Srhcs0F26GZlJNBrjw7MTJMZJJ2uOU.png"},
+      {"nick": "DUKALIS", "real": "Andrei Kuropatkin", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/ZqIiNQAQREw1nICfXZFeVuTpVWxzhoA7.png"}
+    ],
+    "nigma": [
+      {"nick": "KUROKY", "real": "Salehi Takhasomi", "role": "COACH", "photo": "https://dltv.org/uploads/players/Z2HlLgk030TZNB1hJtTgBFjzHqkkewBp.png.webp"},
+      {"nick": "SUMAIL", "real": "Syed Sumail", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/tjv0rikm8zQkIuGFdqH4pxXzl4dHhv7L.png"},
+      {"nick": "LORENOF", "real": "Artem Melnyk", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/ikBAssPwTfwGviyT0QEo96aTTfe0rgbR.png"},
+      {"nick": "DAVAI", "real": "Cedric Alexander Deckmyn", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/P57LsdsJTqZxIQDjhwIG2K3OdrNhcuqI.png"},
+      {"nick": "OMAR", "real": "Omar Moughrabi", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/7Lqnn58LYwQDS7IRzRzFEWhvkgl83HyU.png.webp"},
+      {"nick": "GH", "real": "Maroun Merhej", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/UKuaRpfFeJPC5aeZ5Yvqig2l0uYh76ye.png.webp"}
+    ],
+    "l1ga-team": [
+      {"nick": "THECHOSENONE", "real": "Aliaksei Karanevich", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/6HWwBO2UgpfCDmMSfOONJ2dA4XCL5a1g.png"},
+      {"nick": "SSNOVV1", "real": "Ilya Kondrashov", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/WeXMvJEtWZ42uJ11c2ARozO6vQBJikCB.png"},
+      {"nick": "MIRAGE`", "real": "Miras Mutanov", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/XmRHMLPndZCReaRwshjEqoxUck4pCnQ7.png"},
+      {"nick": "VAZYA", "real": "Ivan German", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/sbcJT0AuW0aUPm6nfx1JAcJ1SHl4rjQY.png"},
+      {"nick": "SAYUW", "real": "Oleg Kalenbet", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/3YwgZfUnoZfqdJ0rqaWdgk5YLXYp0sRM.png"},
+      {"nick": "RESPECT", "real": "Egor Prokurat", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/B3iTaKygbGdnVEru7kURSmRBKukPQ0It.png"}
+    ],
+    "team-resilience": [
+      {"nick": "SUPER!", "real": "Xie Junhao", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/kEpW7fGCvaTQF21RpNT20vqsuZNbC2WM.png"},
+      {"nick": "ERIKA", "real": "Yang Shaohan", "role": "CORE", "photo": "https://dltv.org/uploads/players/xcKxCETfW83XPC4UoTMEffZamWsjJViR.png.webp"},
+      {"nick": "ECHOZZ", "real": "Xu Ziliang", "role": "MID", "photo": "https://dltv.org/uploads/players/RNUsMyALhA24XGN6ZNyalAgd4rUqWuXc.png.webp"},
+      {"nick": "NIU", "real": "Li Kongbo", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/cDix8oobePzWDPhOJ3rk79l6qXCfGfjO.png.webp"},
+      {"nick": "PLANET", "real": "Lin Hao", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/vWRwOZdivEbZMoU6pKmPTpAUEWtm67a6.png"},
+      {"nick": "ZZQ", "real": "Zhang Ziqiang", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/L0i59DMx6JZPaFJseGKr0TncK56me2HZ.png.webp"}
+    ],
+    "vici-gaming": [
+      {"nick": "YAO", "real": "Yao Zhengzheng", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/MYFX7bQXp9TIaCWgYdETNLCAozPgEjTJ.png"},
+      {"nick": "SHIRO", "real": "Guo Xuanang", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/oiKFeUohReTvM72xPy84AhsBI80f1UTP.png"},
+      {"nick": "XM", "real": "Guo Hongcheng", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/ZvbbBzmv4DoCXMvnO4HW6VKwAfCZWqP1.png"},
+      {"nick": "BACH", "real": "Zhang Ruida", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/rRweM0pGoHtRnDzQyjucAudNfPUL9GMs.png"},
+      {"nick": "XINQ", "real": "Zhao Zixing", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/oeUB7vhgFpWu0jR9MLucO4arm9XZ7mvA.png.webp"},
+      {"nick": "Y ", "real": "Zhang Yiping", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/Qp6ZzLXkz2kbuYoc41PoIdetd6RW7SFa.png"}
+    ],
+    "og": [
+      {"nick": "343", "real": "Adam Erwann Shah bin Akhtar Hussein", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/ncvQvFngJoqCTfj4dFmFKIz7Rd4SMXgK.png"},
+      {"nick": "NATSUMI", "real": "John Anthony Vargas", "role": "CORE", "photo": "https://dltv.org/uploads/players/yfYPDqInjgfOb1MfJHTpAB65UiunD0qQ.png.webp"},
+      {"nick": "YOPAJ", "real": "Erin Jasper Ferrer", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/Qwc4BdhAaUR9D7B4hngkyXU3GDiwcVS6.png"},
+      {"nick": "RAVEN^", "real": "Marc Polo Luis Fausto", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/JjRrSdAP5SHzHiISuGuiPgtoComdd5cJ.png"},
+      {"nick": "TIMS", "real": "Timothy John M. Randrup", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/ubod05AxHXm5PVDx8hqwaiPJjUx7yv9A.png.webp"},
+      {"nick": "SKEM", "real": "Rolen Andrei Gabriel Ong", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/yjrqf9CZLUyf6rOZgTXvLD4Mzq0pxU3Z.png"}
+    ],
+    "lgd-gaming": [
+      {"nick": "KAFFURTADX", "real": "Igor Furtado Guimarães Estevão", "role": "COACH", "photo": "https://dltv.org/uploads/players/XgDDmXi8LzPqP1yYM22r79MopXf7IUe9.webp"},
+      {"nick": "YUMA", "real": "Yuma Benjamin Langlet Muckenhirn", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/FM5EbGSJrCH47GD4gtgoWPQ0HhYk7yw9.png"},
+      {"nick": "TAILUNG", "real": "Santiago Olivos Aguero Gustavo", "role": "MID", "photo": "https://dltv.org/uploads/players/medium/VYv1nF3fha5LI6rfcg4lIDK4HIM56fak.png"},
+      {"nick": "WISPER", "real": "Adrián Céspedes Dobles", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/medium/qRC48BY5HZGnS0Tltji32NtN1qy0euOr.png"},
+      {"nick": "THIOLICOR", "real": "Thiago de Oliveira Cordeiro", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/medium/HZD7o6Z2K05eCbUfOtC58YxN71qIT112.png"},
+      {"nick": "KJ", "real": "Matheus Santos Jungles Diniz", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/medium/YbXPWcss4ekISU08waf93n1cCvAwn0bQ.png"}
+    ],
+    "gamerlegion": [
+      {"nick": "MANGUS", "real": "", "role": "COACH", "photo": "https://dltv.org/uploads/players/medium/x0dOJgc4aKwVNdLGgFLfVChTQ7gmCn4z.png"},
+      {"nick": "GHOST", "real": "Daniel Chan Kok Hong", "role": "CORE", "photo": "https://dltv.org/uploads/players/medium/pFKsdt46dSsZrUOA1wibrqBNUuYoXUc7.png"},
+      {"nick": "RCY", "real": "Francis Fundemera", "role": "MID", "photo": "https://dltv.org/uploads/players/aA9cTr9OMaiprqMlznFqKkCoi4q7GX4t.png.webp"},
+      {"nick": "FAYDE", "real": "Victor Zuev", "role": "OFFLANE", "photo": "https://dltv.org/uploads/players/qN3uxXtn5GAvJ1koRQnDTMQCWNvlIPjx.png.webp"},
+      {"nick": "BIGNUM", "real": "Danil Shekhovtsov", "role": "SUPPORT", "photo": "https://dltv.org/uploads/players/N78gapGfRNA1pNlbwXn3CPzgXHW0BHX8.png.webp"},
+      {"nick": "SPEEED", "real": "Paul Bocchicchio", "role": "FULL SUPPORT", "photo": "https://dltv.org/uploads/players/lWhVnNjcAhGr0mHfeAY1trQT5nKn85Vr.png.webp"}
+    ]
+  }
+}
