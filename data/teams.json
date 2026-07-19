@@ -1,7 +1,7 @@
 {
   "event": "The International 2026",
   "source": "dltv.org",
-  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV), ảnh chụp 18/07/2026. 14/16 đội có dữ liệu. TEAM VISION và HULIGANI chưa có trang thống kê tra được trên DLTV — sẽ tự điền khi tìm được slug đúng (xem README). Logo hotlink từ DLTV; đội thiếu logo dùng huy hiệu chữ cái đầu.",
+  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV), cập nhật 20/07/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "name": "Team Falcons",
@@ -188,14 +188,27 @@
       "logo": "https://dltv.org/uploads/teams/7ANCLxgwRDMqqlQvF0pHmasYyXrZ8V3A.png.webp"
     },
     {
-      "name": "TEAM VISION",
-      "short": "Vision",
-      "slug": "team-vision",
-      "region": "Châu Âu",
+      "name": "PARIVISION",
+      "short": "PARI",
+      "slug": "parivision",
+      "region": "CIS",
       "qualification": "Vòng loại — Châu Âu",
-      "slugVerified": false,
-      "stats": null,
-      "logo": null
+      "slugVerified": true,
+      "stats": {
+        "maps": 91,
+        "winrate": 73,
+        "kills": 28.68,
+        "deaths": 20.99,
+        "assists": 62.88,
+        "firstBlood": 52,
+        "f10": 69,
+        "winWhenFb": 80,
+        "winWhenF10": 84,
+        "duration": 39,
+        "totalKills": 49.67,
+        "killDiff": 7.69
+      },
+      "logo": "https://dltv.org/uploads/teams/LsVqzDTPzN7qzT7EsqLuyeOpGkht5AVt.png.webp"
     },
     {
       "name": "Nigma Galaxy",
@@ -221,14 +234,27 @@
       "logo": "https://dltv.org/uploads/teams/rawK7xDgxwI7Ff8GumO9sC7Z9fHvyCQ2.png.webp"
     },
     {
-      "name": "HULIGANI",
-      "short": "HULI",
-      "slug": "huligani",
-      "region": "Châu Âu",
+      "name": "L1GA TEAM",
+      "short": "L1ga",
+      "slug": "l1ga-team",
+      "region": "CIS",
       "qualification": "Vòng loại — Châu Âu",
-      "slugVerified": false,
-      "stats": null,
-      "logo": null
+      "slugVerified": true,
+      "stats": {
+        "maps": 79,
+        "winrate": 51,
+        "kills": 22.78,
+        "deaths": 24.72,
+        "assists": 55.89,
+        "firstBlood": 46,
+        "f10": 41,
+        "winWhenFb": 65,
+        "winWhenF10": 83,
+        "duration": 42,
+        "totalKills": 47.5,
+        "killDiff": -1.94
+      },
+      "logo": "https://dltv.org/uploads/teams/KzJfVKwybUiDjKIwpPVFc2TirGkIqPPk.png"
     },
     {
       "name": "Team Resilience",
