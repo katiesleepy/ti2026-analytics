@@ -52,6 +52,17 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
 .hmid{font-size:11.5px;color:var(--t2);text-align:center}
 .hmid small{display:block;color:var(--mu);font-size:9.5px}
 @media (max-width:640px){.hrow{grid-template-columns:1fr 110px 1fr}}
+.sqwrap{margin-top:12px;padding-top:11px;border-top:1px solid var(--gr)}
+.sqh{font-size:10.5px;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:flex;justify-content:space-between}
+.sq{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 4px}
+.pl{text-align:center;min-width:0}
+.pl .av{position:relative;width:48px;height:48px;margin:0 auto 5px;border-radius:50%;background:var(--bl);color:#fff;font-weight:700;font-size:19px;line-height:48px;text-align:center}
+.pl .av.co{background:var(--cb)}
+.pl .av img{position:absolute;inset:0;width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid var(--bd);background:var(--pg)}
+.pl .pos{position:absolute;right:-4px;bottom:-2px;min-width:15px;height:16px;line-height:16px;padding:0 4px;border-radius:8px;font-size:9px;font-weight:700;color:#fff;background:var(--bl);border:2px solid var(--cd);box-sizing:content-box}
+.pl .pos.co{background:var(--cb)}
+.pl .nk{font-size:11px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl .rn{font-size:9.5px;color:var(--mu);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body data-t="light">
@@ -97,11 +108,15 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
 </div>
 <script>
 const $=s=>document.querySelector(s),tier=w=>w>=60?"S":w>=50?"A":"B";
-let T=[];
+let T=[],R={};
 fetch("data/teams.json").then(r=>r.json()).then(d=>{
   T=d.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));
-  return fetch("data/meta.json").then(r=>r.json()).catch(()=>({}));
-}).then(m=>{
+  return Promise.all([
+    fetch("data/meta.json").then(r=>r.json()).catch(()=>({})),
+    fetch("data/rosters.json").then(r=>r.json()).then(x=>x.rosters||{}).catch(()=>({}))
+  ]);
+}).then(([m,ros])=>{
+  R=ros;
   const wd=T.filter(t=>t.stats).length,dt=m.updatedAt?new Date(m.updatedAt).toLocaleString("vi-VN",{dateStyle:"medium",timeStyle:"short"}):"—";
   $("#snap").innerHTML='<span class="lv">●</span> Cập nhật: <b>'+dt+'</b> · '+wd+'/'+T.length+' đội có dữ liệu'+(m.seed?' · (seed)':'');
   $("#fu").textContent=dt;render();
@@ -120,7 +135,7 @@ function tiles(){const d=wd();if(!d.length)return;const by=f=>[...d].sort(f)[0];
   ["Kết trận nhanh nhất",x=>S(x).duration+"′",x=>x.name,(p,q)=>S(p).duration-S(q).duration],
   ["Trận nhiều máu nhất",x=>S(x).totalKills.toFixed(1),x=>x.name+" · tổng kills/trận",(p,q)=>S(q).totalKills-S(p).totalKills]];
   $("#tiles").innerHTML=a.map(([l,v,h,s])=>{const x=by(s);return '<div class="tile"><div class="l">'+l+'</div><div class="n">'+v(x)+'</div><div class="h"><b>'+h(x).split(" · ")[0]+'</b>'+(h(x).includes("·")?" · "+h(x).split(" · ").slice(1).join(" · "):"")+'</div></div>';}).join("");}
-const C=[["name","Đội","tm",v=>v],["tier","Tier","",v=>v?'<span class="bg '+v+'">'+v+'</span>':"—"],["maps","Vàn","",v=>v],["winrate","WR%","",v=>v+"%"],["kills","Kills","",v=>v.toFixed(2)],["deaths","Deaths","",v=>v.toFixed(2),1],["killDiff","Chênh K–D","",v=>(v>0?"+":"")+v.toFixed(2)],["totalKills","Tổng kills","",v=>v.toFixed(1)],["assists","Assists","",v=>v.toFixed(1)],["firstBlood","FB%","",v=>v+"%"],["f10","F10%","",v=>v+"%"],["winWhenFb","Thắng|FB","",v=>v+"%"],["winWhenF10","Thắng|F10","",v=>v+"%"],["duration","Dur′","",v=>v]];
+const C=[["name","Đội","tm",v=>v],["tier","Tier","",v=>v?'<span class="bg '+v+'">'+v+'</span>':"—"],["maps","Ván","",v=>v],["winrate","WR%","",v=>v+"%"],["kills","Kills","",v=>v.toFixed(2)],["deaths","Deaths","",v=>v.toFixed(2),1],["killDiff","Chênh K–D","",v=>(v>0?"+":"")+v.toFixed(2)],["totalKills","Tổng kills","",v=>v.toFixed(1)],["assists","Assists","",v=>v.toFixed(1)],["firstBlood","FB%","",v=>v+"%"],["f10","F10%","",v=>v+"%"],["winWhenFb","Thắng|FB","",v=>v+"%"],["winWhenF10","Thắng|F10","",v=>v+"%"],["duration","Dur′","",v=>v]];
 let sk="winrate",sa=0;
 const gv=(t,k)=>k==="name"?t.name:k==="tier"?t.tier:t.stats?t.stats[k]:null;
 function mix(a,b,f){const p=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),[r,g,c]=p(a),[R,G,B]=p(b);return`rgb(${Math.round(r+(R-r)*f)},${Math.round(g+(G-g)*f)},${Math.round(c+(B-c)*f)})`;}
@@ -130,11 +145,24 @@ function tbl(){const rows=[...T].sort((a,b)=>{let x=gv(a,sk),y=gv(b,sk);if(x==nu
   h+=rows.map(t=>"<tr>"+C.map(c=>{const v=gv(t,c[0]);if(v==null&&c[0]!=="name"&&c[0]!=="tier")return'<td style="color:var(--mu)">—</td>';const cell=(c[0]==="name")?lg(t)+c[3](v):c[3](v);return'<td class="'+c[2]+'" style="'+heat(c[0],v,c[5])+'">'+cell+"</td>";}).join("")+"</tr>").join("")+"</tbody>";
   const T2=$("#tbl");T2.innerHTML=h;T2.querySelectorAll("th").forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k===sk)sa=!sa;else{sk=k;sa=0;}tbl();});}
 function tags(s){const r=[];if(s.winrate>=65)r.push(["Phong độ đỉnh cao",0]);if(s.killDiff>=5)r.push(["Áp đảo giao tranh",0]);if(s.firstBlood>=55||s.f10>=62)r.push(["Áp nhịp sớm",0]);if(s.assists>=64)r.push(["Teamfight gắn kết",0]);if(s.winWhenF10>=85)r.push(["Đóng trận kỷ luật",0]);if(s.duration>=45)r.push(["Vận hành muộn",0]);if(s.duration<=41)r.push(["Kết trận nhanh",0]);if(s.killDiff<=-3)r.push(["Bị áp đảo",1]);if(s.winWhenFb<=45)r.push(["Chuyển hoá kém",1]);if(s.winrate<45)r.push(["Đang sa sút",1]);return r.slice(0,5);}
-function ins(t){const s=t.stats;return t.name+" đạt winrate <b>"+s.winrate+"%</b> qua "+s.maps+" ván, "+(s.killDiff>=3?"áp đảo giao tranh (chênh K–D <b>+"+s.killDiff+"</b>)":s.killDiff<=-3?"bị lép vế giao tranh (chênh K–D <b>"+s.killDiff+"</b>)":"giao tranh cân bằng")+", "+(s.f10>=60?"thường thắng nhịp đầu (F10 <b>"+s.f10+"%</b>)":s.f10<=48?"ít thắng nhịp đầu (F10 "+s.f10+"%)":"nhịp đầu trung bình")+(s.winWhenF10>=85?", và đóng trận rất chắc (thắng khi có F10 <b>"+s.winWhenF10+"%</b>)":s.winWhenFb<=45?", nhưng chuyển hoá lợi thế yếu (thắng|FB "+s.winWhenFb+"%)":", thời lượng TB "+s.duration+" phút")+".";}
+function ins(t){const s=t.stats;return t.name+" đạt winrate <b>"+s.winrate+"%</b> qua "+s.maps+" ván, "+(s.killDiff>=3?"áp đảo giao tranh (chênh K–D <b>+"+s.killDiff+"</b>)":s.killDiff<=-3?"bị lép vế giao tranh (chênh K–D <b>"+s.killDiff+"</b>)":"giao tranh cân bằng")+", "+(s.f10>=60?"thường thắng nhịp đắu (F10 <b>"+s.f10+"%</b>)":s.f10<=48?"ít thắng nhịp đầu (F10 "+s.f10+"%)":"nhịp đầu trung bình")+(s.winWhenF10>=85?", và đóng trận rất chắc (thắng khi có F10 <b>"+s.winWhenF10+"%</b>)":s.winWhenFb<=45?", nhưng chuyển hoá lợi thế yếu (thắng|FB "+s.winWhenFb+"%)":", thời lượng TB "+s.duration+" phút")+".";}
+const POS={CORE:["1","Carry"],MID:["2","Mid"],OFFLANE:["3","Offlane"],SUPPORT:["4","Hỗ trợ"],"FULL SUPPORT":["5","Hỗ trợ"],COACH:["HLV","Huấn luyện viên"]};
+const RORD={CORE:1,MID:2,OFFLANE:3,SUPPORT:4,"FULL SUPPORT":5,COACH:6};
+const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function sq(slug){
+  const r=R[slug]; if(!r||!r.length) return "";
+  const list=[...r].sort((a,b)=>(RORD[a.role]||9)-(RORD[b.role]||9));
+  const cell=p=>{const co=p.role==="COACH"?" co":"",pos=POS[p.role]||["",""],init=esc((p.nick||"?").charAt(0));
+    const img=p.photo?'<img src="'+esc(p.photo)+'" alt="'+esc(p.nick)+'" loading="lazy" onerror="this.remove()">':"";
+    return '<div class="pl"><div class="av'+co+'" title="'+esc(pos[1])+'">'+init+img+'<span class="pos'+co+'">'+pos[0]+'</span></div>'
+      +'<div class="nk" title="'+esc(p.nick)+'">'+esc(p.nick)+'</div>'
+      +'<div class="rn" title="'+esc(p.real)+'">'+(p.real?esc(p.real):"&nbsp;")+'</div></div>';};
+  return '<div class="sqwrap"><div class="sqh"><span>Đội hình thi đấu</span><span>5 tuyển thủ + HLV</span></div><div class="sq">'+list.map(cell).join("")+'</div></div>';
+}
 function rep(){const so=[...T].sort((a,b)=>a.stats&&b.stats?b.stats.winrate-a.stats.winrate:a.stats?-1:b.stats?1:0);
   $("#rep").innerHTML=so.map(t=>{if(!t.stats)return'<div class="nd"><div class="hd"><span class="nm" style="font-size:15px">'+lg(t,true)+t.name+'</span></div><div style="margin-top:8px">'+t.region+' · Chưa có dữ liệu.</div></div>';
     const s=t.stats,tg=tags(s).map(([x,w])=>'<span class="t'+(w?" wn":"")+'">'+x+"</span>").join(""),M=(l,v)=>'<div class="m"><div class="ml">'+l+'</div><div class="mv">'+v+"</div></div>";
-    return'<div class="c"><div class="hd"><span class="nm">'+lg(t,true)+t.name+' <span class="bg '+t.tier+'">'+t.tier+'</span></span><span class="rg">'+t.region+" · "+t.qualification+'</span></div><div class="tags">'+(tg||'<span class="t">Cân bằng</span>')+'</div><div class="ms">'+M("Winrate",s.winrate+"%")+M("Chênh K–D",(s.killDiff>0?"+":"")+s.killDiff)+M("Tổng kills",s.totalKills.toFixed(1))+M("F10",s.f10+"%")+M("Thắng|F10",s.winWhenF10+"%")+M("Thời lượng",s.duration+"′")+'</div><div class="in">'+ins(t)+"</div></div>";}).join("");}
+    return'<div class="c"><div class="hd"><span class="nm">'+lg(t,true)+t.name+' <span class="bg '+t.tier+'">'+t.tier+'</span></span><span class="rg">'+t.region+" · "+t.qualification+'</span></div><div class="tags">'+(tg||'<span class="t">Cân bằng</span>')+'</div><div class="ms">'+M("Winrate",s.winrate+"%")+M("Chênh K–D",(s.killDiff>0?"+":"")+s.killDiff)+M("Tổng kills",s.totalKills.toFixed(1))+M("F10",s.f10+"%")+M("Thắng|F10",s.winWhenF10+"%")+M("Thời lượng",s.duration+"′")+'</div><div class="in">'+ins(t)+"</div>"+sq(t.slug)+"</div>";}).join("");}
 // ---- So sánh 2 đội (head-to-head) ----
 const H2M=[["winrate","Winrate","%",0],["kills","Kills / trận","",0],["deaths","Deaths / trận","",1],["killDiff","Chênh K–D","",0],["totalKills","Tổng kills / trận","",0],["assists","Assists / trận","",0],["firstBlood","First Blood","%",0],["f10","F10 — 10 kill đầu","%",0],["winWhenFb","Thắng khi có FB","%",0],["winWhenF10","Thắng khi có F10","%",0],["duration","Thời lượng (phút)","",1]];
 function h2hInit(){
