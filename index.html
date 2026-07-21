@@ -72,6 +72,12 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
 .h2m-sc{font-variant-numeric:tabular-nums;font-weight:700;font-size:17px;white-space:nowrap;text-align:center}.h2m-sc i{color:var(--mu);font-style:normal;margin:0 7px;font-weight:400}
 .h2m-sc .w{color:var(--aq)}
 .h2m-r{text-align:right;font-size:11.5px;color:var(--mu)}
+.h2sub{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin:20px 0 12px;padding-top:16px;border-top:1px solid var(--gr)}
+.h2sub:first-child{margin-top:0;padding-top:0;border-top:none}
+.hlegend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--t2);margin-bottom:12px}
+.hlegend .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
+.hlegend .dot.a{background:var(--ca)}.hlegend .dot.b{background:var(--cb)}
+.mu{color:var(--mu)}
 </style>
 </head>
 <body data-t="light">
@@ -174,7 +180,7 @@ function rep(){const so=[...T].sort((a,b)=>a.stats&&b.stats?b.stats.winrate-a.st
     const s=t.stats,tg=tags(s).map(([x,w])=>'<span class="t'+(w?" wn":"")+'">'+x+"</span>").join(""),M=(l,v)=>'<div class="m"><div class="ml">'+l+'</div><div class="mv">'+v+"</div></div>";
     return'<div class="c"><div class="hd"><span class="nm">'+lg(t,true)+t.name+' <span class="bg '+t.tier+'">'+t.tier+'</span></span><span class="rg">'+t.region+" · "+t.qualification+'</span></div><div class="tags">'+(tg||'<span class="t">Cân bằng</span>')+'</div><div class="ms">'+M("Winrate",s.winrate+"%")+M("Chênh K–D",(s.killDiff>0?"+":"")+s.killDiff)+M("Tổng kills",s.totalKills.toFixed(1))+M("F10",s.f10+"%")+M("Thắng|F10",s.winWhenF10+"%")+M("Thời lượng",s.duration+"′")+'</div><div class="in">'+ins(t)+"</div>"+sq(t.slug)+"</div>";}).join("");}
 // ---- So sánh 2 đội (head-to-head) ----
-const H2M=[["winrate","Winrate","%",0],["kills","Kills / trận","",0],["deaths","Deaths / trận","",1],["killDiff","Chênh K–D","",0],["totalKills","Tổng kills / trận","",0],["assists","Assists / trận","",0],["firstBlood","First Blood","%",0],["f10","F10 — 10 kill đầu","%",0],["winWhenFb","Thắng khi có FB","%",0],["winWhenF10","Thắng khi có F10","%",0],["duration","Thời lượng (phút)","",1]];
+const FM=[["maps","Số ván (mẫu)","",0,1],["winrate","Winrate","%",0],["kills","Kills / trận","",0],["deaths","Deaths / trận","",1],["killDiff","Chênh K–D","",0],["totalKills","Tổng kills / trận","",0],["assists","Assists / trận","",0],["firstBlood","First Blood","%",0],["f10","F10 — 10 kill đầu","%",0],["winWhenFb","Thắng khi có FB","%",0],["winWhenF10","Thắng khi có F10","%",0],["duration","Thời lượng (phút)","",1]];
 function h2hInit(){
   const d=wd(); if(d.length<2) return;
   const sa=$("#selA"), sb=$("#selB");
@@ -192,30 +198,57 @@ function h2hRender(){
   $("#h2hHead").innerHTML=card(A,"a")+card(B,"b");
   const box=$("#h2hRows"), v=$("#h2hVerdict");
   if(A.name===B.name){box.innerHTML="";v.innerHTML="Bạn đang chọn cùng một đội — hãy chọn hai đội khác nhau.";return;}
+  // --- Phần 1: Lịch sử đối đầu trực tiếp ---
   const key=[A.slug,B.slug].sort().join("|");
   const list=(H[key]||[]).slice().sort((x,y)=>x.date<y.date?1:-1);
+  let h2hHTML='<div class="h2sub">Đối đầu trực tiếp · 3 tháng gần nhất</div>', h2hVerdict;
   if(!list.length){
-    box.innerHTML='<div class="nd"><b>'+A.name+'</b> và <b>'+B.name+'</b> chưa gặp nhau trong 3 tháng gần nhất (nguồn DLTV).</div>';
-    v.innerHTML='Chưa có dữ liệu đối đầu trực tiếp trong 3 tháng gần nhất. Bạn vẫn có thể so chỉ số tổng quan của hai đội ở tab “Bảng xếp hạng”.';
-    return;
+    h2hHTML+='<div class="nd"><b>'+esc(A.name)+'</b> và <b>'+esc(B.name)+'</b> chưa gặp nhau trong 3 tháng gần nhất (nguồn DLTV).</div>';
+    h2hVerdict='Chưa có dữ liệu đối đầu trực tiếp trong 3 tháng gần nhất — xem chỉ số tổng quan bên dưới.';
+  } else {
+    let sa=0,sb=0,ma=0,mb=0;
+    const rows=list.map(mt=>{
+      const va=mt.s[A.slug], vv=mt.s[B.slug]; ma+=va; mb+=vv;
+      const aw=va>vv, bw=vv>va; if(aw)sa++; else if(bw)sb++;
+      const dd=mt.date.slice(8,10)+"/"+mt.date.slice(5,7);
+      return '<div class="h2m"><div class="h2m-d">'+dd+'<small>'+esc(mt.event)+'</small></div>'
+        +'<div class="h2m-sc"><span class="'+(aw?'w':'')+'">'+va+'</span><i>–</i><span class="'+(bw?'w':'')+'">'+vv+'</span></div>'
+        +'<div class="h2m-r">'+(aw?esc(A.short||A.name):bw?esc(B.short||B.name):'Hoà')+'</div></div>';
+    }).join("");
+    h2hHTML+='<div class="h2tally"><div class="h2t-side"><b>'+sa+'</b><span>'+esc(A.name)+'</span></div>'
+      +'<div class="h2t-mid">'+list.length+' lần gặp<small>tổng maps '+ma+'–'+mb+'</small></div>'
+      +'<div class="h2t-side b"><b>'+sb+'</b><span>'+esc(B.name)+'</span></div></div>'
+      +'<div class="h2list">'+rows+'</div>';
+    const lead=sa>sb?A:sb>sa?B:null;
+    h2hVerdict=lead
+      ? '<b>'+esc(lead.name)+'</b> thắng thế trong '+list.length+' lần đối đầu gần đây — <b>'+Math.max(sa,sb)+'–'+Math.min(sa,sb)+'</b> trận thắng (tổng maps '+(lead===A?ma+'–'+mb:mb+'–'+ma)+').'
+      : 'Hai đội bất phân thắng bại: <b>'+sa+'–'+sb+'</b> trong '+list.length+' lần gặp (tổng maps '+ma+'–'+mb+').';
   }
-  let sa=0,sb=0,ma=0,mb=0;
-  const rows=list.map(mt=>{
-    const va=mt.s[A.slug], vv=mt.s[B.slug]; ma+=va; mb+=vv;
-    const aw=va>vv, bw=vv>va; if(aw)sa++; else if(bw)sb++;
-    const dd=mt.date.slice(8,10)+"/"+mt.date.slice(5,7);
-    return '<div class="h2m"><div class="h2m-d">'+dd+'<small>'+esc(mt.event)+'</small></div>'
-      +'<div class="h2m-sc"><span class="'+(aw?'w':'')+'">'+va+'</span><i>–</i><span class="'+(bw?'w':'')+'">'+vv+'</span></div>'
-      +'<div class="h2m-r">'+(aw?esc(A.short||A.name):bw?esc(B.short||B.name):'Hoà')+'</div></div>';
-  }).join("");
-  box.innerHTML='<div class="h2tally"><div class="h2t-side"><b>'+sa+'</b><span>'+esc(A.name)+'</span></div>'
-    +'<div class="h2t-mid">'+list.length+' lần gặp<small>tổng maps '+ma+'–'+mb+'</small></div>'
-    +'<div class="h2t-side b"><b>'+sb+'</b><span>'+esc(B.name)+'</span></div></div>'
-    +'<div class="h2list">'+rows+'</div>';
-  const lead=sa>sb?A:sb>sa?B:null;
-  v.innerHTML=lead
-    ? '<b>'+lead.name+'</b> thắng thế trong '+list.length+' lần đối đầu gần đây — <b>'+Math.max(sa,sb)+'–'+Math.min(sa,sb)+'</b> trận thắng (tổng maps '+(lead===A?ma+'–'+mb:mb+'–'+ma)+').'
-    : 'Hai đội bất phân thắng bại: <b>'+sa+'–'+sb+'</b> trong '+list.length+' lần gặp (tổng maps '+ma+'–'+mb+').';
+  // --- Phần 2: Chỉ số tổng quan đầy đủ (3 tháng) ---
+  let statsHTML='', statVerdict='';
+  if(A.stats&&B.stats){
+    const d=wd(); let wa=0,wb=0;
+    const rows=FM.map(([k,label,unit,inv,neu])=>{
+      const va=A.stats[k], vb=B.stats[k];
+      const vs=d.map(t=>t.stats[k]), mn=Math.min(...vs), mx=Math.max(...vs);
+      const norm=x=>8+((x-mn)/(mx-mn||1))*92;
+      const aw=!neu&&(inv?va<vb:va>vb), bw=!neu&&(inv?vb<va:vb>va);
+      if(aw)wa++; if(bw)wb++;
+      const fmt=x=>(typeof x==="number"&&!Number.isInteger(x)?x.toFixed(2).replace(/\.?0+$/,""):x)+unit;
+      return '<div class="hrow">'
+        +'<div class="hside l"><span class="hval'+(aw?' win':'')+'">'+fmt(va)+'</span><div class="hbar a" style="width:'+norm(va).toFixed(1)+'%"></div></div>'
+        +'<div class="hmid">'+label+(inv?'<small>thấp hơn = tốt hơn</small>':'')+'</div>'
+        +'<div class="hside"><div class="hbar b" style="width:'+norm(vb).toFixed(1)+'%"></div><span class="hval'+(bw?' win':'')+'">'+fmt(vb)+'</span></div>'
+        +'</div>';
+    }).join("");
+    statsHTML='<div class="h2sub">Chỉ số tổng quan · 3 tháng gần nhất</div>'
+      +'<div class="hlegend"><span><span class="dot a"></span>'+esc(A.name)+'</span><span><span class="dot b"></span>'+esc(B.name)+'</span><span class="mu">Thanh dài hơn = cao hơn (chuẩn hoá toàn giải) · ● = tốt hơn</span></div>'
+      +rows;
+    const slead=wa>wb?A:wb>wa?B:null;
+    statVerdict=' <span class="mu">· Chỉ số tổng quan: <b>'+esc(A.name)+'</b> dẫn '+wa+' · <b>'+esc(B.name)+'</b> dẫn '+wb+(slead?' — <b>'+esc(slead.name)+'</b> nhỉnh hơn.':' — cân bằng.')+'</span>';
+  }
+  box.innerHTML=h2hHTML+statsHTML;
+  v.innerHTML=h2hVerdict+statVerdict;
 }
 function render(){tiles();tbl();rep();h2hInit();}
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".v").forEach(v=>v.classList.remove("on"));$("#v-"+b.dataset.v).classList.add("on");};
