@@ -85,7 +85,7 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
   <div class="top">
     <div>
       <h1>The International 2026 · Phân tích chỉ số các đội</h1>
-      <p class="sub">16 đội tham dự — chỉ số thi đấu 3 tháng gần nhất</p>
+      <p class="sub">16 đội tham dự — chỉ số thi đấu 6 tháng gần nhất</p>
       <p class="snap" id="snap">Đang tải dữ liệu…</p>
     </div>
     <button class="tb" id="tbtn">🌙 Chế độ tối</button>
@@ -106,7 +106,7 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
   <section class="v" id="v-h2h">
     <div class="p">
       <h2>So sánh trực tiếp 2 đội</h2>
-      <p class="d">Lịch sử <b>đối đầu trực tiếp</b> giữa hai đội trong 3 tháng gần nhất (nguồn DLTV): số lần gặp, tỉ số từng trận và đội thắng. Nhiều cặp chỉ mới chạm trán ở EWC 2026 nên số trận có thể ít; cặp chưa gặp nhau sẽ được báo rõ.</p>
+      <p class="d">Lịch sử <b>đối đầu trực tiếp</b> giữa hai đội trong 6 tháng gần nhất (nguồn DLTV): số lần gặp, tỉ số từng trận và đội thắng, kèm <b>chỉ số chỉ tính riêng các ván 2 đội gặp nhau</b>. Một số cặp gặp nhau ít nên mẫu có thể nhỏ (được báo rõ); cặp chưa gặp nhau sẽ hiển thị chỉ số tổng quan toàn giải.</p>
       <div class="h2c">
         <select id="selA"></select><span class="vs">VS</span><select id="selB"></select>
       </div>
@@ -116,7 +116,7 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
     </div>
   </section>
   <section class="v" id="v-abt"><div class="p"><h2>Về trang này</h2><div class="d" style="font-size:13.5px;line-height:1.7">
-    <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>3 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code>; một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
+    <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>6 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code>; một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
     <p><b>Bản đầy đủ</b> (kèm biểu đồ radar/scatter, scraper, workflow) có trong gói mã nguồn. Trang này là bản gọn tự chứa để demo.</p>
   </div></div></section>
   <p class="ft">Dữ liệu: <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a> · Cập nhật lần cuối: <span id="fu">—</span></p>
@@ -181,6 +181,8 @@ function rep(){const so=[...T].sort((a,b)=>a.stats&&b.stats?b.stats.winrate-a.st
     return'<div class="c"><div class="hd"><span class="nm">'+lg(t,true)+t.name+' <span class="bg '+t.tier+'">'+t.tier+'</span></span><span class="rg">'+t.region+" · "+t.qualification+'</span></div><div class="tags">'+(tg||'<span class="t">Cân bằng</span>')+'</div><div class="ms">'+M("Winrate",s.winrate+"%")+M("Chênh K–D",(s.killDiff>0?"+":"")+s.killDiff)+M("Tổng kills",s.totalKills.toFixed(1))+M("F10",s.f10+"%")+M("Thắng|F10",s.winWhenF10+"%")+M("Thời lượng",s.duration+"′")+'</div><div class="in">'+ins(t)+"</div>"+sq(t.slug)+"</div>";}).join("");}
 // ---- So sánh 2 đội (head-to-head) ----
 const FM=[["maps","Số ván (mẫu)","",0,1],["winrate","Winrate","%",0],["kills","Kills / trận","",0],["deaths","Deaths / trận","",1],["killDiff","Chênh K–D","",0],["totalKills","Tổng kills / trận","",0],["assists","Assists / trận","",0],["firstBlood","First Blood","%",0],["f10","F10 — 10 kill đầu","%",0],["winWhenFb","Thắng khi có FB","%",0],["winWhenF10","Thắng khi có F10","%",0],["duration","Thời lượng (phút)","",1]];
+// Chỉ số H2H — khớp thứ tự mảng "order" trong h2h.json: [label, đơn vị, đảo(thấp=tốt), trung tính(bằng nhau)]
+const HM=[["Winrate","%",0,0],["Kills / trận","",0,0],["Deaths / trận","",1,0],["Chênh K–D","",0,0],["Tổng kills / trận","",0,1],["First Blood","%",0,0],["F10 — 10 kill đầu","%",0,0],["Thắng khi có FB","%",0,0],["Thắng khi có F10","%",0,0],["Thời lượng (phút)","",0,1]];
 function h2hInit(){
   const d=wd(); if(d.length<2) return;
   const sa=$("#selA"), sb=$("#selB");
@@ -198,20 +200,23 @@ function h2hRender(){
   $("#h2hHead").innerHTML=card(A,"a")+card(B,"b");
   const box=$("#h2hRows"), v=$("#h2hVerdict");
   if(A.name===B.name){box.innerHTML="";v.innerHTML="Bạn đang chọn cùng một đội — hãy chọn hai đội khác nhau.";return;}
-  // --- Phần 1: Lịch sử đối đầu trực tiếp ---
+  // --- Phần 1: Lịch sử đối đầu trực tiếp (6 tháng) ---
   const key=[A.slug,B.slug].sort().join("|");
-  const list=(H[key]||[]).slice().sort((x,y)=>x.date<y.date?1:-1);
-  let h2hHTML='<div class="h2sub">Đối đầu trực tiếp · 3 tháng gần nhất</div>', h2hVerdict;
+  const s0=key.split("|")[0], s1=key.split("|")[1];
+  const pair=H[key];
+  const list=(pair&&pair.series?pair.series:[]).slice().sort((x,y)=>x[0]<y[0]?1:-1);
+  let h2hHTML='<div class="h2sub">Đối đầu trực tiếp · 6 tháng gần nhất</div>', h2hVerdict;
   if(!list.length){
-    h2hHTML+='<div class="nd"><b>'+esc(A.name)+'</b> và <b>'+esc(B.name)+'</b> chưa gặp nhau trong 3 tháng gần nhất (nguồn DLTV).</div>';
-    h2hVerdict='Chưa có dữ liệu đối đầu trực tiếp trong 3 tháng gần nhất — xem chỉ số tổng quan bên dưới.';
+    h2hHTML+='<div class="nd"><b>'+esc(A.name)+'</b> và <b>'+esc(B.name)+'</b> chưa gặp nhau trong 6 tháng gần nhất (nguồn DLTV).</div>';
+    h2hVerdict='Chưa có dữ liệu đối đầu trực tiếp trong 6 tháng gần nhất — xem chỉ số tổng quan bên dưới.';
   } else {
     let sa=0,sb=0,ma=0,mb=0;
     const rows=list.map(mt=>{
-      const va=mt.s[A.slug], vv=mt.s[B.slug]; ma+=va; mb+=vv;
+      const date=mt[0], event=mt[1];
+      const va=(A.slug===s0?mt[2]:mt[3]), vv=(A.slug===s0?mt[3]:mt[2]); ma+=va; mb+=vv;
       const aw=va>vv, bw=vv>va; if(aw)sa++; else if(bw)sb++;
-      const dd=mt.date.slice(8,10)+"/"+mt.date.slice(5,7);
-      return '<div class="h2m"><div class="h2m-d">'+dd+'<small>'+esc(mt.event)+'</small></div>'
+      const dd=date.slice(8,10)+"/"+date.slice(5,7);
+      return '<div class="h2m"><div class="h2m-d">'+dd+'<small>'+esc(event)+'</small></div>'
         +'<div class="h2m-sc"><span class="'+(aw?'w':'')+'">'+va+'</span><i>–</i><span class="'+(bw?'w':'')+'">'+vv+'</span></div>'
         +'<div class="h2m-r">'+(aw?esc(A.short||A.name):bw?esc(B.short||B.name):'Hoà')+'</div></div>';
     }).join("");
@@ -224,9 +229,31 @@ function h2hRender(){
       ? '<b>'+esc(lead.name)+'</b> thắng thế trong '+list.length+' lần đối đầu gần đây — <b>'+Math.max(sa,sb)+'–'+Math.min(sa,sb)+'</b> trận thắng (tổng maps '+(lead===A?ma+'–'+mb:mb+'–'+ma)+').'
       : 'Hai đội bất phân thắng bại: <b>'+sa+'–'+sb+'</b> trong '+list.length+' lần gặp (tổng maps '+ma+'–'+mb+').';
   }
-  // --- Phần 2: Chỉ số tổng quan đầy đủ (3 tháng) ---
+  // --- Phần 2: Chỉ số khi HAI ĐỘI TRỰC TIẾP ĐỐI ĐẦU (chỉ tính các ván gặp nhau) ---
   let statsHTML='', statVerdict='';
-  if(A.stats&&B.stats){
+  if(pair&&pair.st&&pair.st[A.slug]&&pair.st[B.slug]){
+    const stA=pair.st[A.slug], stB=pair.st[B.slug], n=pair.n; let wa=0,wb=0;
+    const rows=HM.map((meta,i)=>{
+      const label=meta[0],unit=meta[1],inv=meta[2],neu=meta[3];
+      const va=stA[i], vb=stB[i], cmp=(va!=null&&vb!=null);
+      const aw=!neu&&cmp&&(inv?va<vb:va>vb), bw=!neu&&cmp&&(inv?vb<va:vb>va);
+      if(aw)wa++; if(bw)wb++;
+      const mn=cmp?Math.min(va,vb):0, mx=cmp?Math.max(va,vb):1;
+      const norm=v=>v==null?8:neu?60:8+((v-mn)/(mx-mn||1))*92;
+      const fmt=x=>x==null?'—':((typeof x==="number"&&!Number.isInteger(x)?x.toFixed(2).replace(/\.?0+$/,""):x)+unit);
+      return '<div class="hrow">'
+        +'<div class="hside l"><span class="hval'+(aw?' win':'')+'">'+fmt(va)+'</span><div class="hbar a" style="width:'+norm(va).toFixed(1)+'%"></div></div>'
+        +'<div class="hmid">'+label+(inv?'<small>thấp hơn = tốt hơn</small>':neu?'<small>bằng nhau (2 đội)</small>':'')+'</div>'
+        +'<div class="hside"><div class="hbar b" style="width:'+norm(vb).toFixed(1)+'%"></div><span class="hval'+(bw?' win':'')+'">'+fmt(vb)+'</span></div>'
+        +'</div>';
+    }).join("");
+    const small=n<5;
+    statsHTML='<div class="h2sub">Chỉ số khi đối đầu · '+n+' ván chung'+(small?' · <span style="color:var(--rd)">mẫu nhỏ, chỉ tham khảo</span>':'')+'</div>'
+      +'<div class="hlegend"><span><span class="dot a"></span>'+esc(A.name)+'</span><span><span class="dot b"></span>'+esc(B.name)+'</span><span class="mu">Chỉ tính các ván 2 đội gặp nhau · ● = tốt hơn</span></div>'
+      +rows;
+    const slead=wa>wb?A:wb>wa?B:null;
+    statVerdict=' <span class="mu">· Khi đối đầu: <b>'+esc(A.name)+'</b> nhỉnh '+wa+' chỉ số · <b>'+esc(B.name)+'</b> nhỉnh '+wb+(slead?' — <b>'+esc(slead.name)+'</b> vượt trội hơn khi gặp nhau.':' — khá cân bằng.')+'</span>';
+  } else if(A.stats&&B.stats){
     const d=wd(); let wa=0,wb=0;
     const rows=FM.map(([k,label,unit,inv,neu])=>{
       const va=A.stats[k], vb=B.stats[k];
@@ -241,7 +268,7 @@ function h2hRender(){
         +'<div class="hside"><div class="hbar b" style="width:'+norm(vb).toFixed(1)+'%"></div><span class="hval'+(bw?' win':'')+'">'+fmt(vb)+'</span></div>'
         +'</div>';
     }).join("");
-    statsHTML='<div class="h2sub">Chỉ số tổng quan · 3 tháng gần nhất</div>'
+    statsHTML='<div class="h2sub">Chỉ số tổng quan toàn giải · 6 tháng gần nhất <small>(hai đội chưa gặp nhau)</small></div>'
       +'<div class="hlegend"><span><span class="dot a"></span>'+esc(A.name)+'</span><span><span class="dot b"></span>'+esc(B.name)+'</span><span class="mu">Thanh dài hơn = cao hơn (chuẩn hoá toàn giải) · ● = tốt hơn</span></div>'
       +rows;
     const slead=wa>wb?A:wb>wa?B:null;
