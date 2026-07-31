@@ -78,6 +78,36 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
 .hlegend .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
 .hlegend .dot.a{background:var(--ca)}.hlegend .dot.b{background:var(--cb)}
 .mu{color:var(--mu)}
+/* ---- Tier list hero ---- */
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 14px}
+.pill{background:var(--cd);border:1px solid var(--bd);color:var(--t2);border-radius:999px;padding:7px 15px;font-size:13px;font-family:inherit;cursor:pointer}
+.pill.on{background:var(--bl);border-color:var(--bl);color:#fff;font-weight:600}
+.tfind{background:var(--cd);color:var(--tx);border:1px solid var(--bd);border-radius:999px;padding:7px 14px;font-family:inherit;font-size:13px;width:180px}
+.tl{display:flex;flex-direction:column;gap:5px}
+.tr{display:grid;grid-template-columns:104px 1fr;gap:5px}
+.tlab{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:9px;font-weight:800;font-size:16px;color:#141414;text-align:center;padding:8px 5px;line-height:1.1}
+.tlab small{font-size:8.5px;font-weight:700;opacity:.7;margin-top:3px;letter-spacing:.02em;line-height:1.25}
+.thg{display:flex;flex-wrap:wrap;gap:4px;background:var(--cd);border:1px solid var(--bd);border-radius:9px;padding:5px;align-content:flex-start}
+.hx{position:relative;width:98px;height:55px;border-radius:5px;overflow:hidden;background:var(--gr);transition:transform .1s,opacity .12s}
+.hx:hover{transform:scale(1.05);z-index:3}
+.hx img{width:100%;height:100%;object-fit:cover;display:block}
+.hx .hnm{position:absolute;left:0;right:0;bottom:0;font-size:8.5px;font-weight:700;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.88));padding:9px 3px 2px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hx .fb{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;color:var(--t2);padding:3px;text-align:center;line-height:1.15}
+.hx .dt{position:absolute;top:3px;right:3px;width:15px;height:15px;line-height:15px;text-align:center;border-radius:4px;font-size:10px;font-weight:800;color:#fff}
+.hx .dt.up{background:#1baf7a}.hx .dt.down{background:#e34948}
+.hx .bn{position:absolute;top:3px;left:3px;font-size:8.5px;font-weight:800;padding:1px 4px;border-radius:4px;background:rgba(0,0,0,.72);color:#ffcf4d}
+.hx.dim{opacity:.14}.hx.noimg .hnm{display:none}.hx.noimg .fb{display:flex}
+.tnote{font-size:12px;color:var(--t2);background:var(--cd);border:1px solid var(--bd);border-left:3px solid var(--bl);border-radius:8px;padding:10px 13px;margin-top:14px;line-height:1.6}
+.pn{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:4px}
+.pnb{border:1px solid var(--gr);border-radius:9px;padding:11px 13px}
+.pnb h3{margin:0 0 7px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mu)}
+.pnb ul{margin:0;padding-left:17px;font-size:12.5px;color:var(--t2);line-height:1.65}
+.pnb li b{color:var(--tx)}
+.chip{display:inline-block;font-size:11.5px;padding:3px 9px;border-radius:999px;margin:0 5px 5px 0;border:1px solid}
+.chip.up{background:color-mix(in srgb,var(--aq) 13%,transparent);color:var(--aq);border-color:color-mix(in srgb,var(--aq) 32%,transparent)}
+.chip.down{background:color-mix(in srgb,var(--rd) 13%,transparent);color:var(--rd);border-color:color-mix(in srgb,var(--rd) 32%,transparent)}
+.tlgd{display:flex;gap:13px;flex-wrap:wrap;font-size:11.5px;color:var(--t2);margin:12px 0 0;padding-top:11px;border-top:1px solid var(--gr)}
+@media (max-width:640px){.tr{grid-template-columns:64px 1fr}.tlab{font-size:12px}.tlab small{display:none}.hx{width:76px;height:43px}}
 </style>
 </head>
 <body data-t="light">
@@ -94,6 +124,7 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
     <button data-v="rank" class="on">Bảng xếp hạng</button>
     <button data-v="rep">Chi tiết đội</button>
     <button data-v="h2h">So sánh 2 đội</button>
+    <button data-v="tier">Tier list hero</button>
     <button data-v="abt">Về trang này</button>
   </nav>
   <div id="err"></div>
@@ -115,6 +146,31 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
       <div class="in" id="h2hVerdict"></div>
     </div>
   </section>
+  <section class="v" id="v-tier">
+    <div class="p">
+      <h2>Bảng xếp hạng hero theo tier <span id="tpatch" class="mu" style="font-weight:400;font-size:12.5px"></span></h2>
+      <p class="d" id="tdesc">Xếp hạng S / A / B / C theo từng vị trí, kèm nhóm <b>Đặc thù</b> và <b>Tình huống</b>. Mỗi thẻ hero hiển thị số liệu thật: winrate pub và số lần bị ban ở giải chuyên nghiệp.</p>
+      <div class="pills" id="tpills"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:13px">
+        <input class="tfind" id="tfind" type="search" placeholder="Tìm hero…" autocomplete="off">
+        <span class="mu" style="font-size:11.5px" id="tcount"></span>
+      </div>
+      <div class="tl" id="tlist"></div>
+      <div class="tlgd">
+        <span><span class="chip up" style="margin:0">↑</span> được buff ở patch này</span>
+        <span><span class="chip down" style="margin:0">↓</span> bị nerf ở patch này</span>
+        <span class="mu">Số vàng góc trái = số lần hero bị ban ở giải chuyên nghiệp · rê chuột lên thẻ để xem chi tiết</span>
+      </div>
+      <div class="tnote" id="tmethod"></div>
+    </div>
+    <div class="p">
+      <h2 id="pntitle">Thay đổi của patch</h2>
+      <p class="d" id="pnsum"></p>
+      <div class="pn" id="pnbox"></div>
+      <div class="tnote" id="pnnote"></div>
+      <p class="ft" id="tsrc"></p>
+    </div>
+  </section>
   <section class="v" id="v-abt"><div class="p"><h2>Về trang này</h2><div class="d" style="font-size:13.5px;line-height:1.7">
     <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>6 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code>; một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
     <p><b>Bản đầy đủ</b> (kèm biểu đồ radar/scatter, scraper, workflow) có trong gói mã nguồn. Trang này là bản gọn tự chứa để demo.</p>
@@ -123,16 +179,17 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
 </div>
 <script>
 const $=s=>document.querySelector(s),tier=w=>w>=60?"S":w>=50?"A":"B";
-let T=[],R={},H={};
+let T=[],R={},H={},TL=null;
 fetch("data/teams.json").then(r=>r.json()).then(d=>{
   T=d.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));
   return Promise.all([
     fetch("data/meta.json").then(r=>r.json()).catch(()=>({})),
     fetch("data/rosters.json").then(r=>r.json()).then(x=>x.rosters||{}).catch(()=>({})),
-    fetch("data/h2h.json").then(r=>r.json()).then(x=>x.pairs||{}).catch(()=>({}))
+    fetch("data/h2h.json").then(r=>r.json()).then(x=>x.pairs||{}).catch(()=>({})),
+    fetch("data/tiers.json").then(r=>r.json()).catch(()=>null)
   ]);
-}).then(([m,ros,h2h])=>{
-  R=ros; H=h2h;
+}).then(([m,ros,h2h,tl])=>{
+  R=ros; H=h2h; TL=tl;
   const wd=T.filter(t=>t.stats).length,dt=m.updatedAt?new Date(m.updatedAt).toLocaleString("vi-VN",{dateStyle:"medium",timeStyle:"short"}):"—";
   $("#snap").innerHTML='<span class="lv">●</span> Cập nhật: <b>'+dt+'</b> · '+wd+'/'+T.length+' đội có dữ liệu'+(m.seed?' · (seed)':'');
   $("#fu").textContent=dt;render();
@@ -277,7 +334,58 @@ function h2hRender(){
   box.innerHTML=h2hHTML+statsHTML;
   v.innerHTML=h2hVerdict+statVerdict;
 }
-function render(){tiles();tbl();rep();h2hInit();}
+// ---- Tier list hero ----
+const CDN="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/";
+let tpos=0;
+function himg(el){if(el.dataset.r){el.parentElement.classList.add("noimg");el.remove();}else{el.dataset.r="1";el.src=el.dataset.a;}}
+function tierInit(){
+  if(!TL||!TL.positions){$("#tlist").innerHTML='<div class="nd">Chưa tải được <code>data/tiers.json</code>.</div>';return;}
+  $("#tpatch").textContent="· patch "+TL.patch+" ("+TL.patchDate+")";
+  $("#tmethod").innerHTML="<b>Cách xếp hạng.</b> "+esc(TL.method)+"<br><br><b>Lưu ý khi đọc.</b> "+esc(TL.caveat);
+  $("#tpills").innerHTML=TL.positions.map((p,i)=>'<button class="pill'+(i===tpos?" on":"")+'" data-i="'+i+'">'+esc(p.short)+'</button>').join("");
+  $("#tpills").onclick=e=>{const b=e.target.closest("button");if(!b)return;tpos=+b.dataset.i;$("#tfind").value="";tierInit();};
+  $("#tfind").oninput=tfilter;
+  const pn=TL.patchNotes,li=l=>l.map(x=>'<li><b>'+esc(x.n)+'</b> — '+esc(x.d)+' <span class="mu">['+(x.t==="buff"?"buff":x.t==="nerf"?"nerf":"thay đổi")+']</span></li>').join("");
+  $("#pntitle").textContent=pn.title;
+  $("#pnsum").textContent=pn.summary;
+  $("#pnbox").innerHTML='<div class="pnb"><h3>Hero được buff</h3>'+pn.buff.map(h=>'<span class="chip up">↑ '+esc(h)+'</span>').join("")+'</div>'
+    +'<div class="pnb"><h3>Hero bị nerf</h3>'+pn.nerf.map(h=>'<span class="chip down">↓ '+esc(h)+'</span>').join("")+'</div>'
+    +'<div class="pnb"><h3>Item '+esc(TL.patch)+' — đã xác minh</h3><ul>'+li(pn.items)+'</ul></div>'
+    +'<div class="pnb"><h3>Item bản 7.41d trước đó</h3><ul>'+li(pn.itemsPrev)+'</ul></div>';
+  $("#pnnote").innerHTML="<b>Giới hạn dữ liệu.</b> "+esc(pn.note);
+  $("#tsrc").innerHTML="Nguồn: "+TL.sources.map(s=>'<a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t)+'</a>').join(" · ");
+  tierRender();
+}
+function tcard(h){
+  const bits=[];
+  if(h.w!=null)bits.push("winrate pub "+h.w+"%");
+  if(h.b!=null)bits.push("bị ban "+h.b+" lần ở giải chuyên nghiệp");
+  if(h.p!=null)bits.push("được pick "+h.p+" lần");
+  const tip=h.n+(bits.length?" — "+bits.join(", "):"")+(h.t?"\n\n"+h.t:"");
+  return '<div class="hx" data-n="'+esc(h.n.toLowerCase())+'" title="'+esc(tip)+'">'
+    +'<span class="fb">'+esc(h.n)+'</span>'
+    +'<img src="'+CDN+'crops/'+h.i+'.png" data-a="'+CDN+h.i+'.png" alt="" loading="lazy" onerror="himg(this)">'
+    +(h.b!=null?'<span class="bn">'+h.b+'</span>':"")
+    +(h.d?'<span class="dt '+h.d+'">'+(h.d==="up"?"↑":"↓")+'</span>':"")
+    +'<span class="hnm">'+esc(h.n)+'</span></div>';
+}
+function tierRender(){
+  const p=TL.positions[tpos];
+  $("#tdesc").innerHTML='<b>'+esc(p.label)+'</b> — '+esc(p.desc)+' Rê chuột lên thẻ hero để xem số liệu và nhận định.';
+  $("#tlist").innerHTML=TL.tierOrder.map(t=>{
+    const m=TL.tierMeta[t],list=p.tiers[t]||[];
+    if(!list.length)return"";
+    return '<div class="tr"><div class="tlab" style="background:'+m.c+'">'+esc(m.n)+'<small>'+esc(m.d)+'</small></div>'
+      +'<div class="thg">'+list.map(tcard).join("")+'</div></div>';
+  }).join("");
+  tfilter();
+}
+function tfilter(){
+  const q=($("#tfind").value||"").trim().toLowerCase(),all=document.querySelectorAll("#tlist .hx");let n=0;
+  all.forEach(el=>{const hit=!q||el.dataset.n.indexOf(q)>=0;el.classList.toggle("dim",!hit);if(hit)n++;});
+  $("#tcount").textContent=q?(n?n+" hero khớp":"Không có hero nào khớp"):all.length+" hero ở vị trí này";
+}
+function render(){tiles();tbl();rep();h2hInit();tierInit();}
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".v").forEach(v=>v.classList.remove("on"));$("#v-"+b.dataset.v).classList.add("on");};
 $("#tbtn").onclick=function(){const d=document.body.getAttribute("data-t")==="dark";document.body.setAttribute("data-t",d?"light":"dark");this.textContent=d?"🌙 Chế độ tối":"☀️ Chế độ sáng";render();};
 if(matchMedia("(prefers-color-scheme: dark)").matches){document.body.setAttribute("data-t","dark");$("#tbtn").textContent="☀️ Chế độ sáng";}
