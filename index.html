@@ -108,6 +108,40 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
 .chip.down{background:color-mix(in srgb,var(--rd) 13%,transparent);color:var(--rd);border-color:color-mix(in srgb,var(--rd) 32%,transparent)}
 .tlgd{display:flex;gap:13px;flex-wrap:wrap;font-size:11.5px;color:var(--t2);margin:12px 0 0;padding-top:11px;border-top:1px solid var(--gr)}
 @media (max-width:640px){.tr{grid-template-columns:64px 1fr}.tlab{font-size:12px}.tlab small{display:none}.hx{width:76px;height:43px}}
+.psel{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.psel select{background:var(--cd);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:8px 12px;font-family:inherit;font-size:13px;min-width:262px;max-width:100%}
+.pch{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center;border:1px solid var(--bd);border-radius:12px;padding:13px 15px;margin-bottom:14px;background:var(--lo)}
+.pavw{position:relative;width:72px;height:72px}
+.pavw .pavf,.pavw .pav{position:absolute;inset:0;border-radius:50%}
+.pavf{background:var(--bl);color:#fff;font-weight:700;font-size:26px;line-height:72px;text-align:center}
+.pav{width:72px;height:72px;object-fit:cover;background:var(--cd)}
+.pnk{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.pmt{font-size:12.5px;color:var(--t2);margin-top:4px;display:flex;flex-wrap:wrap;gap:3px 14px;align-items:center}
+.pmt b{color:var(--tx)}
+.fl{width:19px;height:13px;object-fit:cover;border-radius:2px;vertical-align:-1px;margin-right:5px;border:1px solid var(--bd)}
+.psm{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.psm span{font-size:11.5px;color:var(--t2);background:var(--cd);border:1px solid var(--gr);border-radius:999px;padding:4px 11px}
+.psm span b{color:var(--tx)}
+.phr{display:grid;grid-template-columns:112px 1fr;gap:13px;padding:13px 0;border-top:1px solid var(--gr);align-items:center}
+.phimg{width:112px;height:63px;object-fit:cover;border-radius:7px;background:var(--gr);display:block}
+.phb{display:flex;flex-wrap:wrap;gap:9px 15px;align-items:center}
+.phn{min-width:150px;flex:1 1 150px}
+.phn .hn{font-size:14.5px;font-weight:700;line-height:1.3}
+.phn .hs{font-size:11px;color:var(--mu);margin-bottom:5px}
+.wbar{height:7px;border-radius:4px;background:var(--gr);overflow:hidden}
+.wbar i{display:block;height:100%;border-radius:4px;background:var(--aq)}
+.wbar.lo i{background:var(--rd)}
+.wpct{font-size:11.5px;font-variant-numeric:tabular-nums;color:var(--t2);margin-top:3px;display:block}
+.wpct b{color:var(--tx)}
+.phm{min-width:58px;text-align:center}
+.phm em{display:block;font-style:normal;font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.03em}
+.phm b{font-size:15px;font-variant-numeric:tabular-nums}
+.phm small{display:block;font-size:10px;color:var(--mu);font-variant-numeric:tabular-nums}
+.phi{display:flex;gap:3px;flex-wrap:wrap;min-width:146px}
+.phi img{width:32px;height:24px;object-fit:cover;border-radius:3px;border:1px solid var(--bd);background:var(--gr)}
+.pldg{border:1px dashed var(--mu);border-radius:10px;padding:24px 18px;text-align:center;color:var(--mu);font-size:13px;line-height:1.6}
+.pldg.er{color:var(--rd);border-color:var(--rd)}
+@media (max-width:560px){.phr{grid-template-columns:1fr}.phimg{width:100%;height:104px}.pch{grid-template-columns:56px 1fr}.pavw,.pav{width:56px;height:56px}.pavf{line-height:56px;font-size:20px}}
 </style>
 </head>
 <body data-t="light">
@@ -125,6 +159,7 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
     <button data-v="rep">Chi tiết đội</button>
     <button data-v="h2h">So sánh 2 đội</button>
     <button data-v="tier">Tier list hero</button>
+    <button data-v="ply">Tra cứu player</button>
     <button data-v="abt">Về trang này</button>
   </nav>
   <div id="err"></div>
@@ -171,6 +206,16 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
       <p class="ft" id="tsrc"></p>
     </div>
   </section>
+  <section class="v" id="v-ply">
+    <div class="p">
+      <h2>Tra cứu chỉ số người chơi</h2>
+      <p class="d">Chọn 1 trong <b>80 tuyển thủ</b> dự TI2026. Số liệu được lấy <b>trực tiếp từ OpenDota API</b> ngay trên trình duyệt của bạn — cửa sổ <b>6 tháng gần nhất</b>, <b>chỉ tính các trận đấu giải</b> (bỏ toàn bộ trận pub). Hiển thị <b>10 hero được dùng nhiều nhất</b>.</p>
+      <div class="psel"><select id="pSel"><option value="">— Chọn tuyển thủ —</option></select></div>
+      <div id="pCard"></div>
+      <div id="pBody"></div>
+      <p class="ft"><b>KDA</b>=(Kill+Assist)/Death · <b>LH/ph</b>=last hit mỗi phút · <b>Thời lượng</b>=độ dài trung bình 1 trận trên hero đó · <b>Items</b>=6 món hay lên nhất (đã bỏ đồ tiêu hao, ward, TP). Ảnh hero/item: Steam CDN · Chỉ số: <a href="https://www.opendota.com" target="_blank" rel="noopener">OpenDota</a>.</p>
+    </div>
+  </section>
   <section class="v" id="v-abt"><div class="p"><h2>Về trang này</h2><div class="d" style="font-size:13.5px;line-height:1.7">
     <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>6 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code>; một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
     <p><b>Bản đầy đủ</b> (kèm biểu đồ radar/scatter, scraper, workflow) có trong gói mã nguồn. Trang này là bản gọn tự chứa để demo.</p>
@@ -180,16 +225,19 @@ th{color:var(--t2);font-weight:600;cursor:pointer;user-select:none}th:hover{colo
 <script>
 const $=s=>document.querySelector(s),tier=w=>w>=60?"S":w>=50?"A":"B";
 let T=[],R={},H={},TL=null;
+let PL=null,PH={},PI={},pCache={},pCur="";
 fetch("data/teams.json").then(r=>r.json()).then(d=>{
   T=d.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));
   return Promise.all([
     fetch("data/meta.json").then(r=>r.json()).catch(()=>({})),
     fetch("data/rosters.json").then(r=>r.json()).then(x=>x.rosters||{}).catch(()=>({})),
     fetch("data/h2h.json").then(r=>r.json()).then(x=>x.pairs||{}).catch(()=>({})),
-    fetch("data/tiers.json").then(r=>r.json()).catch(()=>null)
+    fetch("data/tiers.json").then(r=>r.json()).catch(()=>null),
+    fetch("data/players.json").then(r=>r.json()).catch(()=>null)
   ]);
-}).then(([m,ros,h2h,tl])=>{
+}).then(([m,ros,h2h,tl,pl])=>{
   R=ros; H=h2h; TL=tl;
+  if(pl&&pl.players){PL=pl.players;PH=pl.h||{};PI=pl.i||{};}
   const wd=T.filter(t=>t.stats).length,dt=m.updatedAt?new Date(m.updatedAt).toLocaleString("vi-VN",{dateStyle:"medium",timeStyle:"short"}):"—";
   $("#snap").innerHTML='<span class="lv">●</span> Cập nhật: <b>'+dt+'</b> · '+wd+'/'+T.length+' đội có dữ liệu'+(m.seed?' · (seed)':'');
   $("#fu").textContent=dt;render();
@@ -385,7 +433,97 @@ function tfilter(){
   all.forEach(el=>{const hit=!q||el.dataset.n.indexOf(q)>=0;el.classList.toggle("dim",!hit);if(hit)n++;});
   $("#tcount").textContent=q?(n?n+" hero khớp":"Không có hero nào khớp"):all.length+" hero ở vị trí này";
 }
-function render(){tiles();tbl();rep();h2hInit();tierInit();}
+
+/* ===== Tab tra cứu player (OpenDota live) ===== */
+const PCDN="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/";
+const BADIT=new Set([0,30,33,38,39,40,42,43,44,46,117,188,216,218,237,257]);
+const dstr=t=>isFinite(t)&&t>0?new Date(t*1000).toLocaleDateString("vi-VN"):"\u2014";
+function mmss(s){const m=Math.floor(s/60);return m+":"+String(Math.round(s-m*60)).padStart(2,"0");}
+function plyInit(){
+  const sel=$("#pSel");if(!sel)return;
+  if(!PL){$("#pBody").innerHTML='<div class="pldg er">Kh\u00f4ng t\u1ea3i \u0111\u01b0\u1ee3c data/players.json.</div>';return;}
+  if(!sel.dataset.f){
+    const g={};PL.forEach(p=>{(g[p.tn]=g[p.tn]||[]).push(p);});
+    sel.innerHTML='<option value="">\u2014 Ch\u1ecdn tuy\u1ec3n th\u1ee7 \u2014</option>'+Object.keys(g).map(t=>
+      '<optgroup label="'+esc(t)+'">'+g[t].map(p=>'<option value="'+p.id+'">'+esc(p.n)+" \u2014 "+esc(p.pv)+'</option>').join("")+'</optgroup>').join("");
+    sel.dataset.f="1";
+    sel.onchange=function(){pCur=this.value;pShow();};
+  }
+  sel.value=pCur||"";pShow();
+}
+function pShow(){
+  const body=$("#pBody"),card=$("#pCard");if(!body)return;
+  if(!pCur){card.innerHTML="";body.innerHTML='<div class="pldg">Ch\u1ecdn m\u1ed9t tuy\u1ec3n th\u1ee7 \u1edf \u00f4 tr\u00ean \u0111\u1ec3 xem 10 hero t\u1ee7 c\u1ee7a h\u1ecd.</div>';return;}
+  const p=PL.find(x=>String(x.id)===String(pCur));if(!p){card.innerHTML="";return;}
+  card.innerHTML=pHead(p);
+  const c=pCache[p.id];
+  if(c&&c.ok){body.innerHTML=pTable(c);return;}
+  if(c&&c.err){body.innerHTML='<div class="pldg er">Kh\u00f4ng l\u1ea5y \u0111\u01b0\u1ee3c d\u1eef li\u1ec7u: '+esc(c.err)+'<br><br>OpenDota gi\u1edbi h\u1ea1n 60 l\u01b0\u1ee3t g\u1ecdi/ph\u00fat \u2014 h\u00e3y ch\u1ecdn l\u1ea1i sau v\u00e0i gi\u00e2y.</div>';return;}
+  body.innerHTML='<div class="pldg">\u0110ang t\u1ea3i d\u1eef li\u1ec7u t\u1eeb OpenDota\u2026</div>';
+  pFetch(p);
+}
+function pFetch(p){
+  const F=["hero_id","kills","deaths","assists","gold_per_min","xp_per_min","last_hits","duration","radiant_win","player_slot","item_0","item_1","item_2","item_3","item_4","item_5","start_time"];
+  fetch("https://api.opendota.com/api/players/"+p.id+"/matches?date=180&"+F.map(x=>"project="+x).join("&"))
+    .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
+    .then(ms=>{pCache[p.id]=pAgg(ms);if(String(pCur)===String(p.id))pShow();})
+    .catch(e=>{pCache[p.id]={err:e.message||"l\u1ed7i m\u1ea1ng"};if(String(pCur)===String(p.id))pShow();});
+}
+function pAgg(ms){
+  if(!Array.isArray(ms))return{err:"d\u1eef li\u1ec7u kh\u00f4ng h\u1ee3p l\u1ec7"};
+  const L=ms.filter(m=>m&&(m.lobby_type===1||m.lobby_type===2)&&m.duration>0&&m.hero_id);
+  if(!L.length)return{err:"kh\u00f4ng c\u00f3 tr\u1eadn \u0111\u1ea5u gi\u1ea3i n\u00e0o trong 6 th\u00e1ng g\u1ea7n nh\u1ea5t"};
+  const HH={};let W=0,t0=Infinity,t1=0;
+  L.forEach(m=>{
+    const win=(m.player_slot<128)===!!m.radiant_win;if(win)W++;
+    if(m.start_time){if(m.start_time<t0)t0=m.start_time;if(m.start_time>t1)t1=m.start_time;}
+    const h=HH[m.hero_id]||(HH[m.hero_id]={id:m.hero_id,g:0,w:0,k:0,d:0,a:0,gpm:0,xpm:0,lh:0,du:0,it:{}});
+    h.g++;if(win)h.w++;
+    h.k+=m.kills||0;h.d+=m.deaths||0;h.a+=m.assists||0;
+    h.gpm+=m.gold_per_min||0;h.xpm+=m.xp_per_min||0;h.lh+=m.last_hits||0;h.du+=m.duration||0;
+    for(let i=0;i<6;i++){const t=m["item_"+i];if(t&&!BADIT.has(t))h.it[t]=(h.it[t]||0)+1;}
+  });
+  const top=Object.keys(HH).map(k=>HH[k]).sort((a,b)=>b.g-a.g||(b.w/b.g)-(a.w/a.g)).slice(0,10);
+  return{ok:1,n:L.length,W:W,nh:Object.keys(HH).length,t0:t0,t1:t1,top:top};
+}
+function pHead(p){
+  const av='<div class="pavw"><div class="pavf">'+esc(p.n.charAt(0))+'</div>'+(p.ph?'<img class="pav" src="'+esc(p.ph)+'" alt="" onerror="this.remove()">':"")+'</div>';
+  const fl=p.cc?'<img class="fl" src="https://flagcdn.com/w40/'+esc(p.cc)+'.png" alt="" onerror="this.remove()">':"";
+  return '<div class="pch">'+av+'<div><div class="pnk">'+esc(p.n)+'</div><div class="pmt">'+
+    '<span>'+esc(p.r||"\u2014")+'</span>'+
+    '<span>\u0110\u1ed9i: <b>'+esc(p.tn)+'</b></span>'+
+    '<span>V\u1ecb tr\u00ed: <b>'+esc(p.pv)+'</b></span>'+
+    '<span>'+fl+'Qu\u1ed1c t\u1ecbch: <b>'+esc(p.c)+'</b></span>'+
+    '</div></div></div>';
+}
+function pTable(c){
+  return '<div class="psm">'+
+    '<span>Tr\u1eadn \u0111\u1ea5u gi\u1ea3i: <b>'+c.n+'</b></span>'+
+    '<span>Th\u1eafng <b>'+c.W+'</b> \u2013 Thua <b>'+(c.n-c.W)+'</b></span>'+
+    '<span>Winrate: <b>'+(100*c.W/c.n).toFixed(1)+'%</b></span>'+
+    '<span>S\u1ed1 hero \u0111\u00e3 d\u00f9ng: <b>'+c.nh+'</b></span>'+
+    '<span>T\u1eeb <b>'+dstr(c.t0)+'</b> \u0111\u1ebfn <b>'+dstr(c.t1)+'</b></span></div>'+
+    '<div>'+c.top.map(pRow).join("")+'</div>';
+}
+function pmet(l,v,s){return '<div class="phm"><em>'+l+'</em><b>'+v+'</b>'+(s?'<small>'+s+'</small>':"")+'</div>';}
+function pRow(h){
+  const nm=PH[h.id]||["Hero "+h.id,""],wr=100*h.w/h.g;
+  const items=Object.keys(h.it).map(k=>[k,h.it[k]]).sort((a,b)=>b[1]-a[1]).slice(0,6).map(function(e){
+    const k=PI[e[0]];return k?'<img loading="lazy" src="'+PCDN+'items/'+k+'.png" alt="" title="'+esc(k.replace(/_/g," "))+" \u00b7 "+e[1]+"/"+h.g+' tr\u1eadn" onerror="this.remove()">':"";}).join("");
+  return '<div class="phr"><img class="phimg" loading="lazy" alt="'+esc(nm[0])+'" src="'+PCDN+"heroes/crops/"+nm[1]+'.png" data-fb="'+PCDN+"heroes/"+nm[1]+'.png" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=\'\';}">'+
+    '<div class="phb"><div class="phn"><div class="hn">'+esc(nm[0])+'</div>'+
+    '<div class="hs">'+h.g+' tr\u1eadn \u00b7 '+h.w+'T \u2013 '+(h.g-h.w)+'B</div>'+
+    '<div class="wbar'+(wr<50?" lo":"")+'"><i style="width:'+Math.max(2,wr).toFixed(1)+'%"></i></div>'+
+    '<span class="wpct">Winrate <b>'+wr.toFixed(1)+'%</b></span></div>'+
+    pmet("KDA",((h.k+h.a)/Math.max(1,h.d)).toFixed(2),(h.k/h.g).toFixed(1)+" / "+(h.d/h.g).toFixed(1)+" / "+(h.a/h.g).toFixed(1))+
+    pmet("GPM",Math.round(h.gpm/h.g),"")+
+    pmet("XPM",Math.round(h.xpm/h.g),"")+
+    pmet("LH/ph",(h.lh/(h.du/60)).toFixed(1),"")+
+    pmet("Th\u1eddi l\u01b0\u1ee3ng",mmss(h.du/h.g),"")+
+    '<div class="phi">'+(items||'<span class="mu" style="font-size:11px">\u2014</span>')+'</div>'+
+    '</div></div>';
+}
+function render(){tiles();tbl();rep();h2hInit();tierInit();plyInit();}
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".v").forEach(v=>v.classList.remove("on"));$("#v-"+b.dataset.v).classList.add("on");};
 $("#tbtn").onclick=function(){const d=document.body.getAttribute("data-t")==="dark";document.body.setAttribute("data-t",d?"light":"dark");this.textContent=d?"🌙 Chế độ tối":"☀️ Chế độ sáng";render();};
 if(matchMedia("(prefers-color-scheme: dark)").matches){document.body.setAttribute("data-t","dark");$("#tbtn").textContent="☀️ Chế độ sáng";}
