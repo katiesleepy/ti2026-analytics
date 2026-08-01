@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The International 2026 — Phân tích chỉ số các đội</title>
 <style>
-/* ===== Bảng màu "Moon dust" — #D3D3FF #CEB5FF #8EC1DE #80A8FF — quy tắc 60/30/10 =====
+/* ===== Bảng màu "Sapphire nightfall whisper" — #0474C4 #5379AE #2C444C #A8C4EC #06457F #262B40 — quy tắc 60/30/10 =====
    60% CHỦ ĐẠO   : --pg (nền trang) + --cd (thẻ/khối nội dung) — sáng, trung tính, để nội dung nổi bật
-   30% MÀU PHỤ   : --sf (lavender) + --sf2 (sky) + --gr — thanh nav, tiles, header bảng, chip, chân trang
-   10% ĐIỂM NHẤN : --bl / --ca / --cb — link, tab đang mở, nút CTA, avatar, cột đội trong so sánh
+   30% MÀU PHỤ   : --sf (xanh nhạt) + --sf2 + --gr (#A8C4EC) — thanh nav, tiles, header bảng, chip, chân trang
+   10% ĐIỂM NHẤN : --bl / --ca (#0474C4) + --cb (#06457F) + --acc2 (#5379AE) — link, tab đang mở, nút CTA, avatar
    Ngoại lệ có chủ đích: --aq (thắng) / --rd (thua) giữ xanh–đỏ ngữ nghĩa để đọc nhanh. */
 :root{
- --pg:#f5f5ff;--cd:#ffffff;                    /* 60% */
- --sf:#e8e8ff;--sf2:#ddeaf3;--gr:#d3d3ff;--bd:rgba(70,72,140,.16);--pillon:#ffffff;  /* 30% */
- --bl:#4468d6;--ca:#4468d6;--cb:#7345c7;--acc2:#8ec1de;--onacc:#ffffff;              /* 10% */
- --tx:#191b33;--t2:#4c4f73;--mu:#71749a;
+ --pg:#f4f8fd;--cd:#ffffff;                    /* 60% */
+ --sf:#e3edfa;--sf2:#e0e9f4;--gr:#a8c4ec;--bd:rgba(38,43,64,.16);--pillon:#ffffff;   /* 30% */
+ --bl:#0474c4;--ca:#0474c4;--cb:#06457f;--acc2:#5379ae;--onacc:#ffffff;              /* 10% */
+ --tx:#262b40;--t2:#3c4a63;--mu:#5d6b85;
  --aq:#0f7d59;--rd:#c13a3a;
- --lo:#f5f5ff;--hi:#80a8ff;--onheat:#191b33;
- --wash:rgba(206,181,255,.30)}
+ --lo:#f4f8fd;--hi:#a8c4ec;--onheat:#262b40;
+ --wash:rgba(168,196,236,.42)}
 [data-t=dark]{
- --pg:#0f1024;--cd:#1a1b36;
- --sf:#23254c;--sf2:#1c2b3b;--gr:#2e3059;--bd:rgba(211,211,255,.15);--pillon:#3a3e78;
- --bl:#80a8ff;--ca:#80a8ff;--cb:#ceb5ff;--acc2:#8ec1de;--onacc:#10122b;
- --tx:#ededff;--t2:#b6b8dc;--mu:#8a8db8;
- --aq:#35c795;--rd:#f58a8a;
- --lo:#171a3a;--hi:#3b59b2;--onheat:#ededff;
- --wash:rgba(128,168,255,.16)}
+ --pg:#1a1f30;--cd:#262b40;
+ --sf:#333c58;--sf2:#2c444c;--gr:#3d4763;--bd:rgba(168,196,236,.16);--pillon:#06457f;
+ --bl:#a8c4ec;--ca:#a8c4ec;--cb:#7fa4d8;--acc2:#5379ae;--onacc:#131726;
+ --tx:#eaf1fb;--t2:#b3c3dc;--mu:#9aabc7;
+ --aq:#3ecfa0;--rd:#f58a8a;
+ --lo:#1f2740;--hi:#2f5c9e;--onheat:#eaf1fb;
+ --wash:rgba(4,116,196,.20)}
 body::before{content:"";position:fixed;left:0;right:0;top:0;height:320px;background:linear-gradient(180deg,var(--wash),transparent);pointer-events:none;z-index:0}
 .w{position:relative;z-index:1}
 :where(a,button,select,input):focus-visible{outline:2px solid var(--bl);outline-offset:2px;border-radius:6px}
@@ -551,7 +551,7 @@ function pRow(h){
 function render(){tiles();tbl();rep();h2hInit();tierInit();plyInit();}
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".v").forEach(v=>v.classList.remove("on"));$("#v-"+b.dataset.v).classList.add("on");};
 $("#tbtn").onclick=function(){const d=document.body.getAttribute("data-t")==="dark";document.body.setAttribute("data-t",d?"light":"dark");try{localStorage.setItem("ti26t",d?"light":"dark");}catch(e){}this.textContent=d?"🌙 Chế độ tối":"☀️ Chế độ sáng";render();};
-/* Mặc định luôn là nền sáng "Moon dust"; chỉ nhớ lựa chọn nếu người dùng tự đổi */
+/* Mặc định luôn là nền sáng "Sapphire nightfall whisper"; chỉ nhớ lựa chọn nếu người dùng tự đổi */
 try{if(localStorage.getItem("ti26t")==="dark"){document.body.setAttribute("data-t","dark");$("#tbtn").textContent="☀️ Chế độ sáng";}}catch(e){}
 </script>
 </body>
