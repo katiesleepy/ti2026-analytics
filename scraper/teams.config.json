@@ -1,0 +1,135 @@
+{
+  "_comment": "16 đội The International 2026. 'slug' là phần cuối URL dltv.org/teams/<slug>. Nếu một đội chưa hiện dữ liệu, hãy mở dltv.org/teams/<slug> để kiểm tra và sửa slug cho đúng. 'slugVerified=false' nghĩa là slug đang là phỏng đoán, cần xác minh.",
+  "source": "dltv.org",
+  "event": "The International 2026",
+  "teams": [
+    {
+      "name": "Team Falcons",
+      "short": "Falcons",
+      "slug": "team-falcons",
+      "region": "Đa quốc gia",
+      "qualification": "Mời trực tiếp",
+      "slugVerified": true
+    },
+    {
+      "name": "Team Liquid",
+      "short": "Liquid",
+      "slug": "team-liquid",
+      "region": "Tây Âu",
+      "qualification": "Mời trực tiếp",
+      "slugVerified": true
+    },
+    {
+      "name": "Xtreme Gaming",
+      "short": "XG",
+      "slug": "xtreme-gaming",
+      "region": "Trung Quốc",
+      "qualification": "Mời trực tiếp",
+      "slugVerified": true
+    },
+    {
+      "name": "Aurora Gaming",
+      "short": "Aurora",
+      "slug": "aurora",
+      "region": "Đa quốc gia",
+      "qualification": "Mời trực tiếp",
+      "slugVerified": true
+    },
+    {
+      "name": "BetBoom Team",
+      "short": "BB",
+      "slug": "betboom-team",
+      "region": "CIS",
+      "qualification": "Mời trực tiếp",
+      "slugVerified": true
+    },
+    {
+      "name": "Team Yandex",
+      "short": "Yandex",
+      "slug": "team-yandex",
+      "region": "CIS",
+      "qualification": "Mời trực tiếp",
+      "slugVerified": true
+    },
+    {
+      "name": "1win Team",
+      "short": "1win",
+      "slug": "1win-team",
+      "region": "Tây Âu",
+      "qualification": "Mời trực tiếp",
+      "slugVerified": true
+    },
+    {
+      "name": "Team Spirit",
+      "short": "Spirit",
+      "slug": "team-spirit",
+      "region": "CIS",
+      "qualification": "Vòng loại — Châu Âu",
+      "slugVerified": true
+    },
+    {
+      "name": "PARIVISION",
+      "short": "PARI",
+      "slug": "parivision",
+      "region": "CIS",
+      "qualification": "Vòng loại — Châu Âu",
+      "slugVerified": true
+    },
+    {
+      "name": "Nigma Galaxy",
+      "short": "Nigma",
+      "slug": "nigma",
+      "region": "Đa quốc gia",
+      "qualification": "Vòng loại — Châu Âu",
+      "slugVerified": true
+    },
+    {
+      "name": "L1GA TEAM",
+      "short": "L1ga",
+      "slug": "l1ga-team",
+      "region": "CIS",
+      "qualification": "Vòng loại — Châu Âu",
+      "slugVerified": true
+    },
+    {
+      "name": "Team Resilience",
+      "short": "Resil",
+      "slug": "team-resilience",
+      "region": "Trung Quốc",
+      "qualification": "Vòng loại — Trung Quốc",
+      "slugVerified": true
+    },
+    {
+      "name": "Vici Gaming",
+      "short": "Vici",
+      "slug": "vici-gaming",
+      "region": "Trung Quốc",
+      "qualification": "Vòng loại — Trung Quốc",
+      "slugVerified": true
+    },
+    {
+      "name": "OG",
+      "short": "OG",
+      "slug": "og",
+      "region": "Đông Nam Á",
+      "qualification": "Vòng loại — ĐNÁ",
+      "slugVerified": true
+    },
+    {
+      "name": "LGD Gaming",
+      "short": "LGD",
+      "slug": "lgd-gaming",
+      "region": "Nam Mỹ",
+      "qualification": "Vòng loại — Nam Mỹ",
+      "slugVerified": true
+    },
+    {
+      "name": "GamerLegion",
+      "short": "GL",
+      "slug": "gamerlegion",
+      "region": "Bắc Mỹ",
+      "qualification": "Vòng loại — Bắc Mỹ",
+      "slugVerified": true
+    }
+  ]
+}
