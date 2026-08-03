@@ -1,0 +1,48 @@
+name: Cập nhật dữ liệu TI2026
+
+# Chạy tự động mỗi ngày lúc 02:00 UTC (09:00 giờ VN) + cho phép chạy tay.
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cài Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cài dependencies + Chromium
+        working-directory: scraper
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+
+      - name: Chạy scraper
+        working-directory: scraper
+        run: node scrape.mjs
+
+      - name: Commit dữ liệu mới (nếu có thay đổi)
+        run: |
+          git config user.name  "ti2026-bot"
+          git config user.email "actions@github.com"
+          git add data/teams.json data/meta.json
+          if git diff --staged --quiet; then
+            echo "Không có thay đổi dữ liệu."
+          else
+            git commit -m "chore: cập nhật dữ liệu đội $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
