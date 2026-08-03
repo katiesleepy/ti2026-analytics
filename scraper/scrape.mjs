@@ -3,7 +3,7 @@
  * ----------------------------------------------------
  * Đọc scraper/teams.config.json (map đội -> slug DLTV),
  * mở từng trang dltv.org/teams/<slug>, đọc khối STATS
- * (bật buộc lọc 6 tháng gần nhất qua ?date_range=3) và ghi ra data/teams.json + data/meta.json.
+ * (bắt buộc lọc 6 tháng gần nhất qua ?date_range=3) và ghi ra data/teams.json + data/meta.json.
  *
  * Chạy:  node scraper/scrape.mjs
  * Yêu cầu: Node 18+, playwright (npm i && npx playwright install chromium)
