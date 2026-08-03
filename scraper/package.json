@@ -1,0 +1,14 @@
+{
+  "name": "ti2026-analytics-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Scraper chỉ số các đội The International 2026 từ DLTV",
+  "scripts": {
+    "scrape": "node scrape.mjs",
+    "postinstall": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.45.0"
+  }
+}
