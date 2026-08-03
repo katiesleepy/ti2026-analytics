@@ -96,17 +96,48 @@ async function main() {
   }
   await browser.close();
 
-  await mkdir(join(ROOT, 'data'), { recursive: true });
-  await writeFile(OUT_TEAMS, JSON.stringify({ event: cfg.event, source: cfg.source, teams: results }, null, 2));
+  // Chốt an toàn: nếu đa số đội không đọc được thì nhiều khả năng DLTV đã đổi
+  // giao diện. Dừng lại, KHÔNG ghi đè, để tránh xoá trắng dữ liệu đang chạy.
+  const okCount = results.filter((t) => t.stats).length;
+  const minOk = Math.ceil(results.length * 0.75);
+  if (okCount < minOk) {
+    console.error(`\nChỉ ${okCount}/${results.length} đội đọc được khối STATS (cần tối thiểu ${minOk}).`);
+    console.error('Nhiều khả năng DLTV đã đổi giao diện. Huỷ ghi file để giữ nguyên dữ liệu cũ.');
+    process.exit(1);
+  }
+
+  // Giữ lại các trường chỉ có trong data/teams.json (vd: logo) và dùng lại chỉ số
+  // cũ cho những đội lẻ tẻ đọc hỏng, thay vì ghi null làm mất dữ liệu.
+  let prev = null;
+  try { prev = JSON.parse(await readFile(OUT_TEAMS, 'utf8')); } catch { /* lần chạy đầu */ }
+  const prevBy = new Map((prev?.teams || []).map((t) => [t.slug, t]));
+  const merged = results.map((r) => {
+    const old = prevBy.get(r.slug) || {};
+    const out = { ...old, ...r };
+    if (r.stats) delete out.error;                    // lần này đọc được -> xoá cờ lỗi cũ
+    else if (old.stats) out.stats = old.stats;        // đọc hỏng -> giữ số liệu lần trước
+    return out;
+  });
+
   const now = new Date();
+  const dmy = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()}`;
+  const withStats = merged.filter((t) => t.stats).length;
+
+  await mkdir(join(ROOT, 'data'), { recursive: true });
+  await writeFile(OUT_TEAMS, JSON.stringify({
+    event: cfg.event,
+    source: cfg.source,
+    _note: `Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật ${dmy}. ${withStats}/${merged.length} đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.`,
+    teams: merged,
+  }, null, 2) + '\n');
   await writeFile(OUT_META, JSON.stringify({
     updatedAt: now.toISOString(),
     window: '6 tháng gần nhất (DLTV)',
     source: 'https://dltv.org',
-    teamsWithData: results.filter((t) => t.stats).length,
-    teamsTotal: results.length,
-  }, null, 2));
-  console.log(`\nĐã ghi ${OUT_TEAMS} (${results.filter(t=>t.stats).length}/${results.length} đội có dữ liệu).`);
+    teamsWithData: withStats,
+    teamsTotal: merged.length,
+  }, null, 2) + '\n');
+  console.log(`\nĐã ghi ${OUT_TEAMS} (${withStats}/${merged.length} đội có dữ liệu, ${okCount} đội lấy mới lần này).`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
