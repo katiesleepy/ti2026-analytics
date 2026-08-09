@@ -1,7 +1,7 @@
 {
   "event": "The International 2026",
   "source": "dltv.org",
-  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 08/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 09/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "name": "Team Falcons",
@@ -34,18 +34,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 185,
-        "winrate": 62,
-        "kills": 28.41,
-        "deaths": 24.56,
-        "assists": 67.14,
+        "maps": 183,
+        "winrate": 61,
+        "kills": 28.4,
+        "deaths": 24.66,
+        "assists": 67.11,
         "firstBlood": 45,
         "f10": 54,
-        "winWhenFb": 69,
+        "winWhenFb": 68,
         "winWhenF10": 82,
         "duration": 42,
-        "totalKills": 52.97,
-        "killDiff": 3.85
+        "totalKills": 53.06,
+        "killDiff": 3.74
       },
       "logo": "https://dltv.org/uploads/teams/jzS2BJn2w338twINzzRUUElFEDvdcQgp.png.webp"
     },
@@ -356,18 +356,18 @@
       "qualification": "Vòng loại — Bắc Mỹ",
       "slugVerified": true,
       "stats": {
-        "maps": 118,
+        "maps": 116,
         "winrate": 47,
-        "kills": 26.85,
-        "deaths": 23.81,
-        "assists": 59.29,
+        "kills": 27.1,
+        "deaths": 23.73,
+        "assists": 59.82,
         "firstBlood": 55,
         "f10": 58,
-        "winWhenFb": 55,
-        "winWhenF10": 70,
+        "winWhenFb": 56,
+        "winWhenF10": 71,
         "duration": 41,
-        "totalKills": 50.66,
-        "killDiff": 3.04
+        "totalKills": 50.83,
+        "killDiff": 3.37
       },
       "logo": "https://dltv.org/uploads/teams/small/SL5XvIyOVg02fCankoCetSnjT3x7FdVY.png"
     }
