@@ -1,7 +1,7 @@
 {
   "event": "The International 2026",
   "source": "dltv.org",
-  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 10/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 11/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "name": "Team Falcons",
@@ -149,18 +149,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 122,
-        "winrate": 54,
-        "kills": 25.83,
-        "deaths": 24.49,
-        "assists": 59.75,
-        "firstBlood": 57,
-        "f10": 54,
+        "maps": 119,
+        "winrate": 55,
+        "kills": 25.9,
+        "deaths": 24.44,
+        "assists": 60.03,
+        "firstBlood": 59,
+        "f10": 55,
         "winWhenFb": 53,
         "winWhenF10": 78,
         "duration": 43,
-        "totalKills": 50.32,
-        "killDiff": 1.34
+        "totalKills": 50.34,
+        "killDiff": 1.46
       },
       "logo": "https://dltv.org/uploads/teams/ABiiALC6B9K3sk7Fui1M5Uhnf6RetRll.png.webp"
     },
@@ -241,18 +241,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 184,
-        "winrate": 56,
-        "kills": 24.33,
-        "deaths": 23.78,
-        "assists": 59.47,
-        "firstBlood": 48,
+        "maps": 182,
+        "winrate": 55,
+        "kills": 24.2,
+        "deaths": 23.92,
+        "assists": 59.16,
+        "firstBlood": 47,
         "f10": 43,
-        "winWhenFb": 68,
-        "winWhenF10": 80,
+        "winWhenFb": 67,
+        "winWhenF10": 79,
         "duration": 42,
-        "totalKills": 48.11,
-        "killDiff": 0.55
+        "totalKills": 48.12,
+        "killDiff": 0.28
       },
       "logo": "https://dltv.org/uploads/teams/KzJfVKwybUiDjKIwpPVFc2TirGkIqPPk.png"
     },
