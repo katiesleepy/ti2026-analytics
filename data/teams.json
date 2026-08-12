@@ -1,7 +1,7 @@
 {
   "event": "The International 2026",
   "source": "dltv.org",
-  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 11/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 12/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "name": "Team Falcons",
@@ -80,18 +80,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 181,
+        "maps": 179,
         "winrate": 63,
-        "kills": 28.1,
-        "deaths": 24.5,
-        "assists": 65.08,
+        "kills": 28.01,
+        "deaths": 24.59,
+        "assists": 64.82,
         "firstBlood": 51,
         "f10": 53,
-        "winWhenFb": 71,
+        "winWhenFb": 70,
         "winWhenF10": 80,
         "duration": 42,
         "totalKills": 52.6,
-        "killDiff": 3.6
+        "killDiff": 3.42
       },
       "logo": "https://dltv.org/uploads/teams/CiPyyFif5pBUjKO3bEjzAh3Edd1b0JGu.png"
     },
@@ -218,18 +218,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 144,
-        "winrate": 56,
-        "kills": 27.47,
-        "deaths": 25.78,
-        "assists": 61.84,
-        "firstBlood": 55,
+        "maps": 142,
+        "winrate": 57,
+        "kills": 27.62,
+        "deaths": 25.63,
+        "assists": 62.2,
+        "firstBlood": 56,
         "f10": 50,
         "winWhenFb": 54,
-        "winWhenF10": 70,
+        "winWhenF10": 71,
         "duration": 41,
         "totalKills": 53.25,
-        "killDiff": 1.69
+        "killDiff": 1.99
       },
       "logo": "https://dltv.org/uploads/teams/rawK7xDgxwI7Ff8GumO9sC7Z9fHvyCQ2.png.webp"
     },
@@ -241,18 +241,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 182,
+        "maps": 180,
         "winrate": 55,
-        "kills": 24.2,
-        "deaths": 23.92,
-        "assists": 59.16,
+        "kills": 24.13,
+        "deaths": 23.96,
+        "assists": 58.99,
         "firstBlood": 47,
-        "f10": 43,
+        "f10": 42,
         "winWhenFb": 67,
         "winWhenF10": 79,
         "duration": 42,
-        "totalKills": 48.12,
-        "killDiff": 0.28
+        "totalKills": 48.09,
+        "killDiff": 0.17
       },
       "logo": "https://dltv.org/uploads/teams/KzJfVKwybUiDjKIwpPVFc2TirGkIqPPk.png"
     },
