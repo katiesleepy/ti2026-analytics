@@ -145,9 +145,14 @@ async function main() {
 
     // Giữ lại các trường chỉ có trong file cũ (vd: logo) và dùng lại chỉ số cũ cho
     // những đội lẻ tẻ đọc hỏng, thay vì ghi null làm mất dữ liệu.
-    let prev = null;
+    // Nền: bộ 6 tháng (luôn có logo) + lần chạy trước của chính cửa sổ này.
+    // Nhờ vậy file 3 tháng lần đầu vẫn có logo thay vì trống.
+    let base = null, prev = null;
+    try { base = JSON.parse(await readFile(OUT_TEAMS, 'utf8')); } catch { /* chưa có */ }
     try { prev = JSON.parse(await readFile(w.out, 'utf8')); } catch { /* lần chạy đầu */ }
-    const prevBy = new Map((prev?.teams || []).map((t) => [t.slug, t]));
+    const prevBy = new Map();
+    for (const t of base?.teams || []) prevBy.set(t.slug, { logo: t.logo });
+    for (const t of prev?.teams || []) prevBy.set(t.slug, { ...prevBy.get(t.slug), ...t });
     const merged = results.map((r) => {
       const old = prevBy.get(r.slug) || {};
       const out = { ...old, ...r };
