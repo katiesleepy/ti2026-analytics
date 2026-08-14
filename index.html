@@ -197,7 +197,7 @@ th:first-child{border-radius:9px 0 0 0}th:last-child{border-radius:0 9px 0 0}td.
   <section class="v" id="v-h2h">
     <div class="p">
       <h2>So sánh trực tiếp 2 đội</h2>
-      <p class="d">Lịch sử <b>đối đầu trực tiếp</b> giữa hai đội trong 6 tháng gần nhất (nguồn DLTV): số lần gặp, tỉ số từng trận và đội thắng, kèm <b>chỉ số chỉ tính riêng các ván 2 đội gặp nhau</b>. Một số cặp gặp nhau ít nên mẫu có thể nhỏ (được báo rõ); cặp chưa gặp nhau sẽ hiển thị chỉ số tổng quan toàn giải.</p>
+      <p class="d">Lịch sử <b>đối đầu trực tiếp</b> giữa hai đội trong 6 tháng gần nhất (nguồn DLTV): số lần gặp, tỉ số từng trận và đội thắng, kèm <b>chỉ số chỉ tính riêng các ván 2 đội gặp nhau</b>. Một số cặp gặp nhau ít nên mẫu có thể nhỏ (được báo rõ); Phần <b>chỉ số tổng quan</b> ở cuối luôn hiển thị và dùng cửa sổ <b>3 tháng gần nhất</b> để bám sát phong độ hiện tại.</p>
       <div class="h2c">
         <select id="selA"></select><span class="vs">VS</span><select id="selB"></select>
       </div>
@@ -242,14 +242,14 @@ th:first-child{border-radius:9px 0 0 0}th:last-child{border-radius:0 9px 0 0}td.
     </div>
   </section>
   <section class="v" id="v-abt"><div class="p"><h2>Về trang này</h2><div class="d" style="font-size:13.5px;line-height:1.7">
-    <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>6 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code>; một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
+    <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>6 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code> (6 tháng) và <code>data/teams-3m.json</code> (3 tháng, dùng cho tab so sánh); một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
     <p><b>Bản đầy đủ</b> (kèm biểu đồ radar/scatter, scraper, workflow) có trong gói mã nguồn. Trang này là bản gọn tự chứa để demo.</p>
   </div></div></section>
   <p class="ft">Dữ liệu: <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a> · Cập nhật lần cuối: <span id="fu">—</span></p>
 </div>
 <script>
 const $=s=>document.querySelector(s),tier=w=>w>=60?"S":w>=50?"A":"B";
-let T=[],R={},H={},TL=null;
+let T=[],R={},H={},TL=null,T3=[],T3U="";
 let PL=null,PH={},PI={},pCache={},pCur="";
 fetch("data/teams.json").then(r=>r.json()).then(d=>{
   T=d.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));
@@ -258,10 +258,12 @@ fetch("data/teams.json").then(r=>r.json()).then(d=>{
     fetch("data/rosters.json").then(r=>r.json()).then(x=>x.rosters||{}).catch(()=>({})),
     fetch("data/h2h.json").then(r=>r.json()).then(x=>x.pairs||{}).catch(()=>({})),
     fetch("data/tiers.json").then(r=>r.json()).catch(()=>null),
-    fetch("data/players.json").then(r=>r.json()).catch(()=>null)
+    fetch("data/players.json").then(r=>r.json()).catch(()=>null),
+    fetch("data/teams-3m.json").then(r=>r.json()).catch(()=>null)
   ]);
-}).then(([m,ros,h2h,tl,pl])=>{
+}).then(([m,ros,h2h,tl,pl,t3])=>{
   R=ros; H=h2h; TL=tl;
+  if(t3&&t3.teams){T3=t3.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));T3U=t3.updatedAt?new Date(t3.updatedAt).toLocaleString("vi-VN",{dateStyle:"short",timeStyle:"short"}):"";}
   if(pl&&pl.players){PL=pl.players;PH=pl.h||{};PI=pl.i||{};}
   const wd=T.filter(t=>t.stats).length,dt=m.updatedAt?new Date(m.updatedAt).toLocaleString("vi-VN",{dateStyle:"medium",timeStyle:"short"}):"—";
   $("#snap").innerHTML='<span class="lv">●</span> Cập nhật: <b>'+dt+'</b> · '+wd+'/'+T.length+' đội có dữ liệu'+(m.seed?' · (seed)':'');
@@ -383,29 +385,41 @@ function h2hRender(){
       +rows;
     const slead=wa>wb?A:wb>wa?B:null;
     statVerdict=' <span class="mu">· Khi đối đầu: <b>'+esc(A.name)+'</b> nhỉnh '+wa+' chỉ số · <b>'+esc(B.name)+'</b> nhỉnh '+wb+(slead?' — <b>'+esc(slead.name)+'</b> vượt trội hơn khi gặp nhau.':' — khá cân bằng.')+'</span>';
-  } else if(A.stats&&B.stats){
-    const d=wd(); let wa=0,wb=0;
-    const rows=FM.map(([k,label,unit,inv,neu])=>{
-      const va=A.stats[k], vb=B.stats[k];
-      const vs=d.map(t=>t.stats[k]), mn=Math.min(...vs), mx=Math.max(...vs);
-      const norm=x=>8+((x-mn)/(mx-mn||1))*92;
-      const aw=!neu&&(inv?va<vb:va>vb), bw=!neu&&(inv?vb<va:vb>va);
-      if(aw)wa++; if(bw)wb++;
-      const fmt=x=>(typeof x==="number"&&!Number.isInteger(x)?x.toFixed(2).replace(/\.?0+$/,""):x)+unit;
-      return '<div class="hrow">'
-        +'<div class="hside l"><span class="hval'+(aw?' win':'')+'">'+fmt(va)+'</span><div class="hbar a" style="width:'+norm(va).toFixed(1)+'%"></div></div>'
-        +'<div class="hmid">'+label+(inv?'<small>thấp hơn = tốt hơn</small>':'')+'</div>'
-        +'<div class="hside"><div class="hbar b" style="width:'+norm(vb).toFixed(1)+'%"></div><span class="hval'+(bw?' win':'')+'">'+fmt(vb)+'</span></div>'
-        +'</div>';
-    }).join("");
-    statsHTML='<div class="h2sub">Chỉ số tổng quan toàn giải · 6 tháng gần nhất <small>(hai đội chưa gặp nhau)</small></div>'
-      +'<div class="hlegend"><span><span class="dot a"></span>'+esc(A.name)+'</span><span><span class="dot b"></span>'+esc(B.name)+'</span><span class="mu">Thanh dài hơn = cao hơn (chuẩn hoá toàn giải) · ● = tốt hơn</span></div>'
-      +rows;
-    const slead=wa>wb?A:wb>wa?B:null;
-    statVerdict=' <span class="mu">· Chỉ số tổng quan: <b>'+esc(A.name)+'</b> dẫn '+wa+' · <b>'+esc(B.name)+'</b> dẫn '+wb+(slead?' — <b>'+esc(slead.name)+'</b> nhỉnh hơn.':' — cân bằng.')+'</span>';
   }
-  box.innerHTML=h2hHTML+statsHTML;
-  v.innerHTML=h2hVerdict+statVerdict;
+  const ov=ovBlock(A.name,B.name);
+  box.innerHTML=h2hHTML+statsHTML+ov.html;
+  v.innerHTML=h2hVerdict+statVerdict+ov.verdict;
+}
+// Chỉ số tổng quan trong tab so sánh — ưu tiên bộ 3 tháng gần nhất (data/teams-3m.json),
+// tự lùi về bộ 6 tháng nếu file đó chưa có. Chuẩn hoá thanh theo đúng bộ đang dùng.
+function ovBlock(na,nb){
+  const is3=!!(T3&&T3.length), src=is3?T3:T;
+  const A=src.find(t=>t.name===na), B=src.find(t=>t.name===nb);
+  if(!A||!B||!A.stats||!B.stats) return {html:"",verdict:""};
+  const d=src.filter(t=>t.stats); let wa=0,wb=0;
+  const rows=FM.map(([k,label,unit,inv,neu])=>{
+    const va=A.stats[k], vb=B.stats[k];
+    const vs=d.map(t=>t.stats[k]), mn=Math.min(...vs), mx=Math.max(...vs);
+    const norm=x=>8+((x-mn)/(mx-mn||1))*92;
+    const aw=!neu&&(inv?va<vb:va>vb), bw=!neu&&(inv?vb<va:vb>va);
+    if(aw)wa++; if(bw)wb++;
+    const fmt=x=>(typeof x==="number"&&!Number.isInteger(x)?x.toFixed(2).replace(/\.?0+$/,""):x)+unit;
+    return '<div class="hrow">'
+      +'<div class="hside l"><span class="hval'+(aw?' win':'')+'">'+fmt(va)+'</span><div class="hbar a" style="width:'+norm(va).toFixed(1)+'%"></div></div>'
+      +'<div class="hmid">'+label+(inv?'<small>thấp hơn = tốt hơn</small>':'')+'</div>'
+      +'<div class="hside"><div class="hbar b" style="width:'+norm(vb).toFixed(1)+'%"></div><span class="hval'+(bw?' win':'')+'">'+fmt(vb)+'</span></div>'
+      +'</div>';
+  }).join("");
+  const win=is3?'3 tháng gần nhất':'6 tháng gần nhất';
+  const note=is3?(T3U?' <small>· cào lúc '+T3U+'</small>':'')
+                :' <small>· chưa có bộ 3 tháng, đang dùng tạm bộ 6 tháng</small>';
+  const html='<div class="h2sub">Chỉ số tổng quan · '+win+note+'</div>'
+    +'<div class="hlegend"><span><span class="dot a"></span>'+esc(A.name)+'</span><span><span class="dot b"></span>'+esc(B.name)+'</span><span class="mu">Thanh dài hơn = cao hơn (chuẩn hoá trong 16 đội) · ● = tốt hơn</span></div>'
+    +rows;
+  const lead=wa>wb?A:wb>wa?B:null;
+  const verdict=' <span class="mu">· Chỉ số '+win+': <b>'+esc(A.name)+'</b> dẫn '+wa+' · <b>'+esc(B.name)+'</b> dẫn '+wb
+    +(lead?' — <b>'+esc(lead.name)+'</b> nhỉnh hơn.':' — cân bằng.')+'</span>';
+  return {html,verdict};
 }
 // ---- Tier list hero ----
 const CDN="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/";
