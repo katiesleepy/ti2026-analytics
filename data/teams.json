@@ -1,6 +1,8 @@
 {
   "event": "The International 2026",
   "source": "dltv.org",
+  "window": "6 tháng gần nhất (DLTV)",
+  "updatedAt": "2026-08-14T07:51:57.562Z",
   "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 14/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
@@ -24,7 +26,8 @@
         "totalKills": 54.21,
         "killDiff": 1.15
       },
-      "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp"
+      "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
+      "error": "không đọc được khối STATS sau 3 lần thử"
     },
     {
       "name": "Team Liquid",
@@ -70,7 +73,8 @@
         "totalKills": 47.08,
         "killDiff": -1.14
       },
-      "logo": "https://dltv.org/uploads/teams/pkxvH8kJYZKdmgO9AS91nECnHE5cwqAw.png.webp"
+      "logo": "https://dltv.org/uploads/teams/pkxvH8kJYZKdmgO9AS91nECnHE5cwqAw.png.webp",
+      "error": "không đọc được khối STATS sau 3 lần thử"
     },
     {
       "name": "Aurora Gaming",
@@ -264,18 +268,18 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 50,
-        "winrate": 62,
-        "kills": 27.52,
-        "deaths": 21.42,
-        "assists": 66.7,
-        "firstBlood": 53,
-        "f10": 67,
+        "maps": 51,
+        "winrate": 63,
+        "kills": 27.86,
+        "deaths": 21.47,
+        "assists": 67.9,
+        "firstBlood": 52,
+        "f10": 65,
         "winWhenFb": 72,
         "winWhenF10": 83,
         "duration": 42,
-        "totalKills": 48.94,
-        "killDiff": 6.1
+        "totalKills": 49.33,
+        "killDiff": 6.39
       },
       "logo": "https://dltv.org/uploads/teams/omVP2poiDIlm8hFMQsIeMuP7AIRuvi2P.png.webp"
     },
@@ -310,18 +314,18 @@
       "qualification": "Vòng loại — ĐNÁ",
       "slugVerified": true,
       "stats": {
-        "maps": 102,
+        "maps": 103,
         "winrate": 40,
         "kills": 23.17,
-        "deaths": 24.71,
-        "assists": 56.75,
+        "deaths": 24.91,
+        "assists": 56.73,
         "firstBlood": 42,
         "f10": 48,
-        "winWhenFb": 34,
-        "winWhenF10": 56,
+        "winWhenFb": 33,
+        "winWhenF10": 54,
         "duration": 44,
-        "totalKills": 47.88,
-        "killDiff": -1.54
+        "totalKills": 48.08,
+        "killDiff": -1.74
       },
       "logo": "https://dltv.org/uploads/teams/small/Q2wHmrySFb5UfMXHPUgkU3AIaOMUidze.png"
     },
