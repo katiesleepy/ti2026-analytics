@@ -60,20 +60,42 @@ function parseStats(rawText) {
   return out;
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * DLTV render NHÃN của khối STATS trước, SỐ về sau (và chỉ khi khối được cuộn tới).
+ * Đợi theo nhãn 'KILLS AVG.' là sai: nhãn có ngay nhưng giá trị vẫn là '-'.
+ * Hàm này đợi tới khi ô MAPS thực sự có chữ số.
+ */
+async function waitForStatValues(page, timeout) {
+  await page.waitForFunction(() => {
+    const lines = document.body.innerText.split('\n').map((l) => l.trim()).filter(Boolean);
+    for (let i = 0; i < lines.length - 2; i++) {
+      if (lines[i] === 'STATS' && lines[i + 1] === 'MAPS') return /^\d/.test(lines[i + 2] || '');
+    }
+    return false;
+  }, { timeout });
+}
+
 async function scrapeTeam(page, team) {
   const url = `https://dltv.org/teams/${team.slug}?date_range=3`; // date_range=3 = Last 6 Months
-  try {
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 });
-  } catch { /* vẫn thử đọc nội dung đã tải */ }
-  // đợi khối STATS render
-  try { await page.waitForFunction(() => document.body.innerText.includes('KILLS AVG.'), { timeout: 15000 }); } catch {}
-  const txt = await page.evaluate(() => document.body.innerText);
-  if (/PAGE NOT FOUND/i.test(txt)) {
-    return { ok: false, reason: 'not-found (slug sai?)' };
+  const TRIES = 3;
+  for (let attempt = 1; attempt <= TRIES; attempt++) {
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    } catch { /* vẫn thử đọc nội dung đã tải */ }
+    // Khối STATS nằm dưới màn hình đầu và chỉ nạp khi được cuộn tới.
+    try { await page.evaluate(() => window.scrollTo(0, 1200)); } catch {}
+    try { await waitForStatValues(page, 25000); } catch { /* hết giờ -> thử lại */ }
+
+    const txt = await page.evaluate(() => document.body.innerText);
+    if (/PAGE NOT FOUND/i.test(txt)) return { ok: false, reason: 'not-found (slug sai?)' };
+
+    const stats = parseStats(txt);
+    if (stats) return { ok: true, stats, attempt };
+    if (attempt < TRIES) await sleep(5000);
   }
-  const stats = parseStats(txt);
-  if (!stats) return { ok: false, reason: 'không đọc được khối STATS' };
-  return { ok: true, stats };
+  return { ok: false, reason: `không đọc được khối STATS sau ${TRIES} lần thử` };
 }
 
 async function main() {
@@ -87,7 +109,7 @@ async function main() {
     process.stdout.write(`• ${team.name.padEnd(16)} (${team.slug}) … `);
     const r = await scrapeTeam(page, team);
     if (r.ok) {
-      console.log(`OK  wr=${r.stats.winrate}%  maps=${r.stats.maps}`);
+      console.log(`OK  wr=${r.stats.winrate}%  maps=${r.stats.maps}${r.attempt > 1 ? `  (lần thử ${r.attempt})` : ""}`);
       results.push({ ...team, stats: r.stats });
     } else {
       console.log(`SKIP (${r.reason})`);
