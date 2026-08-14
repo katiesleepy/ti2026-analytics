@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name  "ti2026-bot"
           git config user.email "actions@github.com"
-          git add data/teams.json data/meta.json
+          git add data/teams.json data/meta.json data/teams-3m.json
           if git diff --staged --quiet; then
             echo "Không có thay đổi dữ liệu."
           else
