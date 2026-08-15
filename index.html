@@ -56,6 +56,23 @@ th:first-child{border-radius:9px 0 0 0}th:last-child{border-radius:0 9px 0 0}td.
 .in{font-size:12.5px;color:var(--t2);margin-top:10px;padding-top:10px;border-top:1px solid var(--gr)}
 .nd{border:1px dashed var(--mu);border-radius:12px;padding:16px 18px;color:var(--mu);font-size:13px}
 .ft{color:var(--mu);font-size:11.5px;margin-top:14px}.ft a{color:var(--bl)}
+/* Vòng bảng TI */
+.tisec{font-size:12px;color:var(--t2);font-weight:600;margin:14px 0 8px;letter-spacing:.02em}
+.tisec:first-child{margin-top:0}
+.timg{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:8px;margin-bottom:6px}
+.timg.wide{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.tim{display:flex;align-items:center;gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:8px 11px;font-size:12.5px}
+.titm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.titm.r{text-align:right}.titm.win{font-weight:700}
+.tim .tlg,.tim .mono{margin-right:5px}
+.tim.live{border-color:color-mix(in srgb,var(--aq) 45%,transparent);background:color-mix(in srgb,var(--aq) 8%,var(--sf))}
+.tisc{font-variant-numeric:tabular-nums;color:var(--tx);padding:0 4px;white-space:nowrap}
+.tiwhen{flex:0 0 auto!important;color:var(--mu);font-size:11px;margin-right:2px}
+tr.tiqua td{background:color-mix(in srgb,var(--aq) 9%,transparent)}
+tr.tiout td{background:color-mix(in srgb,var(--rd) 8%,transparent)}
+.tibadge{font-size:10.5px;padding:2px 8px;border-radius:999px;background:var(--gr);color:var(--t2)}
+.tibadge.qua{background:color-mix(in srgb,var(--aq) 18%,transparent);color:var(--aq)}
+.tibadge.out{background:color-mix(in srgb,var(--rd) 15%,transparent);color:var(--rd)}
 .tlg{width:20px;height:20px;object-fit:contain;vertical-align:-5px;margin-right:7px}
 .mono{display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--bl);color:var(--onacc);font-size:10px;font-weight:700;line-height:20px;text-align:center;margin-right:7px;vertical-align:-5px}
 .tlg-lg{width:28px;height:28px;vertical-align:-7px;margin-right:8px}
@@ -199,6 +216,7 @@ th:first-child{border-radius:9px 0 0 0}th:last-child{border-radius:0 9px 0 0}td.
   </div>
   <nav id="nav">
     <button data-v="rank" class="on">Bảng xếp hạng</button>
+    <button data-v="ti">Vòng bảng TI</button>
     <button data-v="rep">Chi tiết đội</button>
     <button data-v="h2h">So sánh 2 đội</button>
     <button data-v="tier">Tier list hero</button>
@@ -210,6 +228,21 @@ th:first-child{border-radius:9px 0 0 0}th:last-child{border-radius:0 9px 0 0}td.
     <div class="tiles" id="tiles"></div>
     <div class="p"><h2>Bảng dữ liệu đầy đủ</h2><p class="d">Bấm tiêu đề cột để sắp xếp. Ô tô đậm theo giá trị.</p><div class="tw"><table id="tbl"></table></div>
     <p class="ft"><b>Chênh K–D</b>=Kills−Deaths · <b>F10</b>=xác suất giành 10 kill đầu · <b>Thắng|F10</b>=tỉ lệ thắng khi giành F10 · <b>Dur</b>=phút. Tier theo winrate (S≥60, A≥50, B còn lại). Nguồn: DLTV.org.</p></div>
+  </section>
+  <section class="v" id="v-ti">
+    <div class="p">
+      <h2>Vòng bảng The International 2026 <span class="mu" id="tiStage" style="font-weight:400;font-size:12.5px"></span></h2>
+      <p class="d">Thể thức <b>Swiss 5 vòng, Bo3</b>: thắng đủ <b>3 trận</b> là đi tiếp vào nhánh trên, thua đủ <b>3 trận</b> là bị loại. Bảng và kết quả lấy từ <b>Liquipedia</b>, tự cập nhật hằng ngày.</p>
+      <div id="tiLive"></div>
+      <div id="tiNext"></div>
+      <div class="tw"><table id="tiTbl"></table></div>
+      <p class="ft" id="tiSrc"></p>
+    </div>
+    <div class="p">
+      <h2>Kết quả từng vòng</h2>
+      <p class="d">Toàn bộ trận đã đấu xong, xếp theo vòng. Đội thắng in đậm.</p>
+      <div id="tiRes"></div>
+    </div>
   </section>
   <section class="v" id="v-rep"><p class="d" style="margin:6px 0 14px">Báo cáo tự sinh: nhãn phong cách, chỉ số chính và nhận định ngắn dựa trên dữ liệu.</p><div class="tg" id="rep"></div></section>
   <section class="v" id="v-h2h">
@@ -261,13 +294,15 @@ th:first-child{border-radius:9px 0 0 0}th:last-child{border-radius:0 9px 0 0}td.
   </section>
   <section class="v" id="v-abt"><div class="p"><h2>Về trang này</h2><div class="d" style="font-size:13.5px;line-height:1.7">
     <p>Phân tích 16 đội <b>The International 2026</b>, chỉ số <b>6 tháng gần nhất</b> từ DLTV.org. Dữ liệu nằm ở <code>data/teams.json</code>; một GitHub Actions workflow cào lại hằng ngày để cập nhật tự động (xem repo).</p>
+    <p><b>Ba nguồn dữ liệu.</b> Chỉ số thi đấu của đội lấy từ <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a>. Bảng xếp hạng Swiss và kết quả từng trận tại TI 2026 lấy từ <a href="https://liquipedia.net/dota2/The_International/2026/Group_Stage" target="_blank" rel="noopener">Liquipedia</a> — nội dung Liquipedia dùng theo giấy phép <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Chỉ số từng tuyển thủ gọi thẳng <a href="https://www.opendota.com" target="_blank" rel="noopener">OpenDota API</a> ngay trên trình duyệt của bạn.</p>
+    <p><b>Cập nhật.</b> Workflow chạy 09:00 giờ VN mỗi ngày, đọc cả hai nguồn độc lập: một nguồn hỏng thì nguồn kia vẫn cập nhật. Kết quả TI mới sẽ tự được chèn vào lịch sử đối đầu ở tab <i>So sánh 2 đội</i>.</p>
     <p><b>Bản đầy đủ</b> (kèm biểu đồ radar/scatter, scraper, workflow) có trong gói mã nguồn. Trang này là bản gọn tự chứa để demo.</p>
   </div></div></section>
-  <p class="ft">Dữ liệu: <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a> · Cập nhật lần cuối: <span id="fu">—</span></p>
+  <p class="ft">Dữ liệu: chỉ số đội &amp; lịch sử đối đầu từ <a href="https://dltv.org" target="_blank" rel="noopener">DLTV.org</a> · bảng xếp hạng &amp; kết quả TI 2026 từ <a href="https://liquipedia.net/dota2/The_International/2026/Group_Stage" target="_blank" rel="noopener">Liquipedia</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>) · chỉ số tuyển thủ từ <a href="https://www.opendota.com" target="_blank" rel="noopener">OpenDota</a> · Cập nhật lần cuối: <span id="fu">—</span></p>
 </div>
 <script>
 const $=s=>document.querySelector(s),tier=w=>w>=60?"S":w>=50?"A":"B";
-let T=[],R={},H={},HU="",TL=null;
+let T=[],R={},H={},HU="",TL=null,G=null;
 let PL=null,PH={},PI={},pCache={},pCur="";
 fetch("data/teams.json").then(r=>r.json()).then(d=>{
   T=d.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));
@@ -276,10 +311,11 @@ fetch("data/teams.json").then(r=>r.json()).then(d=>{
     fetch("data/rosters.json").then(r=>r.json()).then(x=>x.rosters||{}).catch(()=>({})),
     fetch("data/h2h.json").then(r=>r.json()).then(x=>{HU=x.statsUntil||"";return x.pairs||{};}).catch(()=>({})),
     fetch("data/tiers.json").then(r=>r.json()).catch(()=>null),
-    fetch("data/players.json").then(r=>r.json()).catch(()=>null)
+    fetch("data/players.json").then(r=>r.json()).catch(()=>null),
+    fetch("data/ti-groups.json").then(r=>r.json()).catch(()=>null)
   ]);
-}).then(([m,ros,h2h,tl,pl])=>{
-  R=ros; H=h2h; TL=tl;
+}).then(([m,ros,h2h,tl,pl,gr])=>{
+  R=ros; H=h2h; TL=tl; G=gr;
   if(pl&&pl.players){PL=pl.players;PH=pl.h||{};PI=pl.i||{};}
   const wd=T.filter(t=>t.stats).length,dt=m.updatedAt?new Date(m.updatedAt).toLocaleString("vi-VN",{dateStyle:"medium",timeStyle:"short"}):"—";
   $("#snap").innerHTML='<span class="lv">●</span> Cập nhật: <b>'+dt+'</b> · '+wd+'/'+T.length+' đội có dữ liệu'+(m.seed?' · (seed)':'');
@@ -592,7 +628,56 @@ function pRow(h){
     '<div class="phi">'+(items||'<span class="mu" style="font-size:11px">\u2014</span>')+'</div>'+
     '</div></div>';
 }
-function render(){tiles();tbl();rep();h2hInit();tierInit();plyInit();}
+/* ---------- Vòng bảng TI (nguồn Liquipedia, CC BY-SA 3.0) ---------- */
+const tBy=s=>T.find(x=>x.slug===s)||{slug:s,name:s,logo:null};
+function tiTeam(s,bold,side){const t=tBy(s);
+  return '<span class="titm'+(side?' '+side:'')+(bold?' win':'')+'">'+lg(t)+esc(t.name)+'</span>';}
+function tiClock(ts){const d=new Date(ts*1000);
+  return d.toLocaleString("vi-VN",{weekday:"short",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});}
+function tiRender(){
+  if(!G||!G.standings||!G.standings.length){
+    $("#tiTbl").innerHTML='';
+    $("#tiLive").innerHTML='<div class="nd">Chưa có dữ liệu vòng bảng (data/ti-groups.json).</div>';return;
+  }
+  const up=new Date(G.updatedAt);
+  $("#tiStage").textContent='· cập nhật '+up.toLocaleString("vi-VN",{dateStyle:"short",timeStyle:"short"});
+
+  /* Trận đang diễn ra */
+  const lv=(G.live||[]);
+  $("#tiLive").innerHTML=lv.length?'<div class="tisec"><span class="lv">●</span> Đang diễn ra</div><div class="timg">'
+    +lv.map(m=>'<div class="tim live">'+tiTeam(m.a,0,'l')+'<b class="tisc">'+m.sa+' – '+m.sb+'</b>'+tiTeam(m.b,0,'r')+'</div>').join('')+'</div>':'';
+
+  /* Trận sắp đấu đã biết cặp */
+  const nx=(G.upcoming||[]).filter(u=>u.a&&u.b);
+  $("#tiNext").innerHTML=nx.length?'<div class="tisec">Sắp đấu · vòng '+nx[0].r+'</div><div class="timg wide">'
+    +nx.map(m=>'<div class="tim"><span class="tiwhen">'+tiClock(m.ts)+'</span>'+tiTeam(m.a,0,'l')+'<b class="tisc">vs</b>'+tiTeam(m.b,0,'r')+'</div>').join('')+'</div>':'';
+
+  /* Bảng xếp hạng Swiss */
+  const rows=[...G.standings].sort((a,b)=>a.rk-b.rk); // giữ nguyên thứ tự Liquipedia trong cùng hạng
+  $("#tiTbl").innerHTML='<thead><tr><th style="cursor:default">#</th><th style="cursor:default;text-align:left">Đội</th>'
+    +'<th style="cursor:default">Trận</th><th style="cursor:default">Ván</th><th style="cursor:default">Hiệu số ván</th><th style="cursor:default">Tình trạng</th></tr></thead><tbody>'
+    +rows.map(s=>{
+      const gd=s.gw-s.gl, st=s.mw>=3?['qua','Đi tiếp']:s.ml>=3?['out','Bị loại']:['','Đang đấu'];
+      return '<tr class="'+(st[0]?'ti'+st[0]:'')+'"><td>'+s.rk+'</td><td class="tm">'+tiTeam(s.t)+'</td>'
+        +'<td><b>'+s.mw+'–'+s.ml+'</b></td><td>'+s.gw+'–'+s.gl+'</td>'
+        +'<td style="color:'+(gd>0?'var(--aq)':gd<0?'var(--rd)':'var(--mu)')+'">'+(gd>0?'+':'')+gd+'</td>'
+        +'<td><span class="tibadge '+st[0]+'">'+st[1]+'</span></td></tr>';
+    }).join('')+'</tbody>';
+
+  $("#tiSrc").innerHTML='Nguồn: <a href="'+esc(G.sourceUrl||"https://liquipedia.net/dota2")+'" target="_blank" rel="noopener">Liquipedia — '
+    +esc(G.event||"The International 2026")+'</a>, dùng theo giấy phép <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.'
+    +' Cột <b>Trận</b> = thắng–thua trận, <b>Ván</b> = thắng–thua ván.';
+
+  /* Kết quả theo vòng */
+  const byR={};
+  for(const m of (G.matches||[])) (byR[m.r]||=[]).push(m);
+  const ks=Object.keys(byR).map(Number).sort((a,b)=>b-a);
+  $("#tiRes").innerHTML=ks.length?ks.map(r=>'<div class="tisec">Vòng '+r+' <small class="mu">· '+byR[r].length+' trận</small></div><div class="timg">'
+    +byR[r].map(m=>{const aw=m.sa>m.sb;
+      return '<div class="tim">'+tiTeam(m.a,aw,'l')+'<b class="tisc">'+m.sa+' – '+m.sb+'</b>'+tiTeam(m.b,!aw,'r')+'</div>';}).join('')+'</div>').join('')
+    :'<div class="nd">Chưa có trận nào kết thúc.</div>';
+}
+function render(){tiles();tbl();rep();tiRender();h2hInit();tierInit();plyInit();}
 $("#nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".v").forEach(v=>v.classList.remove("on"));$("#v-"+b.dataset.v).classList.add("on");};
 $("#tbtn").onclick=function(){const d=document.body.getAttribute("data-t")==="dark";document.body.setAttribute("data-t",d?"light":"dark");try{localStorage.setItem("ti26t",d?"light":"dark");}catch(e){}this.textContent=d?"🌙 Chế độ tối":"☀️ Chế độ sáng";render();};
 /* Mặc định luôn là nền sáng "Sapphire nightfall whisper"; chỉ nhớ lựa chọn nếu người dùng tự đổi */
