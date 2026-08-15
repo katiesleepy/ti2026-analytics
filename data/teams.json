@@ -2,10 +2,11 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "6 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-08-14T07:51:57.562Z",
-  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 14/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "updatedAt": "2026-08-15T01:39:24.354Z",
+  "_note": "Dữ liệu chỉ số 6 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 15/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
+      "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
       "name": "Team Falcons",
       "short": "Falcons",
       "slug": "team-falcons",
@@ -13,23 +14,22 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 154,
+        "maps": 157,
         "winrate": 60,
-        "kills": 27.68,
-        "deaths": 26.53,
-        "assists": 61.64,
-        "firstBlood": 47,
-        "f10": 50,
-        "winWhenFb": 60,
-        "winWhenF10": 81,
+        "kills": 27.69,
+        "deaths": 26.71,
+        "assists": 61.54,
+        "firstBlood": 46,
+        "f10": 51,
+        "winWhenFb": 59,
+        "winWhenF10": 80,
         "duration": 44,
-        "totalKills": 54.21,
-        "killDiff": 1.15
-      },
-      "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
-      "error": "không đọc được khối STATS sau 3 lần thử"
+        "totalKills": 54.4,
+        "killDiff": 0.98
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/jzS2BJn2w338twINzzRUUElFEDvdcQgp.png.webp",
       "name": "Team Liquid",
       "short": "Liquid",
       "slug": "team-liquid",
@@ -38,21 +38,21 @@
       "slugVerified": true,
       "stats": {
         "maps": 183,
-        "winrate": 62,
-        "kills": 28.52,
-        "deaths": 24.54,
-        "assists": 67.54,
+        "winrate": 61,
+        "kills": 28.55,
+        "deaths": 24.74,
+        "assists": 67.33,
         "firstBlood": 45,
         "f10": 54,
-        "winWhenFb": 70,
+        "winWhenFb": 69,
         "winWhenF10": 82,
         "duration": 42,
-        "totalKills": 53.06,
-        "killDiff": 3.98
-      },
-      "logo": "https://dltv.org/uploads/teams/jzS2BJn2w338twINzzRUUElFEDvdcQgp.png.webp"
+        "totalKills": 53.29,
+        "killDiff": 3.81
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/pkxvH8kJYZKdmgO9AS91nECnHE5cwqAw.png.webp",
       "name": "Xtreme Gaming",
       "short": "XG",
       "slug": "xtreme-gaming",
@@ -60,23 +60,22 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 160,
-        "winrate": 48,
-        "kills": 22.97,
-        "deaths": 24.11,
-        "assists": 54.99,
+        "maps": 162,
+        "winrate": 49,
+        "kills": 23.02,
+        "deaths": 23.99,
+        "assists": 55.06,
         "firstBlood": 52,
         "f10": 51,
-        "winWhenFb": 53,
+        "winWhenFb": 54,
         "winWhenF10": 72,
         "duration": 44,
-        "totalKills": 47.08,
-        "killDiff": -1.14
-      },
-      "logo": "https://dltv.org/uploads/teams/pkxvH8kJYZKdmgO9AS91nECnHE5cwqAw.png.webp",
-      "error": "không đọc được khối STATS sau 3 lần thử"
+        "totalKills": 47.01,
+        "killDiff": -0.97
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/CiPyyFif5pBUjKO3bEjzAh3Edd1b0JGu.png",
       "name": "Aurora Gaming",
       "short": "Aurora",
       "slug": "aurora",
@@ -84,22 +83,22 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 180,
+        "maps": 183,
         "winrate": 62,
         "kills": 28,
-        "deaths": 24.78,
-        "assists": 64.58,
+        "deaths": 24.66,
+        "assists": 64.67,
         "firstBlood": 50,
-        "f10": 52,
+        "f10": 53,
         "winWhenFb": 69,
-        "winWhenF10": 79,
+        "winWhenF10": 80,
         "duration": 42,
-        "totalKills": 52.78,
-        "killDiff": 3.22
-      },
-      "logo": "https://dltv.org/uploads/teams/CiPyyFif5pBUjKO3bEjzAh3Edd1b0JGu.png"
+        "totalKills": 52.66,
+        "killDiff": 3.34
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/QoOnPgu1RpLhomwHIxKUabSiCx9d6AGK.png.webp",
       "name": "BetBoom Team",
       "short": "BB",
       "slug": "betboom-team",
@@ -119,10 +118,10 @@
         "duration": 44,
         "totalKills": 49.54,
         "killDiff": 4.64
-      },
-      "logo": "https://dltv.org/uploads/teams/QoOnPgu1RpLhomwHIxKUabSiCx9d6AGK.png.webp"
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/12pnnPv0JfxJO0MneMlJDb0pjsV82oVB.png.webp",
       "name": "Team Yandex",
       "short": "Yandex",
       "slug": "team-yandex",
@@ -130,22 +129,22 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 121,
-        "winrate": 60,
-        "kills": 26.69,
-        "deaths": 22.48,
-        "assists": 63.06,
-        "firstBlood": 61,
-        "f10": 59,
+        "maps": 119,
+        "winrate": 61,
+        "kills": 26.52,
+        "deaths": 22.61,
+        "assists": 62.39,
+        "firstBlood": 62,
+        "f10": 60,
         "winWhenFb": 64,
         "winWhenF10": 77,
         "duration": 41,
-        "totalKills": 49.17,
-        "killDiff": 4.21
-      },
-      "logo": "https://dltv.org/uploads/teams/12pnnPv0JfxJO0MneMlJDb0pjsV82oVB.png.webp"
+        "totalKills": 49.13,
+        "killDiff": 3.91
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/ABiiALC6B9K3sk7Fui1M5Uhnf6RetRll.png.webp",
       "name": "1win Team",
       "short": "1win",
       "slug": "1win-team",
@@ -165,10 +164,10 @@
         "duration": 43,
         "totalKills": 50.34,
         "killDiff": 1.46
-      },
-      "logo": "https://dltv.org/uploads/teams/ABiiALC6B9K3sk7Fui1M5Uhnf6RetRll.png.webp"
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/7ANCLxgwRDMqqlQvF0pHmasYyXrZ8V3A.png.webp",
       "name": "Team Spirit",
       "short": "Spirit",
       "slug": "team-spirit",
@@ -176,22 +175,22 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 143,
-        "winrate": 59,
-        "kills": 27.71,
-        "deaths": 26.27,
-        "assists": 64.25,
+        "maps": 146,
+        "winrate": 60,
+        "kills": 27.81,
+        "deaths": 26.32,
+        "assists": 64.45,
         "firstBlood": 46,
-        "f10": 48,
-        "winWhenFb": 69,
-        "winWhenF10": 80,
+        "f10": 49,
+        "winWhenFb": 70,
+        "winWhenF10": 81,
         "duration": 43,
-        "totalKills": 53.98,
-        "killDiff": 1.44
-      },
-      "logo": "https://dltv.org/uploads/teams/7ANCLxgwRDMqqlQvF0pHmasYyXrZ8V3A.png.webp"
+        "totalKills": 54.13,
+        "killDiff": 1.49
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/LsVqzDTPzN7qzT7EsqLuyeOpGkht5AVt.png.webp",
       "name": "PARIVISION",
       "short": "PARI",
       "slug": "parivision",
@@ -211,10 +210,10 @@
         "duration": 40,
         "totalKills": 49.13,
         "killDiff": 6.83
-      },
-      "logo": "https://dltv.org/uploads/teams/LsVqzDTPzN7qzT7EsqLuyeOpGkht5AVt.png.webp"
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/rawK7xDgxwI7Ff8GumO9sC7Z9fHvyCQ2.png.webp",
       "name": "Nigma Galaxy",
       "short": "Nigma",
       "slug": "nigma",
@@ -234,10 +233,10 @@
         "duration": 42,
         "totalKills": 53.81,
         "killDiff": 1.79
-      },
-      "logo": "https://dltv.org/uploads/teams/rawK7xDgxwI7Ff8GumO9sC7Z9fHvyCQ2.png.webp"
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/KzJfVKwybUiDjKIwpPVFc2TirGkIqPPk.png",
       "name": "L1GA TEAM",
       "short": "L1ga",
       "slug": "l1ga-team",
@@ -245,22 +244,22 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 175,
+        "maps": 173,
         "winrate": 55,
-        "kills": 24.3,
-        "deaths": 24.05,
-        "assists": 59.47,
+        "kills": 24.18,
+        "deaths": 24.03,
+        "assists": 59.27,
         "firstBlood": 47,
         "f10": 42,
-        "winWhenFb": 70,
-        "winWhenF10": 80,
+        "winWhenFb": 69,
+        "winWhenF10": 79,
         "duration": 42,
-        "totalKills": 48.35,
-        "killDiff": 0.25
-      },
-      "logo": "https://dltv.org/uploads/teams/KzJfVKwybUiDjKIwpPVFc2TirGkIqPPk.png"
+        "totalKills": 48.21,
+        "killDiff": 0.15
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/omVP2poiDIlm8hFMQsIeMuP7AIRuvi2P.png.webp",
       "name": "Team Resilience",
       "short": "Resil",
       "slug": "team-resilience",
@@ -268,22 +267,22 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 51,
+        "maps": 52,
         "winrate": 63,
-        "kills": 27.86,
-        "deaths": 21.47,
-        "assists": 67.9,
-        "firstBlood": 52,
-        "f10": 65,
+        "kills": 27.94,
+        "deaths": 21.35,
+        "assists": 68.08,
+        "firstBlood": 51,
+        "f10": 66,
         "winWhenFb": 72,
-        "winWhenF10": 83,
+        "winWhenF10": 84,
         "duration": 42,
-        "totalKills": 49.33,
-        "killDiff": 6.39
-      },
-      "logo": "https://dltv.org/uploads/teams/omVP2poiDIlm8hFMQsIeMuP7AIRuvi2P.png.webp"
+        "totalKills": 49.29,
+        "killDiff": 6.59
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/ycpoymjjrOUl038UnVLbtdPzCN4PrYog.png.webp",
       "name": "Vici Gaming",
       "short": "Vici",
       "slug": "vici-gaming",
@@ -291,22 +290,22 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 133,
+        "maps": 136,
         "winrate": 53,
-        "kills": 22.04,
-        "deaths": 22.62,
-        "assists": 52.9,
+        "kills": 22.07,
+        "deaths": 22.78,
+        "assists": 53.1,
         "firstBlood": 44,
-        "f10": 50,
+        "f10": 48,
         "winWhenFb": 58,
         "winWhenF10": 75,
         "duration": 43,
-        "totalKills": 44.66,
-        "killDiff": -0.58
-      },
-      "logo": "https://dltv.org/uploads/teams/ycpoymjjrOUl038UnVLbtdPzCN4PrYog.png.webp"
+        "totalKills": 44.85,
+        "killDiff": -0.71
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/small/Q2wHmrySFb5UfMXHPUgkU3AIaOMUidze.png",
       "name": "OG",
       "short": "OG",
       "slug": "og",
@@ -314,22 +313,22 @@
       "qualification": "Vòng loại — ĐNÁ",
       "slugVerified": true,
       "stats": {
-        "maps": 103,
-        "winrate": 40,
+        "maps": 101,
+        "winrate": 41,
         "kills": 23.17,
-        "deaths": 24.91,
-        "assists": 56.73,
+        "deaths": 24.92,
+        "assists": 56.56,
         "firstBlood": 42,
         "f10": 48,
-        "winWhenFb": 33,
-        "winWhenF10": 54,
+        "winWhenFb": 34,
+        "winWhenF10": 56,
         "duration": 44,
-        "totalKills": 48.08,
-        "killDiff": -1.74
-      },
-      "logo": "https://dltv.org/uploads/teams/small/Q2wHmrySFb5UfMXHPUgkU3AIaOMUidze.png"
+        "totalKills": 48.09,
+        "killDiff": -1.75
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/6dA6cd7zwFvaAuFFPldKLrbygXopSqBr.png",
       "name": "LGD Gaming",
       "short": "LGD",
       "slug": "lgd-gaming",
@@ -349,10 +348,10 @@
         "duration": 46,
         "totalKills": 54.29,
         "killDiff": 1.73
-      },
-      "logo": "https://dltv.org/uploads/teams/6dA6cd7zwFvaAuFFPldKLrbygXopSqBr.png"
+      }
     },
     {
+      "logo": "https://dltv.org/uploads/teams/small/SL5XvIyOVg02fCankoCetSnjT3x7FdVY.png",
       "name": "GamerLegion",
       "short": "GL",
       "slug": "gamerlegion",
@@ -360,20 +359,19 @@
       "qualification": "Vòng loại — Bắc Mỹ",
       "slugVerified": true,
       "stats": {
-        "maps": 120,
-        "winrate": 48,
-        "kills": 27.08,
-        "deaths": 23.71,
-        "assists": 59.83,
-        "firstBlood": 57,
-        "f10": 60,
+        "maps": 123,
+        "winrate": 47,
+        "kills": 27.13,
+        "deaths": 23.7,
+        "assists": 59.95,
+        "firstBlood": 56,
+        "f10": 61,
         "winWhenFb": 55,
-        "winWhenF10": 71,
+        "winWhenF10": 69,
         "duration": 41,
-        "totalKills": 50.79,
-        "killDiff": 3.37
-      },
-      "logo": "https://dltv.org/uploads/teams/small/SL5XvIyOVg02fCankoCetSnjT3x7FdVY.png"
+        "totalKills": 50.83,
+        "killDiff": 3.43
+      }
     }
   ]
 }
