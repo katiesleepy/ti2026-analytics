@@ -267,14 +267,14 @@ th:first-child{border-radius:9px 0 0 0}th:last-child{border-radius:0 9px 0 0}td.
 </div>
 <script>
 const $=s=>document.querySelector(s),tier=w=>w>=60?"S":w>=50?"A":"B";
-let T=[],R={},H={},TL=null;
+let T=[],R={},H={},HU="",TL=null;
 let PL=null,PH={},PI={},pCache={},pCur="";
 fetch("data/teams.json").then(r=>r.json()).then(d=>{
   T=d.teams.map(x=>({...x,tier:x.stats?tier(x.stats.winrate):null}));
   return Promise.all([
     fetch("data/meta.json").then(r=>r.json()).catch(()=>({})),
     fetch("data/rosters.json").then(r=>r.json()).then(x=>x.rosters||{}).catch(()=>({})),
-    fetch("data/h2h.json").then(r=>r.json()).then(x=>x.pairs||{}).catch(()=>({})),
+    fetch("data/h2h.json").then(r=>r.json()).then(x=>{HU=x.statsUntil||"";return x.pairs||{};}).catch(()=>({})),
     fetch("data/tiers.json").then(r=>r.json()).catch(()=>null),
     fetch("data/players.json").then(r=>r.json()).catch(()=>null)
   ]);
@@ -396,7 +396,7 @@ function h2hRender(){
         +'</div>';
     }).join("");
     const small=n<5;
-    statsHTML='<div class="h2sub">Chỉ số khi đối đầu · '+n+' ván chung'+(small?' · <span style="color:var(--rd)">mẫu nhỏ, chỉ tham khảo</span>':'')+'</div>'
+    statsHTML='<div class="h2sub">Chỉ số khi đối đầu · '+n+' ván chung'+(HU?' <small>· các ván tới '+HU.slice(8,10)+'/'+HU.slice(5,7)+', chưa gồm TI</small>':'')+(small?' · <span style="color:var(--rd)">mẫu nhỏ, chỉ tham khảo</span>':'')+'</div>'
       +'<div class="hlegend"><span><span class="dot a"></span>'+esc(A.name)+'</span><span><span class="dot b"></span>'+esc(B.name)+'</span><span class="mu">Chỉ tính các ván 2 đội gặp nhau · ● = tốt hơn</span></div>'
       +rows;
     const slead=wa>wb?A:wb>wa?B:null;
