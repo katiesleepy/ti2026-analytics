@@ -31,7 +31,16 @@ jobs:
           npm install
           npx playwright install --with-deps chromium
 
-      - name: Chạy scraper
+      # Hai nguồn chạy độc lập: nguồn này hỏng thì nguồn kia vẫn cập nhật được.
+      - name: Chạy scraper Liquipedia (BXH Swiss + kết quả TI)
+        id: liquipedia
+        continue-on-error: true
+        working-directory: scraper
+        run: node liquipedia.mjs
+
+      - name: Chạy scraper DLTV (chỉ số đội)
+        id: dltv
+        continue-on-error: true
         working-directory: scraper
         run: node scrape.mjs
 
@@ -39,10 +48,19 @@ jobs:
         run: |
           git config user.name  "ti2026-bot"
           git config user.email "actions@github.com"
-          git add data/teams.json data/meta.json data/teams-3m.json
+          git add data/teams.json data/meta.json data/teams-3m.json data/ti-groups.json data/h2h.json
           if git diff --staged --quiet; then
             echo "Không có thay đổi dữ liệu."
           else
-            git commit -m "chore: cập nhật dữ liệu đội $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "chore: cập nhật dữ liệu $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
+
+      # Đã commit xong mới báo hỏng, để dữ liệu lấy được vẫn kịp lên trang.
+      - name: Báo lỗi nếu có nguồn hỏng
+        if: steps.liquipedia.outcome == 'failure' || steps.dltv.outcome == 'failure'
+        run: |
+          echo "Liquipedia: ${{ steps.liquipedia.outcome }}"
+          echo "DLTV:       ${{ steps.dltv.outcome }}"
+          echo "Ít nhất một nguồn không lấy được dữ liệu — xem log các bước phía trên."
+          exit 1
