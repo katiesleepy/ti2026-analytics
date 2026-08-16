@@ -232,7 +232,7 @@ tr.tiout td{background:color-mix(in srgb,var(--rd) 8%,transparent)}
   <section class="v" id="v-ti">
     <div class="p">
       <h2>Vòng bảng The International 2026 <span class="mu" id="tiStage" style="font-weight:400;font-size:12.5px"></span></h2>
-      <p class="d">Thể thức <b>Swiss 5 vòng, Bo3</b>: thắng đủ <b>3 trận</b> là đi tiếp vào nhánh trên, thua đủ <b>3 trận</b> là bị loại. Bảng và kết quả lấy từ <b>Liquipedia</b>, tự cập nhật hằng ngày.</p>
+      <p class="d">Thể thức <b>Swiss 5 vòng, Bo3</b>, sau đó là <b>vòng quyết định</b> giữa các đội hoà điểm. Cột <b>Tình trạng</b> lấy thẳng dấu đi tiếp / bị loại do <b>Liquipedia</b> đánh, không phải do trang này tự suy ra. Bảng và kết quả tự cập nhật hằng ngày.</p>
       <div id="tiLive"></div>
       <div id="tiNext"></div>
       <div class="tw"><table id="tiTbl"></table></div>
@@ -632,6 +632,8 @@ function pRow(h){
 const tBy=s=>T.find(x=>x.slug===s)||{slug:s,name:s,logo:null};
 function tiTeam(s,bold,side){const t=tBy(s);
   return '<span class="titm'+(side?' '+side:'')+(bold?' win':'')+'">'+lg(t)+esc(t.name)+'</span>';}
+/* Swiss chỉ có 5 vòng; mọi thứ sau đó là vòng quyết định giữa các đội hoà điểm. */
+function tiRoundName(r){return !r?'Chưa rõ vòng':r<=5?('vòng '+r):'Vòng quyết định';}
 function tiClock(ts){const d=new Date(ts*1000);
   return d.toLocaleString("vi-VN",{weekday:"short",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});}
 function tiRender(){
@@ -649,7 +651,7 @@ function tiRender(){
 
   /* Trận sắp đấu đã biết cặp */
   const nx=(G.upcoming||[]).filter(u=>u.a&&u.b);
-  $("#tiNext").innerHTML=nx.length?'<div class="tisec">Sắp đấu · vòng '+nx[0].r+'</div><div class="timg wide">'
+  $("#tiNext").innerHTML=nx.length?'<div class="tisec">Sắp đấu · '+tiRoundName(nx[0].r)+'</div><div class="timg wide">'
     +nx.map(m=>'<div class="tim"><span class="tiwhen">'+tiClock(m.ts)+'</span>'+tiTeam(m.a,0,'l')+'<b class="tisc">vs</b>'+tiTeam(m.b,0,'r')+'</div>').join('')+'</div>':'';
 
   /* Bảng xếp hạng Swiss */
@@ -657,7 +659,8 @@ function tiRender(){
   $("#tiTbl").innerHTML='<thead><tr><th style="cursor:default">#</th><th style="cursor:default;text-align:left">Đội</th>'
     +'<th style="cursor:default">Trận</th><th style="cursor:default">Ván</th><th style="cursor:default">Hiệu số ván</th><th style="cursor:default">Tình trạng</th></tr></thead><tbody>'
     +rows.map(s=>{
-      const gd=s.gw-s.gl, st=s.mw>=3?['qua','Đi tiếp']:s.ml>=3?['out','Bị loại']:['','Đang đấu'];
+      // Trạng thái lấy thẳng dấu của Liquipedia (up/down), không tự suy từ số trận thắng.
+      const gd=s.gw-s.gl, st=s.pos==='up'?['qua','Đi tiếp']:s.pos==='down'?['out','Bị loại']:['','Đang đấu'];
       return '<tr class="'+(st[0]?'ti'+st[0]:'')+'"><td>'+s.rk+'</td><td class="tm">'+tiTeam(s.t)+'</td>'
         +'<td><b>'+s.mw+'–'+s.ml+'</b></td><td>'+s.gw+'–'+s.gl+'</td>'
         +'<td style="color:'+(gd>0?'var(--aq)':gd<0?'var(--rd)':'var(--mu)')+'">'+(gd>0?'+':'')+gd+'</td>'
@@ -672,7 +675,7 @@ function tiRender(){
   const byR={};
   for(const m of (G.matches||[])) (byR[m.r]||=[]).push(m);
   const ks=Object.keys(byR).map(Number).sort((a,b)=>b-a);
-  $("#tiRes").innerHTML=ks.length?ks.map(r=>'<div class="tisec">Vòng '+r+' <small class="mu">· '+byR[r].length+' trận</small></div><div class="timg">'
+  $("#tiRes").innerHTML=ks.length?ks.map(r=>'<div class="tisec">'+tiRoundName(r)+' <small class="mu">· '+byR[r].length+' trận</small></div><div class="timg">'
     +byR[r].map(m=>{const aw=m.sa>m.sb;
       return '<div class="tim">'+tiTeam(m.a,aw,'l')+'<b class="tisc">'+m.sa+' – '+m.sb+'</b>'+tiTeam(m.b,!aw,'r')+'</div>';}).join('')+'</div>').join('')
     :'<div class="nd">Chưa có trận nào kết thúc.</div>';
