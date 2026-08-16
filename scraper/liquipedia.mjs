@@ -78,10 +78,15 @@ function isoDate(s) {
  * thành tích ("1-0", "2-1"…) — tổng thắng+thua chính là số trận đã đấu.
  */
 function roundOf(label) {
-  const r = /^Round\s+(\d+)/i.exec(label || '');
+  const t = (label || '').trim();
+  const r = /^Round\s+(\d+)/i.exec(t);
   if (r) return +r[1];
-  const b = /^(\d+)\s*-\s*(\d+)$/.exec((label || '').trim());
-  return b ? +b[1] + +b[2] + 1 : null;
+  // Vòng thường: nhánh thành tích "1-0", "2-1"…
+  const b = /^(\d+)\s*-\s*(\d+)$/.exec(t);
+  if (b) return +b[1] + +b[2] + 1;
+  // Vòng quyết định sau 5 vòng Swiss: nhãn dạng "[3-2] vs [2-3]".
+  const e = /^\[(\d+)\s*-\s*(\d+)\]\s*vs/i.exec(t);
+  return e ? +e[1] + +e[2] + 1 : null;
 }
 
 /** Bóc hai bảng cần dùng ngay trong trang. */
@@ -106,7 +111,11 @@ function extractFromPage() {
     if (r.cells.length < 4) return null;
     const c = [...r.cells].map((x) => x.innerText.trim().replace(/\s+/g, ''));
     if (!/^\d+$/.test(c[0])) return null;
-    return { rank: +c[0], team: teamOf(r.cells[1]), matches: c[2], games: c[3] };
+    // Liquipedia tự đánh dấu đội đi tiếp / bị loại bằng data-position-status
+    // (up = đi tiếp, down = bị loại, stay/staydown = còn đang tranh). Dùng dấu này
+    // thay vì tự suy ra từ số trận thắng, vì luật đi tiếp đổi theo từng vòng.
+    return { rank: +c[0], team: teamOf(r.cells[1]), matches: c[2], games: c[3],
+             pos: r.getAttribute('data-position-status') || '' };
   }).filter(Boolean) : [];
 
   const rows = mtTable ? [...mtTable.rows].slice(1).map((r) => {
@@ -242,7 +251,7 @@ async function main() {
     const t = slug(s.team);
     const [mw, ml] = s.matches.split('-').map(Number);
     const [gw, gl] = s.games.split('-').map(Number);
-    return t ? { rk: s.rank, t, mw, ml, gw, gl } : null;
+    return t ? { rk: s.rank, t, mw, ml, gw, gl, pos: s.pos || '' } : null;
   }).filter(Boolean);
 
   // ---- Chốt an toàn: giao diện Liquipedia đổi thì thà không ghi còn hơn ghi sai ----
@@ -252,9 +261,12 @@ async function main() {
   }
 
   // ---- Đối chiếu chéo: BXH phải khớp với tổng hợp từ chính các trận bóc được ----
+  // Bảng BXH của Liquipedia chỉ tính 5 vòng Swiss; vòng quyết định (r > 5) nằm
+  // ở bảng riêng nên phải loại ra, không thì đối chiếu sẽ báo lệch giả.
+  const SWISS_ROUNDS = 5;
   const acc = {};
   const bump = (t) => (acc[t] ||= { mw: 0, ml: 0, gw: 0, gl: 0 });
-  for (const m of [...done, ...live]) {
+  for (const m of [...done, ...live].filter((m) => !m.r || m.r <= SWISS_ROUNDS)) {
     const A = bump(m.a), B = bump(m.b);
     A.gw += m.sa; A.gl += m.sb; B.gw += m.sb; B.gl += m.sa;
     if (Math.max(m.sa, m.sb) >= 2) { // trận đang đấu chưa tính vào thắng/thua trận
