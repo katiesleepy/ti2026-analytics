@@ -26,6 +26,7 @@ const ROOT = join(__dirname, '..');
 const OUT_GROUPS = join(ROOT, 'data', 'ti-groups.json');
 const OUT_H2H = join(ROOT, 'data', 'h2h.json');
 
+const PAGE_TITLE = 'The International/2026/Group Stage';
 const PAGE_URL = 'https://liquipedia.net/dota2/The_International/2026/Group_Stage';
 const EVENT = 'The International 2026';
 // Điều khoản Liquipedia: cấm User-Agent chung chung, phải có cách liên hệ.
@@ -126,6 +127,33 @@ function extractFromPage() {
 }
 
 /**
+ * Lấy HTML đã render của trang qua API chính thức `action=parse`.
+ *
+ * Vì sao không tải thẳng trang: Liquipedia chặn việc cào trang HTML từ IP trung tâm
+ * dữ liệu (GitHub Actions runner nằm trong nhóm này) — trang trả về không có bảng nào
+ * và `waitForSelector('table')` hết giờ. api.php thì cho phép truy cập tự động, miễn là
+ * User-Agent có thông tin liên hệ và tôn trọng giới hạn 1 request/30 giây cho action=parse.
+ */
+async function fetchParsedHtml() {
+  const api = 'https://liquipedia.net/dota2/api.php?action=parse&format=json&formatversion=2'
+    + '&prop=text&page=' + encodeURIComponent(PAGE_TITLE);
+  const r = await fetch(api, {
+    // Không tự đặt Accept-Encoding: Node đã gửi sẵn gzip/deflate/br và tự giải nén.
+    headers: { 'User-Agent': UA, 'Accept': 'application/json' },
+  });
+  if (!r.ok) {
+    const body = (await r.text()).slice(0, 200).replace(/\s+/g, ' ');
+    throw new Error(`api.php HTTP ${r.status} — ${body}`);
+  }
+  const j = await r.json();
+  if (j.error) throw new Error(`api.php lỗi: ${j.error.code} — ${j.error.info}`);
+  // formatversion=2 trả text là chuỗi; bản cũ trả { '*': '<html>' }.
+  const html = typeof j?.parse?.text === 'string' ? j.parse.text : j?.parse?.text?.['*'];
+  if (!html) throw new Error('api.php không trả về HTML');
+  return html;
+}
+
+/**
  * Tải bảng thô từ Liquipedia. Đặt biến môi trường LQ_FIXTURE=<file.json> để nạp
  * dữ liệu mẫu thay vì mở mạng — dùng khi kiểm thử ở máy không ra được Liquipedia.
  */
@@ -143,18 +171,32 @@ async function fetchRaw() {
   let raw = null;
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
-      const resp = await page.goto(PAGE_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-      if (resp && resp.status() === 429) throw new Error('429 — bị giới hạn tần suất');
-      await page.waitForSelector('table', { timeout: 30000 });
+      // Đường chính: API. Trình duyệt ở đây chỉ đóng vai trò bộ phân tích DOM.
+      const html = await fetchParsedHtml();
+      await page.setContent(`<!doctype html><html><body>${html}</body></html>`,
+        { waitUntil: 'domcontentloaded' });
       raw = await page.evaluate(extractFromPage);
       if (raw.standings.length && raw.rows.length) break;
-      throw new Error('không tìm thấy bảng BXH hoặc bảng trận');
-    } catch (e) {
-      console.error(`Lần thử ${attempt}/3 hỏng: ${e.message}`);
-      raw = null;
-      // Điều khoản Liquipedia: tối thiểu 2 giây giữa hai lượt gọi; ta chờ hẳn 30s.
-      if (attempt < 3) await new Promise((r) => setTimeout(r, 30000));
+      throw new Error(`API trả về HTML nhưng không có bảng cần tìm (${html.length} ký tự)`);
+    } catch (eApi) {
+      console.error(`Lần thử ${attempt}/3 — API hỏng: ${eApi.message}`);
+      // Đường dự phòng: tải thẳng trang. Thường bị chặn trên runner nhưng chạy được ở máy nhà.
+      try {
+        const resp = await page.goto(PAGE_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+        const st = resp ? resp.status() : 0;
+        if (st !== 200) throw new Error(`tải trang trả HTTP ${st}`);
+        await page.waitForSelector('table', { timeout: 30000 });
+        raw = await page.evaluate(extractFromPage);
+        if (raw.standings.length && raw.rows.length) { console.log('Dùng đường dự phòng: tải thẳng trang.'); break; }
+        const t = await page.title();
+        throw new Error(`trang tải được nhưng không có bảng (tiêu đề: "${t}")`);
+      } catch (ePage) {
+        console.error(`Lần thử ${attempt}/3 — tải trang hỏng: ${ePage.message}`);
+        raw = null;
+      }
     }
+    // Điều khoản Liquipedia: action=parse tối đa 1 request/30 giây.
+    if (attempt < 3) await new Promise((r) => setTimeout(r, 31000));
   }
   await browser.close();
   return raw;
