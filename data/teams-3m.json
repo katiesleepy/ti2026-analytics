@@ -2,7 +2,7 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "3 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-08-16T02:53:53.283Z",
+  "updatedAt": "2026-08-16T05:43:40.669Z",
   "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 16/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
@@ -14,18 +14,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 75,
-        "winrate": 61,
-        "kills": 27.69,
-        "deaths": 27.43,
-        "assists": 60.2,
-        "firstBlood": 42,
-        "f10": 54,
-        "winWhenFb": 61,
-        "winWhenF10": 78,
+        "maps": 77,
+        "winrate": 62,
+        "kills": 27.78,
+        "deaths": 26.94,
+        "assists": 60.39,
+        "firstBlood": 43,
+        "f10": 56,
+        "winWhenFb": 63,
+        "winWhenF10": 79,
         "duration": 45,
-        "totalKills": 55.12,
-        "killDiff": 0.26
+        "totalKills": 54.72,
+        "killDiff": 0.84
       }
     },
     {
@@ -83,18 +83,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 71,
-        "winrate": 61,
-        "kills": 30.69,
-        "deaths": 25.8,
-        "assists": 68.94,
-        "firstBlood": 52,
+        "maps": 73,
+        "winrate": 59,
+        "kills": 30.6,
+        "deaths": 25.9,
+        "assists": 68.88,
+        "firstBlood": 54,
         "f10": 56,
-        "winWhenFb": 67,
-        "winWhenF10": 76,
+        "winWhenFb": 63,
+        "winWhenF10": 74,
         "duration": 44,
-        "totalKills": 56.49,
-        "killDiff": 4.89
+        "totalKills": 56.5,
+        "killDiff": 4.7
       }
     },
     {
@@ -175,18 +175,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 63,
+        "maps": 64,
         "winrate": 59,
-        "kills": 30.67,
-        "deaths": 27.68,
-        "assists": 69.11,
-        "firstBlood": 55,
-        "f10": 55,
+        "kills": 30.64,
+        "deaths": 27.39,
+        "assists": 69.05,
+        "firstBlood": 54,
+        "f10": 56,
         "winWhenFb": 70,
-        "winWhenF10": 77,
+        "winWhenF10": 78,
         "duration": 44,
-        "totalKills": 58.35,
-        "killDiff": 2.99
+        "totalKills": 58.03,
+        "killDiff": 3.25
       }
     },
     {
@@ -267,18 +267,18 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 34,
-        "winrate": 62,
-        "kills": 30.94,
-        "deaths": 24.68,
-        "assists": 74.59,
-        "firstBlood": 47,
-        "f10": 60,
-        "winWhenFb": 80,
+        "maps": 35,
+        "winrate": 60,
+        "kills": 30.31,
+        "deaths": 24.8,
+        "assists": 73.09,
+        "firstBlood": 48,
+        "f10": 58,
+        "winWhenFb": 75,
         "winWhenF10": 83,
-        "duration": 43,
-        "totalKills": 55.62,
-        "killDiff": 6.26
+        "duration": 42,
+        "totalKills": 55.11,
+        "killDiff": 5.51
       }
     },
     {
@@ -290,18 +290,18 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 73,
-        "winrate": 49,
-        "kills": 21.84,
-        "deaths": 25.67,
-        "assists": 52.58,
-        "firstBlood": 38,
-        "f10": 36,
-        "winWhenFb": 50,
+        "maps": 75,
+        "winrate": 48,
+        "kills": 21.48,
+        "deaths": 25.81,
+        "assists": 51.76,
+        "firstBlood": 39,
+        "f10": 35,
+        "winWhenFb": 48,
         "winWhenF10": 69,
         "duration": 44,
-        "totalKills": 47.51,
-        "killDiff": -3.83
+        "totalKills": 47.29,
+        "killDiff": -4.33
       }
     },
     {
