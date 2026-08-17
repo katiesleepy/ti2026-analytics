@@ -73,6 +73,7 @@ tr.tiout td{background:color-mix(in srgb,var(--rd) 8%,transparent)}
 .tibadge{font-size:10.5px;padding:2px 8px;border-radius:999px;background:var(--gr);color:var(--t2)}
 .tibadge.qua{background:color-mix(in srgb,var(--aq) 18%,transparent);color:var(--aq)}
 .tibadge.out{background:color-mix(in srgb,var(--rd) 15%,transparent);color:var(--rd)}
+.posub{font-size:11.5px;color:var(--mu);margin:10px 0 6px;text-transform:uppercase;letter-spacing:.04em}
 .tlg{width:20px;height:20px;object-fit:contain;vertical-align:-5px;margin-right:7px}
 .mono{display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--bl);color:var(--onacc);font-size:10px;font-weight:700;line-height:20px;text-align:center;margin-right:7px;vertical-align:-5px}
 .tlg-lg{width:28px;height:28px;vertical-align:-7px;margin-right:8px}
@@ -232,9 +233,10 @@ tr.tiout td{background:color-mix(in srgb,var(--rd) 8%,transparent)}
   <section class="v" id="v-ti">
     <div class="p">
       <h2>Vòng bảng The International 2026 <span class="mu" id="tiStage" style="font-weight:400;font-size:12.5px"></span></h2>
-      <p class="d">Thể thức <b>Swiss 5 vòng, Bo3</b>, sau đó là <b>vòng quyết định</b> giữa các đội hoà điểm. Cột <b>Tình trạng</b> lấy thẳng dấu đi tiếp / bị loại do <b>Liquipedia</b> đánh, không phải do trang này tự suy ra. Bảng và kết quả tự cập nhật hằng ngày.</p>
+      <p class="d">Thể thức <b>Swiss 5 vòng, Bo3</b>, sau đó là <b>vòng quyết định</b> giữa các đội hoà điểm, rồi tới <b>playoffs</b> nhánh thắng–thua. Cột <b>Tình trạng</b> lấy thẳng dấu đi tiếp / bị loại do <b>Liquipedia</b> đánh; đội đã có tên trong nhánh playoffs thì tính là đi tiếp. Bảng và kết quả tự cập nhật hằng ngày.</p>
       <div id="tiLive"></div>
       <div id="tiNext"></div>
+      <div id="tiPo"></div>
       <div class="tw"><table id="tiTbl"></table></div>
       <p class="ft" id="tiSrc"></p>
     </div>
@@ -632,6 +634,29 @@ function pRow(h){
 const tBy=s=>T.find(x=>x.slug===s)||{slug:s,name:s,logo:null};
 function tiTeam(s,bold,side){const t=tBy(s);
   return '<span class="titm'+(side?' '+side:'')+(bold?' win':'')+'">'+lg(t)+esc(t.name)+'</span>';}
+/* Tên nhánh playoffs của Liquipedia -> tiếng Việt. Không khớp thì giữ nguyên bản gốc. */
+const PO_VI={"Upper Bracket Quarterfinals":"Tứ kết nhánh trên","Upper Bracket Semifinals":"Bán kết nhánh trên",
+ "Upper Bracket Final":"Chung kết nhánh trên","Lower Bracket Round 1":"Nhánh dưới · vòng 1",
+ "Lower Bracket Round 2":"Nhánh dưới · vòng 2","Lower Bracket Quarterfinals":"Tứ kết nhánh dưới",
+ "Lower Bracket Semifinals":"Bán kết nhánh dưới","Lower Bracket Final":"Chung kết nhánh dưới",
+ "Grand Final":"Chung kết tổng"};
+function poName(r){return PO_VI[r]||r||"Chưa rõ nhánh";}
+function poBlock(){
+  const ps=(G&&G.playoffs)||[];
+  if(!ps.length){$("#tiPo").innerHTML='';return;}
+  const groups=[],idx={};
+  for(const p of ps){ if(!(p.round in idx)){idx[p.round]=groups.length;groups.push([p.round,[]]);} groups[idx[p.round]][1].push(p); }
+  const row=p=>{
+    const tbd='<span class="titm mu">Chưa xác định</span>';
+    const L=p.a?tiTeam(p.a,p.done&&p.sa>p.sb,'l'):tbd, R=p.b?tiTeam(p.b,p.done&&p.sb>p.sa,'r'):tbd;
+    const mid=(p.sa!=null)?(p.sa+' – '+p.sb):'vs';
+    return '<div class="tim'+(p.sa!=null&&!p.done?' live':'')+'">'
+      +(p.sa==null&&p.ts?'<span class="tiwhen">'+tiClock(p.ts)+'</span>':'')
+      +L+'<b class="tisc">'+mid+'</b>'+R+'</div>';
+  };
+  $("#tiPo").innerHTML='<div class="tisec">Playoffs · nhánh thắng thua <small class="mu">· Bo3, chung kết tổng Bo5</small></div>'
+    +groups.map(([r,ms])=>'<div class="posub">'+esc(poName(r))+'</div><div class="timg wide">'+ms.map(row).join('')+'</div>').join('');
+}
 /* Swiss chỉ có 5 vòng; mọi thứ sau đó là vòng quyết định giữa các đội hoà điểm. */
 function tiRoundName(r){return !r?'Chưa rõ vòng':r<=5?('vòng '+r):'Vòng quyết định';}
 function tiClock(ts){const d=new Date(ts*1000);
@@ -639,7 +664,8 @@ function tiClock(ts){const d=new Date(ts*1000);
 function tiRender(){
   if(!G||!G.standings||!G.standings.length){
     $("#tiTbl").innerHTML='';
-    $("#tiLive").innerHTML='<div class="nd">Chưa có dữ liệu vòng bảng (data/ti-groups.json).</div>';return;
+    $("#tiLive").innerHTML='<div class="nd">Chưa có dữ liệu vòng bảng (data/ti-groups.json).</div>';
+    $("#tiPo").innerHTML='';return;
   }
   const up=new Date(G.updatedAt);
   $("#tiStage").textContent='· cập nhật '+up.toLocaleString("vi-VN",{dateStyle:"short",timeStyle:"short"});
@@ -653,6 +679,8 @@ function tiRender(){
   const nx=(G.upcoming||[]).filter(u=>u.a&&u.b);
   $("#tiNext").innerHTML=nx.length?'<div class="tisec">Sắp đấu · '+tiRoundName(nx[0].r)+'</div><div class="timg wide">'
     +nx.map(m=>'<div class="tim"><span class="tiwhen">'+tiClock(m.ts)+'</span>'+tiTeam(m.a,0,'l')+'<b class="tisc">vs</b>'+tiTeam(m.b,0,'r')+'</div>').join('')+'</div>':'';
+
+  poBlock();
 
   /* Bảng xếp hạng Swiss */
   const rows=[...G.standings].sort((a,b)=>a.rk-b.rk); // giữ nguyên thứ tự Liquipedia trong cùng hạng
@@ -669,6 +697,7 @@ function tiRender(){
 
   $("#tiSrc").innerHTML='Nguồn: <a href="'+esc(G.sourceUrl||"https://liquipedia.net/dota2")+'" target="_blank" rel="noopener">Liquipedia — '
     +esc(G.event||"The International 2026")+'</a>, dùng theo giấy phép <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.'
+    +(G.playoffUrl?' Nhánh playoffs: <a href="'+esc(G.playoffUrl)+'" target="_blank" rel="noopener">trang Main Event</a>.':'')
     +' Cột <b>Trận</b> = thắng–thua trận, <b>Ván</b> = thắng–thua ván.';
 
   /* Kết quả theo vòng */
