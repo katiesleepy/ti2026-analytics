@@ -28,6 +28,9 @@ const OUT_H2H = join(ROOT, 'data', 'h2h.json');
 
 const PAGE_TITLE = 'The International/2026/Group Stage';
 const PAGE_URL = 'https://liquipedia.net/dota2/The_International/2026/Group_Stage';
+// Nhánh playoffs nằm ở trang riêng, bảng trận cùng dạng 5 cột như vòng bảng.
+const PLAYOFF_TITLE = 'The International/2026/Main Event';
+const PLAYOFF_URL = 'https://liquipedia.net/dota2/The_International/2026/Main_Event';
 const EVENT = 'The International 2026';
 // Điều khoản Liquipedia: cấm User-Agent chung chung, phải có cách liên hệ.
 const UA = 'TI2026-Analytics/1.0 (+https://github.com/katiesleepy/ti2026-analytics) playwright-chromium';
@@ -143,9 +146,9 @@ function extractFromPage() {
  * và `waitForSelector('table')` hết giờ. api.php thì cho phép truy cập tự động, miễn là
  * User-Agent có thông tin liên hệ và tôn trọng giới hạn 1 request/30 giây cho action=parse.
  */
-async function fetchParsedHtml() {
+async function fetchParsedHtml(title = PAGE_TITLE) {
   const api = 'https://liquipedia.net/dota2/api.php?action=parse&format=json&formatversion=2'
-    + '&prop=text&page=' + encodeURIComponent(PAGE_TITLE);
+    + '&prop=text&page=' + encodeURIComponent(title);
   const r = await fetch(api, {
     // Không tự đặt Accept-Encoding: Node đã gửi sẵn gzip/deflate/br và tự giải nén.
     headers: { 'User-Agent': UA, 'Accept': 'application/json' },
@@ -169,7 +172,7 @@ async function fetchParsedHtml() {
 async function fetchRaw() {
   if (process.env.LQ_FIXTURE) {
     console.log(`Dùng dữ liệu mẫu: ${process.env.LQ_FIXTURE}`);
-    return JSON.parse(await readFile(process.env.LQ_FIXTURE, 'utf8'));
+    return { raw: JSON.parse(await readFile(process.env.LQ_FIXTURE, 'utf8')), browser: null, page: null };
   }
   // Nạp playwright ở đây thôi, để đường chạy bằng dữ liệu mẫu không cần cài trình duyệt.
   const { chromium } = await import('playwright');
@@ -207,12 +210,38 @@ async function fetchRaw() {
     // Điều khoản Liquipedia: action=parse tối đa 1 request/30 giây.
     if (attempt < 3) await new Promise((r) => setTimeout(r, 31000));
   }
-  await browser.close();
-  return raw;
+  // Giữ trình duyệt mở: hàm gọi còn cần `page` để đọc tiếp trang playoffs.
+  if (!raw) { await browser.close(); return { raw: null, browser: null, page: null }; }
+  return { raw, browser, page };
+}
+
+/**
+ * Bảng trận của trang Main Event có đúng dạng 5 cột như vòng bảng, nhưng cột Round
+ * là tên nhánh ("Upper Bracket Quarterfinals"…) chứ không phải số vòng, và phần lớn
+ * các cặp còn là TBD cho tới khi vòng trước đá xong.
+ */
+async function fetchPlayoffs(page) {
+  if (process.env.LQ_FIXTURE_PLAYOFF) {
+    return JSON.parse(await readFile(process.env.LQ_FIXTURE_PLAYOFF, 'utf8'));
+  }
+  if (!page) return [];
+  try {
+    const html = await fetchParsedHtml(PLAYOFF_TITLE);
+    await page.setContent(`<!doctype html><html><body>${html}</body></html>`,
+      { waitUntil: 'domcontentloaded' });
+    return (await page.evaluate(extractFromPage)).rows;
+  } catch (e) {
+    console.error(`Không đọc được nhánh playoffs: ${e.message}`);
+    return [];
+  }
 }
 
 async function main() {
-  const raw = await fetchRaw();
+  const { raw, browser, page } = await fetchRaw();
+  // Điều khoản Liquipedia: action=parse tối đa 1 request/30 giây.
+  if (raw && !process.env.LQ_FIXTURE) await new Promise((r) => setTimeout(r, 31000));
+  const playoffRows = raw ? await fetchPlayoffs(page) : [];
+  if (browser) await browser.close();
 
   if (!raw) {
     console.error('Không lấy được dữ liệu Liquipedia — giữ nguyên file cũ.');
@@ -283,6 +312,32 @@ async function main() {
   }
   console.log(mismatch ? `Đối chiếu BXH: ${mismatch} đội lệch (vẫn ghi, xem log).` : 'Đối chiếu BXH: khớp hoàn toàn.');
 
+  // ---- Chuẩn hoá nhánh playoffs ----
+  const playoffs = [];
+  for (const r of playoffRows) {
+    const m = /^(\d+)\s*:\s*(\d+)/.exec(r.score);
+    const bo = /Bo(\d)/i.exec(r.score);
+    const A = NAME2SLUG[r.a] || null, B = NAME2SLUG[r.b] || null;
+    const e = { ts: r.ts || null, round: r.round, a: A, b: B, bo: bo ? +bo[1] : 3 };
+    if (m) { e.sa = +m[1]; e.sb = +m[2]; e.done = Math.max(+m[1], +m[2]) >= Math.ceil(e.bo / 2) ? 1 : 0; }
+    playoffs.push(e);
+  }
+  // Đội đã có tên trong nhánh playoffs thì chắc chắn đi tiếp. Trang vòng bảng đôi khi
+  // còn để dấu "stay" một thời gian sau khi vòng cuối kết thúc, nên lấy nhánh làm chuẩn.
+  const inPlayoffs = new Set(playoffs.flatMap((p) => [p.a, p.b]).filter(Boolean));
+  for (const s of standings) if (inPlayoffs.has(s.t)) s.pos = 'up';
+  if (playoffs.length) {
+    const withTeams = playoffs.filter((p) => p.a && p.b).length;
+    console.log(`Nhánh playoffs: ${playoffs.length} trận (${withTeams} trận đã biết cặp, ${inPlayoffs.size} đội vào nhánh).`);
+  }
+
+  // Kết quả playoffs cũng là trận TI, gộp vào danh sách để ghi tiếp vào lịch sử đối đầu.
+  const playoffDone = playoffs
+    .filter((p) => p.done && p.a && p.b)
+    .map((p) => ({ d: p.ts ? new Date(p.ts * 1000).toISOString().slice(0, 10) : null,
+                   r: null, a: p.a, sa: p.sa, b: p.b, sb: p.sb }))
+    .filter((p) => p.d);
+
   // ---- Ghi data/ti-groups.json ----
   const now = new Date();
   await mkdir(join(ROOT, 'data'), { recursive: true });
@@ -298,6 +353,8 @@ async function main() {
     matches: done.sort((x, y) => (x.d === y.d ? x.r - y.r : x.d < y.d ? -1 : 1)),
     live,
     upcoming,
+    playoffs,
+    playoffUrl: PLAYOFF_URL,
   }) + '\n');
   console.log(`Đã ghi ${OUT_GROUPS}: ${standings.length} dòng BXH, ${done.length} trận xong, ${live.length} đang đấu, ${upcoming.length} sắp đấu.`);
 
@@ -309,7 +366,7 @@ async function main() {
     return;
   }
   let added = 0;
-  for (const m of done) {
+  for (const m of [...done, ...playoffDone]) {
     const [k0, k1] = [m.a, m.b].sort();
     const key = `${k0}|${k1}`;
     const s0 = m.a === k0 ? m.sa : m.sb;
@@ -324,7 +381,8 @@ async function main() {
   }
   if (added) {
     h2h.updatedAt = now.toISOString();
-    const last = done[done.length - 1];
+    const all = [...done, ...playoffDone].sort((x, y) => (x.d < y.d ? -1 : 1));
+    const last = all[all.length - 1];
     h2h.note = `Lịch sử đối đầu tự cập nhật từ Liquipedia, tới hết ${last.d.slice(8, 10)}/${last.d.slice(5, 7)}/${last.d.slice(0, 4)}. `
       + `Khối "chỉ số khi đối đầu" (n, st) vẫn tính trên các ván tới ${h2h.statsUntil} — chưa bóc được chỉ số từng ván của các trận TI.`;
     await writeFile(OUT_H2H, JSON.stringify(h2h) + '\n');
