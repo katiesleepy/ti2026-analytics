@@ -2,8 +2,8 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "3 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-08-20T02:48:05.485Z",
-  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 20/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "updatedAt": "2026-08-21T02:54:42.379Z",
+  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 21/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
@@ -14,18 +14,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 69,
-        "winrate": 61,
-        "kills": 27.35,
-        "deaths": 26.9,
-        "assists": 59.86,
-        "firstBlood": 43,
-        "f10": 52,
+        "maps": 72,
+        "winrate": 60,
+        "kills": 27.06,
+        "deaths": 26.89,
+        "assists": 59.24,
+        "firstBlood": 41,
+        "f10": 53,
         "winWhenFb": 59,
-        "winWhenF10": 76,
+        "winWhenF10": 74,
         "duration": 45,
-        "totalKills": 54.25,
-        "killDiff": 0.45
+        "totalKills": 53.95,
+        "killDiff": 0.17
       }
     },
     {
@@ -37,18 +37,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 66,
-        "winrate": 56,
-        "kills": 27.88,
-        "deaths": 25.02,
-        "assists": 63.29,
-        "firstBlood": 48,
-        "f10": 54,
+        "maps": 65,
+        "winrate": 55,
+        "kills": 27.86,
+        "deaths": 24.94,
+        "assists": 63.34,
+        "firstBlood": 49,
+        "f10": 56,
         "winWhenFb": 71,
         "winWhenF10": 82,
         "duration": 43,
-        "totalKills": 52.9,
-        "killDiff": 2.86
+        "totalKills": 52.8,
+        "killDiff": 2.92
       }
     },
     {
@@ -60,18 +60,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 49,
-        "winrate": 39,
-        "kills": 23.16,
+        "maps": 46,
+        "winrate": 37,
+        "kills": 22.5,
         "deaths": 26.8,
-        "assists": 55.33,
-        "firstBlood": 57,
-        "f10": 44,
-        "winWhenFb": 50,
-        "winWhenF10": 62,
+        "assists": 53.67,
+        "firstBlood": 54,
+        "f10": 40,
+        "winWhenFb": 48,
+        "winWhenF10": 61,
         "duration": 46,
-        "totalKills": 49.96,
-        "killDiff": -3.64
+        "totalKills": 49.3,
+        "killDiff": -4.3
       }
     },
     {
@@ -106,18 +106,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 61,
+        "maps": 58,
         "winrate": 64,
-        "kills": 26.85,
-        "deaths": 22.41,
-        "assists": 61.85,
+        "kills": 26.72,
+        "deaths": 22.38,
+        "assists": 61.78,
         "firstBlood": 63,
         "f10": 63,
         "winWhenFb": 61,
-        "winWhenF10": 73,
+        "winWhenF10": 74,
         "duration": 44,
-        "totalKills": 49.26,
-        "killDiff": 4.44
+        "totalKills": 49.1,
+        "killDiff": 4.34
       }
     },
     {
@@ -129,18 +129,18 @@
       "qualification": "Mời trực tiếp",
       "slugVerified": true,
       "stats": {
-        "maps": 59,
-        "winrate": 69,
-        "kills": 27.58,
-        "deaths": 22.58,
-        "assists": 62.19,
-        "firstBlood": 54,
-        "f10": 60,
-        "winWhenFb": 80,
+        "maps": 61,
+        "winrate": 70,
+        "kills": 27.82,
+        "deaths": 22.66,
+        "assists": 62.93,
+        "firstBlood": 55,
+        "f10": 61,
+        "winWhenFb": 81,
         "winWhenF10": 89,
-        "duration": 42,
-        "totalKills": 50.16,
-        "killDiff": 5
+        "duration": 43,
+        "totalKills": 50.48,
+        "killDiff": 5.16
       }
     },
     {
@@ -175,18 +175,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 59,
-        "winrate": 58,
-        "kills": 29.98,
-        "deaths": 27.88,
-        "assists": 67.59,
+        "maps": 61,
+        "winrate": 59,
+        "kills": 30.36,
+        "deaths": 27.82,
+        "assists": 68.41,
         "firstBlood": 56,
-        "f10": 57,
-        "winWhenFb": 66,
-        "winWhenF10": 77,
+        "f10": 59,
+        "winWhenFb": 67,
+        "winWhenF10": 79,
         "duration": 44,
-        "totalKills": 57.86,
-        "killDiff": 2.1
+        "totalKills": 58.18,
+        "killDiff": 2.54
       }
     },
     {
@@ -221,18 +221,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 47,
+        "maps": 50,
         "winrate": 68,
-        "kills": 29.94,
-        "deaths": 24.19,
-        "assists": 66.47,
-        "firstBlood": 52,
-        "f10": 60,
-        "winWhenFb": 71,
-        "winWhenF10": 74,
+        "kills": 29.74,
+        "deaths": 23.98,
+        "assists": 66.66,
+        "firstBlood": 55,
+        "f10": 58,
+        "winWhenFb": 70,
+        "winWhenF10": 75,
         "duration": 43,
-        "totalKills": 54.13,
-        "killDiff": 5.75
+        "totalKills": 53.72,
+        "killDiff": 5.76
       }
     },
     {
@@ -290,18 +290,18 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 69,
-        "winrate": 49,
-        "kills": 21.35,
-        "deaths": 25.48,
-        "assists": 51.45,
+        "maps": 66,
+        "winrate": 50,
+        "kills": 21.27,
+        "deaths": 25.29,
+        "assists": 51.08,
         "firstBlood": 39,
         "f10": 34,
-        "winWhenFb": 52,
-        "winWhenF10": 70,
+        "winWhenFb": 54,
+        "winWhenF10": 73,
         "duration": 44,
-        "totalKills": 46.83,
-        "killDiff": -4.13
+        "totalKills": 46.56,
+        "killDiff": -4.02
       }
     },
     {
