@@ -2,8 +2,8 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "3 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-08-31T07:51:20.989Z",
-  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 31/08/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "updatedAt": "2026-09-01T06:56:14.527Z",
+  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 01/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
@@ -336,18 +336,18 @@
       "qualification": "Vòng loại — Nam Mỹ",
       "slugVerified": true,
       "stats": {
-        "maps": 79,
-        "winrate": 57,
-        "kills": 26.75,
-        "deaths": 26.3,
-        "assists": 62.28,
-        "firstBlood": 55,
-        "f10": 44,
-        "winWhenFb": 64,
-        "winWhenF10": 82,
+        "maps": 75,
+        "winrate": 55,
+        "kills": 25.95,
+        "deaths": 26.57,
+        "assists": 61.19,
+        "firstBlood": 53,
+        "f10": 42,
+        "winWhenFb": 62,
+        "winWhenF10": 80,
         "duration": 46,
-        "totalKills": 53.05,
-        "killDiff": 0.45
+        "totalKills": 52.52,
+        "killDiff": -0.62
       }
     },
     {
