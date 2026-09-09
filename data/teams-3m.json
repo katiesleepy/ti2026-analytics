@@ -2,8 +2,8 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "3 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-09-08T06:42:43.503Z",
-  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 08/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "updatedAt": "2026-09-09T06:51:57.678Z",
+  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 09/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
@@ -244,18 +244,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 53,
-        "winrate": 42,
-        "kills": 21,
-        "deaths": 26,
-        "assists": 52.36,
-        "firstBlood": 34,
-        "f10": 35,
-        "winWhenFb": 65,
-        "winWhenF10": 76,
-        "duration": 45,
-        "totalKills": 47,
-        "killDiff": -5
+        "maps": 56,
+        "winrate": 43,
+        "kills": 21.3,
+        "deaths": 25.59,
+        "assists": 53.02,
+        "firstBlood": 36,
+        "f10": 37,
+        "winWhenFb": 63,
+        "winWhenF10": 79,
+        "duration": 44,
+        "totalKills": 46.89,
+        "killDiff": -4.29
       }
     },
     {
@@ -359,18 +359,18 @@
       "qualification": "Vòng loại — Bắc Mỹ",
       "slugVerified": true,
       "stats": {
-        "maps": 41,
-        "winrate": 49,
-        "kills": 28.24,
-        "deaths": 23.76,
-        "assists": 61.24,
-        "firstBlood": 44,
+        "maps": 44,
+        "winrate": 50,
+        "kills": 28.48,
+        "deaths": 23.57,
+        "assists": 61.55,
+        "firstBlood": 45,
         "f10": 73,
-        "winWhenFb": 65,
-        "winWhenF10": 63,
-        "duration": 42,
-        "totalKills": 52,
-        "killDiff": 4.48
+        "winWhenFb": 63,
+        "winWhenF10": 66,
+        "duration": 43,
+        "totalKills": 52.05,
+        "killDiff": 4.91
       }
     }
   ]
