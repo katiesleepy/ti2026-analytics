@@ -2,8 +2,8 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "3 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-09-09T06:51:57.678Z",
-  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 09/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "updatedAt": "2026-09-10T06:47:49.159Z",
+  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 10/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
@@ -245,17 +245,17 @@
       "slugVerified": true,
       "stats": {
         "maps": 56,
-        "winrate": 43,
-        "kills": 21.3,
-        "deaths": 25.59,
-        "assists": 53.02,
-        "firstBlood": 36,
+        "winrate": 39,
+        "kills": 20.63,
+        "deaths": 25.8,
+        "assists": 51.25,
+        "firstBlood": 33,
         "f10": 37,
-        "winWhenFb": 63,
-        "winWhenF10": 79,
+        "winWhenFb": 59,
+        "winWhenF10": 74,
         "duration": 44,
-        "totalKills": 46.89,
-        "killDiff": -4.29
+        "totalKills": 46.43,
+        "killDiff": -5.17
       }
     },
     {
@@ -359,18 +359,18 @@
       "qualification": "Vòng loại — Bắc Mỹ",
       "slugVerified": true,
       "stats": {
-        "maps": 44,
-        "winrate": 50,
-        "kills": 28.48,
-        "deaths": 23.57,
-        "assists": 61.55,
-        "firstBlood": 45,
-        "f10": 73,
-        "winWhenFb": 63,
-        "winWhenF10": 66,
-        "duration": 43,
-        "totalKills": 52.05,
-        "killDiff": 4.91
+        "maps": 47,
+        "winrate": 53,
+        "kills": 29.51,
+        "deaths": 23.09,
+        "assists": 63.06,
+        "firstBlood": 44,
+        "f10": 74,
+        "winWhenFb": 65,
+        "winWhenF10": 69,
+        "duration": 42,
+        "totalKills": 52.6,
+        "killDiff": 6.42
       }
     }
   ]
