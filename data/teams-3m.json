@@ -2,8 +2,8 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "3 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-09-10T06:47:49.159Z",
-  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 10/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "updatedAt": "2026-09-11T06:47:10.622Z",
+  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 11/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
@@ -244,18 +244,18 @@
       "qualification": "Vòng loại — Châu Âu",
       "slugVerified": true,
       "stats": {
-        "maps": 56,
-        "winrate": 39,
-        "kills": 20.63,
-        "deaths": 25.8,
-        "assists": 51.25,
-        "firstBlood": 33,
-        "f10": 37,
-        "winWhenFb": 59,
-        "winWhenF10": 74,
+        "maps": 51,
+        "winrate": 35,
+        "kills": 19.45,
+        "deaths": 26.35,
+        "assists": 49.08,
+        "firstBlood": 29,
+        "f10": 38,
+        "winWhenFb": 57,
+        "winWhenF10": 72,
         "duration": 44,
-        "totalKills": 46.43,
-        "killDiff": -5.17
+        "totalKills": 45.8,
+        "killDiff": -6.9
       }
     },
     {
@@ -359,18 +359,18 @@
       "qualification": "Vòng loại — Bắc Mỹ",
       "slugVerified": true,
       "stats": {
-        "maps": 47,
-        "winrate": 53,
+        "maps": 49,
+        "winrate": 51,
         "kills": 29.51,
-        "deaths": 23.09,
-        "assists": 63.06,
-        "firstBlood": 44,
-        "f10": 74,
-        "winWhenFb": 65,
+        "deaths": 23.86,
+        "assists": 63.98,
+        "firstBlood": 45,
+        "f10": 71,
+        "winWhenFb": 62,
         "winWhenF10": 69,
-        "duration": 42,
-        "totalKills": 52.6,
-        "killDiff": 6.42
+        "duration": 43,
+        "totalKills": 53.37,
+        "killDiff": 5.65
       }
     }
   ]
