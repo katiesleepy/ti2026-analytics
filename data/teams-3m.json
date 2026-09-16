@@ -2,8 +2,8 @@
   "event": "The International 2026",
   "source": "dltv.org",
   "window": "3 tháng gần nhất (DLTV)",
-  "updatedAt": "2026-09-15T06:55:18.623Z",
-  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 15/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
+  "updatedAt": "2026-09-16T06:58:01.319Z",
+  "_note": "Dữ liệu chỉ số 3 tháng gần nhất (DLTV, chỉ tính trận đấu giải chính thức), cập nhật 16/09/2026. 16/16 đội có dữ liệu (TEAM VISION = PARIVISION; HULIGANI = L1GA TEAM). Logo hotlink từ DLTV.",
   "teams": [
     {
       "logo": "https://dltv.org/uploads/teams/m6OBnmWJxH2ifWVW9Kgx4298lO5nOdER.png.webp",
@@ -267,18 +267,18 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 42,
-        "winrate": 60,
-        "kills": 30.26,
-        "deaths": 24.17,
-        "assists": 71.71,
-        "firstBlood": 48,
+        "maps": 40,
+        "winrate": 58,
+        "kills": 29.93,
+        "deaths": 24.55,
+        "assists": 70.93,
+        "firstBlood": 47,
         "f10": 61,
-        "winWhenFb": 74,
-        "winWhenF10": 83,
+        "winWhenFb": 72,
+        "winWhenF10": 82,
         "duration": 41,
-        "totalKills": 54.43,
-        "killDiff": 6.09
+        "totalKills": 54.48,
+        "killDiff": 5.38
       }
     },
     {
@@ -290,18 +290,18 @@
       "qualification": "Vòng loại — Trung Quốc",
       "slugVerified": true,
       "stats": {
-        "maps": 66,
-        "winrate": 50,
-        "kills": 21.27,
-        "deaths": 25.29,
-        "assists": 51.08,
+        "maps": 64,
+        "winrate": 48,
+        "kills": 21.03,
+        "deaths": 25.63,
+        "assists": 50.81,
         "firstBlood": 39,
         "f10": 34,
-        "winWhenFb": 54,
+        "winWhenFb": 52,
         "winWhenF10": 73,
         "duration": 44,
-        "totalKills": 46.56,
-        "killDiff": -4.02
+        "totalKills": 46.66,
+        "killDiff": -4.6
       }
     },
     {
